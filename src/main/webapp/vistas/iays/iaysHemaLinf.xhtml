@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100%;">
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelIzq" style="width: 15%;">
+						<p:selectBooleanCheckbox id="iaysHemaLinfNeg" itemLabel="Negativo" value="#{iaysHemaLinfMB.iaysHema.negativo}"/>		
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 15%;">
+						<p:selectBooleanCheckbox id="iaysHemaLinfSang" itemLabel="Sangrado" value="#{iaysHemaLinfMB.iaysHema.sangrado}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 15%;">
+						<p:selectBooleanCheckbox id="iaysHemaLinfEqui" itemLabel="Equimosis" value="#{iaysHemaLinfMB.iaysHema.equimosis}"/>	
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 55%;">
+						<p:selectBooleanCheckbox id="iaysHemaLinfAdeno" itemLabel="Adenopatías" value="#{iaysHemaLinfMB.iaysHema.adenopatias}"/>  
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelDer" style="width: 15%;">
+						<p:outputLabel value="Otro:" for="iaysHemaLinfOtro1" />						
+					</p:column>	
+					<p:column style="width: 85%;">
+						<p:inputText id="iaysHemaLinfOtro1" style="width: 75%;" value="#{iaysHemaLinfMB.iaysHema.otro}"
+									 onkeydown='return revisarBase(event)' />
+					</p:column>				
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelDerTop1" footerText="iaysHemaLinfObserv1" >
+						<p:outputLabel value="Observaciones:" for="iaysHemaLinfObserv1" />						
+					</p:column>	
+					<p:column>
+						<p:inputTextarea id="iaysHemaLinfObserv1" value="#{iaysHemaLinfMB.iaysHema.observaciones}" autoResize="false" 
+								 	 	 rows="5" style="width: 75%;" maxlength="500" />
+					</p:column>		
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>		
+	</p:panelGrid>
+</ui:composition>

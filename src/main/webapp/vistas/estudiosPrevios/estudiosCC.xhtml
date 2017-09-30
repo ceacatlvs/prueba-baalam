@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaCCEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaCCEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+									maxdate="#{epCitologiaCMB.fechaHoy}" value="#{epCitologiaCMB.epCC.fechaCitologia}"
+									onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="options" value="#{epCitologiaCMB.epCC.resultadoCitologia}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosCCobserv" value="Observaciones:" />
+					</p:column>
+					<p:column style="width: 85% !important;" >
+						<p:inputTextarea id="estudiosCCobserv" value="#{epCitologiaCMB.epCC.observaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

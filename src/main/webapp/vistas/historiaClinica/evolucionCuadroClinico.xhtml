@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+				
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;">
+		<p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column colspan="3">
+					<p:selectBooleanCheckbox id="eccIndicaciones" itemLabel="Siguió indicaciones" value="#{evolucionCuadroClinicoMB.ecc.siguiIndicaciones}"/>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column style="width: 5%;" styleClass="labelDerTop1" >
+					<p:outputLabel for="eccNotasIndicaciones" value="Notas:" />
+				</p:column>
+				<p:column style="width: 95%;" styleClass="labelIzq" >
+					<p:inputTextarea id="eccNotasIndicaciones" value="#{evolucionCuadroClinicoMB.ecc.notasIndicaciones}" autoResize="false" 
+								     rows="5" style="width: 75%;" maxlength="300" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column style="width: 20%;" styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccMejoría" itemLabel="Mejoría" value="#{evolucionCuadroClinicoMB.ecc.mejoria}"/>
+				</p:column>
+				<p:column style="width: 20%;" styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccCuracion" itemLabel="Curación" value="#{evolucionCuadroClinicoMB.ecc.curacion}"/>
+				</p:column>
+				<p:column style="width: 20%;" styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccNoMod" itemLabel="No modificación" value="#{evolucionCuadroClinicoMB.ecc.noModificacion}"/>
+				</p:column>
+				<p:column style="width: 40%;" styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccEmpeora" itemLabel="Empeoramiento" value="#{evolucionCuadroClinicoMB.ecc.empeoramiento}"/>
+				</p:column>
+			</p:row>
+			
+			<p:row>				
+				<p:column styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccAgregados" itemLabel="Otros agregados" value="#{evolucionCuadroClinicoMB.ecc.otrosAgregados}"/>
+				</p:column>
+				<p:column styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccTabaco" itemLabel="Ingesta tabaco" value="#{evolucionCuadroClinicoMB.ecc.ingestaTabaco}"/>
+				</p:column>
+				<p:column styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccAlcohol" itemLabel="Ingesta alcohol" value="#{evolucionCuadroClinicoMB.ecc.ingestaAlcohol}"/>
+				</p:column>
+				<p:column styleClass="labelIzq">
+					<p:selectBooleanCheckbox id="eccAdicciones" itemLabel="Otras adicciones" value="#{evolucionCuadroClinicoMB.ecc.otrasAdicciones}"/>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column style="width: 5%;" styleClass="labelDerTop1">
+					<p:outputLabel for="eccNotas" value="Notas:" />
+				</p:column>
+				<p:column style="width: 95%;" styleClass="labelIzq">
+					<p:inputTextarea id="eccNotas" value="#{evolucionCuadroClinicoMB.ecc.notas}" autoResize="false" 
+								     rows="5" style="width: 75%;" maxlength="300" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</p:column></p:row>
+	
+</ui:composition>

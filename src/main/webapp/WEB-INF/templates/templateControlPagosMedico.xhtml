@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:pe="http://primefaces.org/ui/extensions"
+		xmlns:f="http://java.sun.com/jsf/core">
+		
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		
+		<title>
+			<ui:insert name="title" />
+		</title>
+	</h:head>
+    
+    <h:body>
+    	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+    	<h:outputScript library="js" name="scrolling.js" />
+    	<h:outputStylesheet name="css/consulta.css" />
+    	
+    	<p:layout fullPage="true" resizeTitle="resize" >
+
+			<p:layoutUnit position="north" id="top" size="15%" resizable="false" styleClass="ui-top" >
+				<p:layout>
+					<p:layoutUnit position="west" id="topLeft" size="85%" resizable="false" styleClass="ui-topLeft">
+						<p:panelGrid styleClass="panelGrid-Medico">
+        					<p:row>
+        						<p:column rowspan="2">
+        							<h:graphicImage value="/resources/gfx/DoctorMale.png" alt="Medico" width="32px" height="32px" />
+        						</p:column>
+        						<p:column styleClass="nombreMedico">
+        							<h:outputText value="Nombre de médico" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column styleClass="especialidad">
+        							<h:outputText value="Especialidad" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" styleClass="primerConsulta">
+        							<h:outputText value="Control de pagos" />
+        						</p:column>
+        					</p:row>
+        				</p:panelGrid>	
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="center" id="topCenter" size="15%" resizable="false" styleClass="ui-topCenter">
+        				<p:panelGrid styleClass="panelGrid-MenuGeneral">
+        					<p:row>  
+        						<p:column style="width:50px;"><h:outputLink value="../inicio/inicioM.jsf"><h:graphicImage value="/resources/gfx/home.png" alt="Home" width="40" height="40" /></h:outputLink></p:column>
+        						<p:column style="width:50px;"><h:outputLink value="../../login.jsf"><h:graphicImage value="/resources/gfx/exit.png" alt="Exit" width="40" height="40" /></h:outputLink></p:column>
+    						</p:row>
+    						<p:row>
+    							<p:column style="width:50px;"><h:outputLink value="../inicio/inicioM.jsf" style="text-decoration: none;"><h:outputText styleClass="menuGeneral" value="Inicio" /></h:outputLink></p:column>
+    							<p:column style="width:50px;"><h:outputLink value="../../login.jsf" style="text-decoration: none;"><h:outputText styleClass="menuGeneral" value="Salir" /></h:outputLink></p:column>
+    						</p:row>
+        				</p:panelGrid>
+        			</p:layoutUnit>
+				</p:layout>
+           	</p:layoutUnit>
+           	
+           	<p:layoutUnit position="center" id="center" size="85%" resizable="false" styleClass="ui-center">
+           		<p:layout>
+        			<p:layoutUnit position="center" id="ctrLeft" size="85%" resizable="false" styleClass="ui-ctrCenterIII">
+						<p:growl id="growlInicio" autoUpdate="true" showDetail="true" showSummary="true" sticky="false" life="3000" />
+						<p:outputPanel>
+                			<ui:insert name="controlPagos" />
+                		</p:outputPanel>
+        			</p:layoutUnit>
+        		</p:layout>
+           	</p:layoutUnit>
+    		
+    	</p:layout>
+    	
+    	<ui:insert name="pantallaModal" />
+    	
+    </h:body>
+    
+</html>

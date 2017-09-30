@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid style="width: 100%;">
+	
+		<p:row>
+			<p:column styleClass="labelDer" style="width: 35% !important;">
+				<p:outputLabel for="apnpLugarOrigen" value="Lugar de origen: " />
+			</p:column>
+			<p:column style="width: 65% !important;">
+				<p:inputText styleClass="inputIzqL2" id="apnpLugarOrigen" value="#{antecedentesPNPMB.apnp.lugarOrigen}"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel value="Tabaquismo: " />
+			</p:column>
+			<p:column>
+				<p:selectOneMenu id="apnpTabaquismo" effect="fade" editable="false" value="#{antecedentesPNPMB.apnp.idCatTabaquismo.idCatTabaquismo}" >
+					<p:ajax event="change" update="apnpOpTabaquismo" listener="#{antecedentesPNPMB.mostrarTabaquismo()}" />            		 
+					<f:selectItems value="#{antecedentesPNPMB.tabaquismo}" var="tabaquismo" itemLabel="#{tabaquismo.descripcion}" 
+								   itemValue="#{tabaquismo.idCatTabaquismo}"/>
+       			</p:selectOneMenu>
+       		</p:column>
+		</p:row>
+		<p:row><p:column colspan="2">
+			<p:outputPanel id="apnpOpTabaquismo" styleClass="panelGrid-APNP">
+				<p:panelGrid id="apnpPgTabaquismo">
+					<p:row rendered="#{antecedentesPNPMB.tabaquismoActual}">
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpCigarrosDiarios" value="# de cigarros diarios: "/>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="apnpCigarrosDiarios" value="#{antecedentesPNPMB.apnp.cigarrosDiarios}"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="apnpCigarrosDiarios"/>
+						</p:column>
+					</p:row>
+					<p:row rendered="#{antecedentesPNPMB.tabaquismoActual}">
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpAniosFumando" value="# de años fumando: " />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="apnpAniosFumando" value="#{antecedentesPNPMB.apnp.cigarrosAnios}"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="apnpAniosFumando"/>
+						</p:column>
+					</p:row>
+					<p:row rendered="#{antecedentesPNPMB.tabaquismoHistoria}">
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpAniosSinFumar" value="# de años desde que dejó de fumar: " />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="apnpAniosSinFumar" value="#{antecedentesPNPMB.apnp.cigarrosAniosSinFumar}"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="apnpAniosSinFumar"/>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpAlcohol" value="¿Consume alcohol?: " />
+			</p:column>
+			<p:column>
+				<p:selectBooleanCheckbox id="apnpAlcohol" value="#{antecedentesPNPMB.apnp.alcohol}">
+					<p:ajax event="change" update="apnpOpAlcohol" />
+				</p:selectBooleanCheckbox>
+			</p:column>
+		</p:row>
+		<p:row><p:column colspan="2">
+			<p:outputPanel id="apnpOpAlcohol" styleClass="panelGrid-APNP">
+				<p:panelGrid id="apnpPgAlcohol" rendered="#{antecedentesPNPMB.apnp.alcohol}" >
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpFrecuenciaAlcohol" value="Frecuencia de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpFrecuenciaAlcohol" value="#{antecedentesPNPMB.apnp.alcoholFrecuencia}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpCantidadAlcohol" value="Cantidad de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpCantidadAlcohol" value="#{antecedentesPNPMB.apnp.alcoholCantidad}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpDrogas" value="¿Consume drogas recreativas?: " />
+			</p:column>
+			<p:column>
+				<p:selectBooleanCheckbox id="apnpDrogas" value="#{antecedentesPNPMB.apnp.drogasRecreativas}">
+					<p:ajax event="change" update="apnpOpDrogas" />
+				</p:selectBooleanCheckbox>
+			</p:column>
+		</p:row>
+		<p:row><p:column colspan="2">
+			<p:outputPanel id="apnpOpDrogas" styleClass="panelGrid-APNP">
+				<p:panelGrid id="apnpPgDrogas" rendered="#{antecedentesPNPMB.apnp.drogasRecreativas}" >
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpTipoDrogas" value="Tipo de drogas: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpTipoDrogas" value="#{antecedentesPNPMB.apnp.drogaTipo}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpFrecuenciaDrogas" value="Frecuencia de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpFrecuenciaDrogas" value="#{antecedentesPNPMB.apnp.drogaFrecuencia}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpEjercicio" value="¿Practica ejercicio regular?: " />
+			</p:column>
+			<p:column>
+				<p:selectBooleanCheckbox id="apnpEjercicio" value="#{antecedentesPNPMB.apnp.ejercicioRegular}">
+					<p:ajax event="change" update="apnpOpEjercicio" />
+				</p:selectBooleanCheckbox>
+			</p:column>
+		</p:row>
+		<p:row><p:column colspan="2">
+			<p:outputPanel id="apnpOpEjercicio" styleClass="panelGrid-APNP">
+				<p:panelGrid id="apnpPgEjercicio" rendered="#{antecedentesPNPMB.apnp.ejercicioRegular}" >
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpTipoEjercicio" value="Tipo de ejercicio: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpTipoEjercicio" value="#{antecedentesPNPMB.apnp.ejercicioTipo}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpFrecuenciaEjercicio" value="Frecuencia de ejercicio: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpFrecuenciaEjercicio" value="#{antecedentesPNPMB.apnp.ejercicioFrecuencia}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpDuracionEjercicio" value="Duración: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpDuracionEjercicio" value="#{antecedentesPNPMB.apnp.ejercicioDuracion}"
+							 			 onkeydown='return revisarBase(event)' />
+		        		</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpLacteos" value="¿Consume lácteos o suplementos de calcio?: " />
+			</p:column>
+			<p:column>
+				<p:selectBooleanCheckbox id="apnpLacteos" value="#{antecedentesPNPMB.apnp.lacteosCalcio}">
+					<p:ajax event="change" update="apnpOpLacteos" />
+				</p:selectBooleanCheckbox>
+			</p:column>
+		</p:row>
+		<p:row><p:column colspan="2">
+			<p:outputPanel id="apnpOpLacteos" styleClass="panelGrid-APNP">
+				<p:panelGrid id="apnpPgLacteos" rendered="#{antecedentesPNPMB.apnp.lacteosCalcio}" >
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpCantidadLacteos" value="Cantidad de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpCantidadLacteos" value="#{antecedentesPNPMB.apnp.lacteosCalcioCantidad}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpFrecuenciaLacteos" value="Frecuencia de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpFrecuenciaLacteos" value="#{antecedentesPNPMB.apnp.lacteosCalcioFrecuencia}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpCafeina" value="¿Consume cafeína o refrescos de cola?: " />
+			</p:column>
+			<p:column>
+				<p:selectBooleanCheckbox id="apnpCafeina" value="#{antecedentesPNPMB.apnp.cafeinaRefrescos}">
+					<p:ajax event="change" update="apnpOpCafeina" />
+				</p:selectBooleanCheckbox>
+			</p:column>
+		</p:row>
+		<p:row><p:column colspan="2">
+			<p:outputPanel id="apnpOpCafeina" styleClass="panelGrid-APNP">
+				<p:panelGrid id="apnpPgCafeina" rendered="#{antecedentesPNPMB.apnp.cafeinaRefrescos}" >
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpCantidadCafeina" value="Cantidad de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpCantidadCafeina" value="#{antecedentesPNPMB.apnp.cafeinaRefrescosCantidad}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpFrecuenciaCafeina" value="Frecuencia de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpFrecuenciaCafeina" value="#{antecedentesPNPMB.apnp.cafeinaRefrescosFrecuencia}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="apnpTipoCafeina" value="Tipo de consumo: " />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="apnpTipoCafeina" value="#{antecedentesPNPMB.apnp.cafeinaRefrescosTipo}"
+							 			 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel value="Orientación sexual: " />
+			</p:column>
+			<p:column>
+				<p:selectOneMenu effect="fade" editable="false" value="#{antecedentesPNPMB.apnp.idCatOrientacionSexual.idCatOrientacionSexual}">            			
+					<f:selectItems value="#{antecedentesPNPMB.orientacionSexual}" var="orientacionSexual" itemLabel="#{orientacionSexual.descripcion}" 
+								   itemValue="#{orientacionSexual.idCatOrientacionSexual}"/>
+       			</p:selectOneMenu>
+       		</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel value="Estado civil: " />
+			</p:column>
+			<p:column>
+				<p:selectOneMenu effect="fade" editable="false" value="#{antecedentesPNPMB.apnp.idCatEstadoCivil.idCatEstadoCivil}"> 		           			
+					<f:selectItems value="#{antecedentesPNPMB.edoCivil}" var="edoCivil" itemLabel="#{edoCivil.descripcion}" 
+								   itemValue="#{edoCivil.idCatEstadoCivil}"/> 
+       			</p:selectOneMenu>
+       		</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpPersonasVivienda" value="Personas que viven con paciente: " />
+			</p:column>
+			<p:column styleClass="inputDerS1">
+				<p:inputText id="apnpPersonasVivienda" value="#{antecedentesPNPMB.apnp.vivenConPaciente}"
+							 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+				<p:watermark value="0" for="apnpPersonasVivienda"/>
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel value="Escolaridad: " />
+			</p:column>
+			<p:column>
+				<p:selectOneMenu id="apnpEscolaridad" value="#{antecedentesPNPMB.apnp.idCatEscolaridad.idCatEscolaridad}"> 		           			
+					<f:selectItems value="#{antecedentesPNPMB.escolaridad}" var="escolaridad" itemLabel="#{escolaridad.descripcion}" 
+								   itemValue="#{escolaridad.idCatEscolaridad}"/>
+       			</p:selectOneMenu>
+       		</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="apnpEmpleoReciente" value="Empleo actual o más reciente: " />
+			</p:column>
+			<p:column>
+				<p:inputText styleClass="inputIzqL2" id="apnpEmpleoReciente" value="#{antecedentesPNPMB.apnp.empleo}"
+							 onkeypress='return revisarBase(event)' onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>					
+			<p:column styleClass="labelDerTop1">
+				<p:outputLabel for="apnpObservaciones" value="Observaciones: " />
+			</p:column>
+			<p:column>
+				<p:inputTextarea id="apnpObservaciones" value="#{antecedentesPNPMB.apnp.observaciones}" autoResize="false" 
+								 rows="5" style="width: 75%;" maxlength="300" />
+			</p:column>				
+		</p:row>
+		
+	</p:panelGrid></p:column></p:row>
+		
+</ui:composition>

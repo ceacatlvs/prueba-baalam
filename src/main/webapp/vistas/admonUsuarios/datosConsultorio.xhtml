@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple" style="width: 100%;">
+		<p:row><p:column styleClass="tipoFuente"><p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column style="width: 20%;" />
+				<p:column style="width: 16%;" />
+				<p:column style="width: 18%;" />
+				<p:column style="width: 16%;" />
+				<p:column style="width: 12%;" />
+				<p:column style="width: 18%;" />
+			</p:row>			
+			
+			<p:row>  
+		    	<p:column colspan="6" styleClass="tituloSubSeccion">
+		    		<h:outputText value="Datos generales" />
+		    	</p:column>  
+		    </p:row>
+		    <p:row>
+		    	<p:column styleClass="labelDer" >
+		    		<p:outputLabel for="conNombre" value="Nombre:" />
+		    	</p:column>
+		    	<p:column colspan="5">
+					<p:inputText id="conNombre" value="#{datosConsultorioMB.consultorio.nombre}" style="width: 90%;" 
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+		    </p:row>
+		    <p:row>
+		    	<p:column styleClass="labelDer">
+		    		<p:outputLabel for="conHorario" value="Horario:" />
+		    	</p:column>
+		    	<p:column colspan="5">
+		    		<p:inputText id="conHorario" value="#{datosConsultorioMB.consultorio.horario}" style="width: 90%;"
+								 onkeydown='return revisarBase(event)' />
+		    	</p:column>
+		    </p:row>
+		    
+		    <p:row>  
+		    	<p:column colspan="6" styleClass="tituloSubSeccion">
+		    		<h:outputText value="Datos de contacto" />
+		    	</p:column>
+		    </p:row>
+		    <p:row>
+		    	<p:column styleClass="labelDer">
+		    		<p:outputLabel for="conTelefono" value="Teléfono:" />
+		    	</p:column>
+		    	<p:column colspan="5">
+		    		<p:inputMask id="conTelefono" mask="(99)9999-9999" style="width: 25%;" value="#{datosConsultorioMB.consultorio.telefono}"
+		    					 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+		    		<p:watermark value="(55)5555-5555" for="conTelefono"/>
+		    		<p:tooltip id="ttConTel" for="conTelefono" showEvent="focusin" hideEvent="focusout" styleClass="tipoFuente" />
+		    	</p:column>
+		    </p:row>
+		    <p:row>
+		    	<p:column styleClass="labelDer">
+		    		<p:outputLabel for="conTelefono2" value="Teléfono 2:" />
+		    	</p:column>
+		    	<p:column colspan="5">
+		    		<p:inputMask id="conTelefono2" mask="(99)9999-9999" style="width: 25%;" value="#{datosConsultorioMB.consultorio.telefono2}"
+								 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+					<p:watermark value="(55)5555-5555" for="conTelefono2" />
+					<p:tooltip id="ttConTel2" for="conTelefono2" showEvent="focusin" hideEvent="focusout" styleClass="tipoFuente" />
+		    	</p:column>
+		    </p:row>
+		    <p:row>
+		    	<p:column styleClass="labelDer">
+					<p:outputLabel for="conFax" value="Fax:" />
+				</p:column>
+				<p:column colspan="5">
+					<p:inputMask id="conFax" mask="(99)9999-9999" style="width: 25%;" value="#{datosConsultorioMB.consultorio.fax}" 
+								 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+					<p:watermark value="(55)5555-5555" for="conFax" />
+					<p:tooltip id="ttConFax" for="conFax" showEvent="focusin" hideEvent="focusout" styleClass="tipoFuente" />
+				</p:column>
+		    </p:row>
+		    
+		    <p:row>  
+		    	<p:column colspan="6" styleClass="tituloSubSeccion">
+		    		<h:outputText value="Dirección" />
+		    	</p:column>  
+		    </p:row>
+		    <p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="conCalle" value="Calle:" />
+				</p:column>
+				<p:column colspan="5">
+					<p:inputText id="conCalle" value="#{datosConsultorioMB.consultorio.calle}" style="width: 90%;"
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="conNumExt" value="Número exterior:" />
+				</p:column>
+				<p:column>
+					<p:inputMask id="conNumExt" mask="9?***" value="#{datosConsultorioMB.consultorio.numeroExterior}" style="width: 90%;"
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="conNumInt" value="Número interior:" />
+				</p:column>
+				<p:column>
+					<p:inputMask id="conNumInt" mask="9?***" value="#{datosConsultorioMB.consultorio.numeroInterior}" style="width: 90%;"
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="conCP" value="C.P.:" />
+				</p:column>
+				<p:column>
+					<p:inputMask id="conCP" mask="99999" value="#{datosConsultorioMB.consultorio.cp}" style="width: 45%;"
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="medColonia" value="Colonia:" />
+				</p:column>
+				<p:column colspan="2">
+					<p:inputText id="medColonia" value="#{datosConsultorioMB.consultorio.colonia}" style="width: 90%;"
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="medDelegMun" value="Delegación/Municipio:" />
+				</p:column>
+				<p:column colspan="2">
+					<p:inputText id="medDelegMun" value="#{datosConsultorioMB.consultorio.delegMuni}" style="width: 70%;"
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="conEf" value="Entidad federativa:" />
+				</p:column>
+				<p:column colspan="2">
+					<p:selectOneMenu id="conEf" effect="fade">
+	           			<f:selectItem itemLabel="Elija..." itemValue="" />  							 
+	           			<f:selectItems value="#{datosConsultorioMB.entidades}" var="entidad" itemLabel="#{entidad.descripcion}" 
+	           						   itemValue="#{entidad.idEntidadFedereativa}"/>  
+	       			</p:selectOneMenu>
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="conPais" value="País:" />
+				</p:column>
+				<p:column colspan="2">
+					<p:inputText id="conPais" value="#{datosConsultorioMB.consultorio.pais}" style="width: 70%;" 
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+	</p:panelGrid>	
+	
+</ui:composition>

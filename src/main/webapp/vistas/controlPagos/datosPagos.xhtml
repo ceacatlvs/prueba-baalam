@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+
+	<p:panelGrid style="width: 100%;" >
+		<p:row><p:column style="width: 100%;" >
+			
+			<p:dataTable id="dtCobrosConsultas" value="#{cpCobroConsultaMB.cobrosConsulta}" style="width: 100%;" var="cobro" editable="true"
+						 paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+						 emptyMessage="No se tiene registro de cobros y pagos."
+						 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+      		
+				
+				<p:column style="width:6%" >
+					<f:facet name="header">
+						<h:outputText value="Ver pagos" />
+					</f:facet>
+            		<p:rowToggler />
+        		</p:column> 
+				
+				<p:column style="width: 20%;" styleClass="labelIzqMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Fecha de consulta" />
+					</f:facet>
+					<p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{cobro.padecimientoActual.fechaConsulta}" ><f:convertDateTime pattern="EEEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" timeZone="Mexico/General" /></h:outputText>
+		                </f:facet>
+		                <f:facet name="input">
+		                	<p:calendar style="width: 100%;" styleClass="inputDer" id="cpCobroFecha" value="#{cobro.padecimientoActual.fechaConsulta}"
+										showOn="both" yearRange="c-100:c+1" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true" 
+										navigator="true" effect="slideDown" readonlyInput="true" maxdate="#{cpCobroConsultaMB.fechaHoy}" />
+		                </f:facet>  
+		            </p:cellEditor>
+				</p:column>
+				
+				<p:column style="width: 11%;" styleClass="labelCtrMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Tipo de consulta" />
+					</f:facet>
+					<p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="Primera vez" rendered="#{cobro.padecimientoActual.tipoConsulta.equalsIgnoreCase('P')}" />
+							<h:outputText value="Subsecuente" rendered="#{cobro.padecimientoActual.tipoConsulta.equalsIgnoreCase('S')}" />
+							<h:outputText value="Control de embarazo" rendered="#{cobro.padecimientoActual.tipoConsulta.equalsIgnoreCase('C')}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                	<h:outputText value="Primera vez" rendered="#{cobro.padecimientoActual.tipoConsulta.equalsIgnoreCase('P')}" />
+							<h:outputText value="Subsecuente" rendered="#{cobro.padecimientoActual.tipoConsulta.equalsIgnoreCase('S')}" />
+							<h:outputText value="Control de embarazo" rendered="#{cobro.padecimientoActual.tipoConsulta.equalsIgnoreCase('C')}" />
+		                </f:facet>  
+		            </p:cellEditor>
+				</p:column>
+				
+				<p:column style="width: 8%;" styleClass="labelDerMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Monto" />
+					</f:facet>
+					<p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{cobro.monto}"><f:convertNumber currencySymbol="$" type="currency" locale="en-US" /></h:outputText>
+		                </f:facet>
+		                <f:facet name="input">
+		                	<pe:inputNumber id="cpMonto" style="width: 90%;" styleClass="inputDer" value="#{cobro.monto}" minValue="0"
+										    symbol="$" symbolPosition="p" decimalSeparator="." decimalPlaces="2" thousandSeparator="," />
+		                </f:facet>  
+		            </p:cellEditor>
+				</p:column>
+				
+				<p:column style="width: 7%;" styleClass="labelCtrMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Recibo" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{cobro.recibo ? 'Si' : 'No'}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectBooleanCheckbox id="cpRecibo" value="#{cobro.recibo}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column style="width: 23%;" >
+					<f:facet name="header">
+						<h:outputText value="Notas" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{cobro.notas}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea id="cpNotas" maxlength="300" rows="3" style="width: 95%;" autoResize="false" value="#{cobro.notas}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column style="width: 8%;" styleClass="labelDerMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Pago pendiente" />
+					</f:facet>
+					<h:outputText value="#{cobro.pendientePagar}"><f:convertNumber currencySymbol="$" type="currency" locale="en-US" /></h:outputText>
+				</p:column>
+				
+				<p:column style="width: 10%;" styleClass="labelCtrMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Pagos" />
+					</f:facet>
+					<p:commandLink styleClass="tipoFuenteLinks" value="Registrar" oncomplete="PF('dialogPago').show()" update=":formPagos:dlgRegistrarPago" rendered="#{cobro.pendientePagar!=0}">
+						 <f:setPropertyActionListener target="#{cpCobroConsultaMB.cobroConsulta}" value="#{cobro}" />
+					</p:commandLink>
+					<p:outputLabel value="Consulta pagada" rendered="#{cobro.pendientePagar==0}"/>
+				</p:column>
+				
+				<p:column style="width: 7%;" styleClass="labelCtrMiddle" >
+					<f:facet name="header">
+						<h:outputText value="Editar" />
+					</f:facet>
+					<p:rowEditor id="cpReCobro" />
+				</p:column>
+				
+								
+				<p:rowExpansion>  
+		            <p:panelGrid id="display" style="width:100%;" >
+		            	<p:row>
+	            			<p:column>  
+		                    	<p:dataTable id="dtPagos" style="width: 100%;" editable="true" value="#{cobro.cpPagos}" var="pago"
+						 					 emptyMessage="No se tiene registro de pagos para esta consulta." >
+				
+									<f:facet name="header">
+										<h:outputText value="Pagos de la consulta" />
+									</f:facet>
+					        		
+					        		<p:column style="width: 20%;">
+										<f:facet name="header">
+											<h:outputText value="Fecha de pago" />
+										</f:facet>
+										<p:cellEditor>
+							                <f:facet name="output">
+							                    <h:outputText value="#{pago.fechaPago}" ><f:convertDateTime pattern="EEEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" timeZone="Mexico/General" /></h:outputText>
+							                </f:facet>
+							                <f:facet name="input">
+							                	<h:outputText value="#{pago.fechaPago}" />
+							                </f:facet>  
+							            </p:cellEditor>
+					        		</p:column>
+					        		
+					        		<p:column style="width: 20%;">
+										<f:facet name="header">
+											<h:outputText value="Cantidad" />
+										</f:facet>
+										<p:cellEditor>
+							                <f:facet name="output">
+							                    <h:outputText value="#{pago.cantidadPago}" />
+							                </f:facet>
+							                <f:facet name="input">
+							                	<h:outputText value="#{pago.cantidadPago}" />
+							                </f:facet>  
+							            </p:cellEditor>
+					        		</p:column>
+					        		
+					        		<p:column style="width: 20%;">
+										<f:facet name="header">
+											<h:outputText value="Tipo de pago" />
+										</f:facet>
+										<p:cellEditor>
+							                <f:facet name="output">
+							                    <h:outputText value="#{pago.tipoPago.descripcion}" />
+							                </f:facet>
+							                <f:facet name="input">
+							                	<h:outputText value="#{pago.tipoPago.descripcion}" />
+							                </f:facet>  
+							            </p:cellEditor>
+					        		</p:column>
+					        		
+					        		<p:column style="width: 30%;">
+										<f:facet name="header">
+											<h:outputText value="Notas" />
+										</f:facet>
+										<p:cellEditor>
+							                <f:facet name="output">
+							                    <h:outputText value="#{pago.notas}" />
+							                </f:facet>
+							                <f:facet name="input">
+							                	<h:outputText value="#{pago.notas}" />
+							                </f:facet>  
+							            </p:cellEditor>
+					        		</p:column>
+					        		
+					        		<p:column style="width: 10%;" styleClass="labelCtrMiddle" >
+										<f:facet name="header">
+											<h:outputText value="Editar" />
+										</f:facet>
+										<p:rowEditor id="cpRePago" />
+									</p:column>
+        						</p:dataTable>
+	                		</p:column>
+	                	</p:row>            
+		            </p:panelGrid>
+		        </p:rowExpansion>
+				
+			</p:dataTable>
+			
+		</p:column></p:row>
+	</p:panelGrid>
+	
+	
+	
+	<p:dialog id="dlgRegistrarPago" header="Registro de pago" styleClass="tipoFuente" widgetVar="dialogPago" resizable="false" 
+			  draggable="true" height="350" width="500" focus="cpCantidadPago" >
+		<p:panelGrid id="pgDatosCita" styleClass="tipoFuente" style="width: 100%;" >
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 35%;">
+					<p:outputLabel value="Fecha de consulta: " />
+				</p:column>
+				<p:column style="width: 65%;" >
+					<p:outputLabel value="#{cpCobroConsultaMB.cobroConsulta.padecimientoActual.fechaConsulta}">
+						<f:convertDateTime pattern="EEEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" timeZone="Mexico/General" />
+					</p:outputLabel>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 35%;">
+					<p:outputLabel value="Fecha de pago: " for="cpPagoFecha" />
+				</p:column>
+				<p:column style="width: 65%;" >
+					<p:calendar style="width: 100%;" styleClass="inputDer" id="cpPagoFecha" value="#{cpCobroConsultaMB.pago.fechaPago}"
+								showOn="both" yearRange="c-100:c+1" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true" 
+								navigator="true" effect="slideDown" readonlyInput="true" maxdate="#{cpCobroConsultaMB.fechaHoy}" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="2" >
+					<p:outputPanel styleClass="ui-messages-warn ui-corner-all" style="margin: 0px !important;" >
+						<p:outputLabel styleClass="ui-messages-warn-icon" />
+						<p:outputLabel styleClass=" ui-messages-warn-summary" 
+									   value="La cantidad de pago debe ser menor o igual a $#{cpCobroConsultaMB.cobroConsulta.pendientePagar}MN" />
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 35%;">
+					<p:outputLabel value="Cantidad pago: " for="cpCantidadPago" />
+				</p:column>
+				<p:column style="width: 65%;">
+					<pe:inputNumber id="cpCantidadPago" value="#{cpCobroConsultaMB.pago.cantidadPago}" style="width: 50%;" styleClass="inputDer"
+									minValue="0.0" maxValue="#{cpCobroConsultaMB.cobroConsulta.pendientePagar}" onfocus="this.select()"
+									symbol="$" symbolPosition="p" decimalSeparator="." decimalPlaces="2" thousandSeparator="," />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="2" >
+					<p:outputPanel id="pnlTipoPago" >
+						<p:outputPanel id="pnlTipoPago2" styleClass="ui-messages-error ui-corner-all" style="margin: 0px !important;"
+									   rendered="#{cpCobroConsultaMB.pago.tipoPago.idTipoPago == 0}" >
+							<p:outputLabel styleClass="ui-messages-error-icon" />
+							<p:outputLabel styleClass=" ui-messages-error-summary" value="Se necesita elegir un tipo de pago" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 35%;">
+					<p:outputLabel value="Tipo de pago: " for="cpTipoPago" id="lblTipoPago" />
+				</p:column>
+				<p:column style="width: 65%;">
+					 <p:selectOneMenu id="cpTipoPago" value="#{cpCobroConsultaMB.pago.tipoPago.idTipoPago}" panelStyleClass="tipoFuente" 
+					 				  required="true" immediate="true" >
+			            <f:selectItem itemLabel="Elija..." itemValue="0" />  
+						<f:selectItems value="#{cpCobroConsultaMB.tiposPago}" var="tipoPago" itemLabel="#{tipoPago.descripcion}" itemValue="#{tipoPago.idTipoPago}" />
+						
+						<p:ajax event="change" update="pnlTipoPago btnRegistrarPago" />
+			        </p:selectOneMenu>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDerTop1" style="width: 35%;">
+					<p:outputLabel value="Notas del pago: " />
+				</p:column>
+				<p:column style="width: 65%;" >
+					<p:inputTextarea id="cpNotasPago" value="#{cpCobroConsultaMB.pago.notas}" maxlength="300" rows="3" style="width: 98%;" autoResize="false" />
+				</p:column>
+			</p:row>
+			
+			<p:row><p:column colspan="2"><p:spacer height="5" /></p:column></p:row>
+			
+			<p:row>
+				<p:column colspan="4" styleClass="labelDerTop1" style="width: 20%;" >
+					<p:commandButton id="btnCancelar" value="Cancelar" oncomplete="PF('dialogPago').hide();" />
+					<p:commandButton id="btnRegistrarPago" value="Registrar" oncomplete="PF('dialogPago').hide();" disabled="#{cpCobroConsultaMB.pago.tipoPago.idTipoPago == 0}"
+									 action="#{cpCobroConsultaMB.registrar(2)}" update=":formPagos:dtCobrosConsultas :formPagos:dtCobrosConsultas:dtPagos" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>	
+	</p:dialog>
+	
+</ui:composition>

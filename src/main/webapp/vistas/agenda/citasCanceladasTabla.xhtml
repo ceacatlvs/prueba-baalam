@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple" style="width: 99%;">
+		
+		<p:row><p:column styleClass="tipoFuente"><p:panelGrid style="width: 99%;">
+			<p:row>
+        		<p:column styleClass="tipoFuente" >
+        			<p:dataTable id="citasCanceladas" value="#{agendaMB.citasCanceladas}" var="citaCancel" styleClass="tipoFuenteTabla" paginator="true"
+        						 rows="10" rowsPerPageTemplate="5,10,15" paginatorPosition="top" emptyMessage="No se han registrado citas canceladas."
+             					 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >  
+	        	        <p:column styleClass="tipoFuenteTabla" style="width: 14%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Fecha de la cita" />
+				        	</f:facet>
+				        	<h:outputText value="#{citaCancel.citaInicio}" >
+				        		<f:convertDateTime pattern="EEE dd 'de' MMM, yyyy" timeZone="Mexico/General" />
+				        	</h:outputText>
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 18%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Paciente" />
+				        	</f:facet>
+				        	<h:outputText value="#{citaCancel.nombrePaciente}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 16%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Fecha de cancelacion" />
+				        	</f:facet>	
+				        	<h:outputText value="#{citaCancel.fechaCancelacion}" >
+				        		<f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="Mexico/General" />
+				        	</h:outputText>	
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 10%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Cancelada por" />
+				        	</f:facet>
+				        	<h:outputText value="#{citaCancel.cancelador}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 16%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Motivo" />
+				        	</f:facet>
+				        	<h:outputText value="#{citaCancel.motivoCancelacionCita}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 10%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Confirmada" />
+				        	</f:facet>
+				        	<h:outputText styleClass="ui-icon ui-icon-check" style="float: left" rendered="#{citaCancel.citaConfirmada}" />
+				        	<h:outputText value="Si" rendered="#{citaCancel.citaConfirmada}" />
+							<h:outputText styleClass="ui-icon ui-icon-closethick" style="float: left" rendered="#{!citaCancel.citaConfirmada}" />
+							<h:outputText value="No" rendered="#{!citaCancel.citaConfirmada}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 16%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Notas" />
+				        	</f:facet>
+				        	<h:outputText value="#{citaCancel.notasCita}" />
+				        </p:column>
+
+    				</p:dataTable> 
+        		</p:column>
+        	</p:row>
+		</p:panelGrid></p:column></p:row>
+	
+	</p:panelGrid>	
+	
+</ui:composition>

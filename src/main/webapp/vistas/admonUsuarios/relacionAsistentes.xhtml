@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple" style="width:50%;" >
+		
+		<p:row>
+			<p:column style="width:40px;"><h:graphicImage value="/resources/gfx/nurse.png" width="40" height="40" /></p:column> 
+			<p:column style="height:30px;" styleClass="tituloSeccionAzul"><h:outputText value="Administración de asistentes" /></p:column>  
+	    </p:row>
+		
+		<p:row><p:column colspan="2" styleClass="tipoFuente"><p:panelGrid>
+			
+			<p:row>
+				<p:column colspan="2" >
+					<p:spacer height="3px" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column style="width:70%;" styleClass="labelDer" >
+					<p:outputLabel for="cpBusqueda" value="Indique el código postal en el que busca a la asistente:" />
+				</p:column>
+				<p:column style="width:30%;" >
+					<p:inputMask id="cpBusqueda" styleClass="inputIzqL1" style="width:35%;" mask="99999" />
+				</p:column>
+			</p:row>
+		
+			<p:row>
+        		<p:column colspan="2" >
+        			<p:pickList id="pickListAsistentes" value="#{relacionAsistentesMB.asistentes}" var="asistente"
+        						itemLabel="#{asistente.secreataria}" itemValue="#{asistente.secreataria}" converter="#{secretariaConverter}"
+        						showSourceControls="false" showTargetControls="false" showCheckbox="true"
+        						showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" 
+        						styleClass="ui-picklist" >
+        					
+        					<f:facet name="sourceCaption">Asistentes disponibles</f:facet>  
+        					<f:facet name="targetCaption">Asistentes asociadas</f:facet>
+        					
+        					<p:column style="width:90%;">
+        						#{asistente.secreataria.nombre} #{asistente.secreataria.aPaterno} #{asistente.secreataria.aMaterno}
+        					</p:column>
+        					
+        					<p:ajax event="transfer" listener="#{relacionAsistentesMB.registrar(0)}" />         				
+        			</p:pickList>
+        		</p:column>
+        	</p:row>
+        	
+        	<p:row>
+				<p:column colspan="2" >
+					<p:dialog id="dlgNuevaAsistente" header="Registro de nueva asistente" height="425" width="600" modal="false" draggable="false" 
+							  resizable="false" showEffect="fade" hideEffect="fade" widgetVar="nuevaAsistente" >  
+						<p:panelGrid style="width:100%;" >
+							<p:row>
+								<p:column colspan="2" styleClass="tituloSubSeccion">
+									<h:outputText value="Datos personales" />
+								</p:column>  
+						    </p:row>
+				       		<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="asistenteNombre" value="Nombre(s):" />
+								</p:column>
+								<p:column style="width:70%;">
+									<p:inputText id="asistenteNombre" styleClass="inputIzqL1" style="width:90%;" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="asistenteApaterno" value="Apellido paterno:" />
+								</p:column>
+								<p:column style="width:70%;">
+									<p:inputText id="asistenteApaterno" styleClass="inputIzqL1" style="width:90%;" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="asistenteAmaterno" value="Apellido materno:" />
+								</p:column>
+								<p:column style="width:70%;">
+									<p:inputText id="asistenteAmaterno" styleClass="inputIzqL1" style="width:90%;" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="asistenteTelefono" value="Teléfono:" />
+								</p:column>
+								<p:column style="width:70%;">
+									<p:inputMask id="asistenteTelefono" styleClass="inputIzqL1" style="width:35%;" mask="(99) 9999-9999" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="asistenteCelular" value="Celular:" />
+								</p:column>
+								<p:column style="width:70%;">
+									<p:inputMask id="asistenteCelular" styleClass="inputIzqL1" style="width:35%;" mask="(99) 9999-9999" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="asistenteCP" value="Código postal:" />
+								</p:column>
+								<p:column style="width:70%;">
+									<p:inputMask id="asistenteCP" styleClass="inputIzqL1" style="width:35%;" mask="99999" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column colspan="2" styleClass="tituloSubSeccion">
+									<h:outputText value="Datos de cuenta" />
+								</p:column>  
+						    </p:row>
+						    
+						    <p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="medUsuario" value="Usuario:" />
+								</p:column>
+								<p:column style="width:70%;" >
+									<p:inputText id="medUsuario" styleClass="inputIzqL1" style="width:90%;" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="medContrasena" value="Contraseña:" />
+								</p:column>
+								<p:column style="width:70%;" >
+									<p:password id="medContrasena" styleClass="inputIzqL1" style="width:90%;" feedback="true" inline="true" 
+												match="medContrasenaConfirm" promptLabel="Escriba una contraseña..."
+												weakLabel="Contraseña débil" goodLabel="Contraseña segura" strongLabel="Contraseña altamente segura" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="width:30%;" styleClass="labelDer">
+									<p:outputLabel for="medContrasenaConfirm" value="Confirmar contraseña:" />
+								</p:column>
+								<p:column style="width:70%;" >
+									<p:password id="medContrasenaConfirm" styleClass="inputIzqL1" style="width:90%;" feedback="true" inline="true" 
+												promptLabel="Confirme la contraseña..."
+												weakLabel="Contraseña débil" goodLabel="Contraseña segura" strongLabel="Contraseña altamente segura" />
+								</p:column>
+							</p:row>
+							
+							<p:row><p:column><p:spacer height="15" /></p:column></p:row>
+							
+							<p:row>
+								<p:column styleClass="labelDerTop1" colspan="4" >
+									<p:commandButton id="btnCancelar" value="Cancelar" oncomplete="PF('nuevaAsistente').hide();" />
+									<p:commandButton id="btnRegistrarAsistente" value="Registrar" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:dialog>
+				</p:column>
+			</p:row>
+			
+		</p:panelGrid></p:column></p:row>
+		
+	</p:panelGrid>	
+</ui:composition>

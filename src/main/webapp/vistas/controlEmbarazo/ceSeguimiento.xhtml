@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 80%;">
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100%;"><p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column styleClass="tituloSubSeccion" colspan="5">
+					<p:outputLabel value="Datos de paciente" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDerBold">
+					<p:outputLabel value="Nombre: " />
+				</p:column>
+				<p:column colspan="4">
+					<p:outputLabel value="#{fichaIdentificacionMB.paciente.nombrePaciente}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDerBold">
+					<p:outputLabel value="Edad: " />
+				</p:column>
+				<p:column colspan="4">
+					<p:outputLabel value="#{fichaIdentificacionMB.paciente.edad}" />
+					<p:outputLabel value=" años" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="GS: " for="ceGS" />
+				</p:column>
+				<p:column colspan="4" styleClass="inputDerS1">
+					<p:inputText id="ceGS" value="#{ceSeguimientoMB.ce.gs}" maxlength="5"  
+							 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+					<p:watermark value="0.0" for="ceGS" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="Gesta: " for="ceGesta" />
+				</p:column>
+				<p:column styleClass="inputDerS1">
+					<p:inputText id="ceGesta" value="#{ceSeguimientoMB.ce.gesta}" maxlength="5"  
+							 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+					<p:watermark value="0.0" for="ceGesta" />
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="Para: " for="cePara" />
+				</p:column>
+				<p:column styleClass="inputDerS1">
+					<p:inputText id="cePara" value="#{ceSeguimientoMB.ce.para}" maxlength="5"  
+							 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+					<p:watermark value="0.0" for="cePara" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="Ces: " for="ceCes" />
+				</p:column>
+				<p:column styleClass="inputDerS1">
+					<p:inputText id="ceCes" value="#{ceSeguimientoMB.ce.ces}" maxlength="5"  
+							 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+					<p:watermark value="0.0" for="ceCes" />
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="AB: " for="ceAB" />
+				</p:column>
+				<p:column styleClass="inputDerS1">
+					<p:inputText id="ceAB" value="#{ceSeguimientoMB.ce.ab}" maxlength="5"  
+							 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+					<p:watermark value="0.0" for="ceAB" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="F.U.M.: " for="ceFUM" />
+				</p:column>
+				<p:column colspan="2">
+					<p:calendar styleClass="inputDerM1" id="ceFUM" showOn="both" locale="es" pattern="dd/MMM/yyyy" pages="3"
+								  showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" 
+								  yearRange="c-100:c+1" value="#{ceSeguimientoMB.ce.fum}" maxdate="#{ceSeguimientoMB.fechaHoy}"
+								  onkeydown='return revisarBase(event)' >
+						<p:ajax event="dateSelect" listener="#{ceSeguimientoMB.actualizarFPP}" update="ceFPP" process="@this"/>
+					</p:calendar>
+				</p:column>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="F.P.P.: " for="ceFPP" />
+				</p:column>
+				<p:column>
+					<p:calendar styleClass="inputDerM1" id="ceFPP" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+								  showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" 
+								  yearRange="c-100:c+1" value="#{ceSeguimientoMB.ce.fpp}" mindate="#{ceSeguimientoMB.ce.fpp}"
+								  maxdate="#{ceSeguimientoMB.ce.fpp}" onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="Embarazo: " for="ceEmbarazo" />
+				</p:column>
+				<p:column colspan="4">
+					<p:inputText id="ceEmbarazo" styleClass="inputIzqXL2" value="#{ceSeguimientoMB.ce.embarazo}" onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="Factor de riesgo: " for="ceFactorRiesto" />
+				</p:column>
+				<p:column colspan="4">
+					<p:inputText id="ceFactorRiesto" styleClass="inputIzqXL2" value="#{ceSeguimientoMB.ce.factorRiesgo}" 
+								 onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="tituloSubSeccion" colspan="8">
+					<p:outputLabel value="Seguimiento" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="8" style="width: 70%;">
+				<p:outputPanel id="ceOpSeguimiento" style="width: 100%;">
+				<p:panelGrid id="cePgSeguimiento" style="width: 100%;">
+					<p:row>
+						<p:column colspan="2" styleClass="labelDer">
+							<p:outputLabel for="segFecha" value="Fecha de consulta: " />
+						</p:column>
+						<p:column colspan="6">
+							<p:calendar styleClass="inputDerM1" id="segFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+										value="#{ceSeguimientoMB.seguimiento.fechaConsulta}" showButtonPanel="true" navigator="true" 
+										effect="slideDown" readonlyInput="true" maxdate="#{ceSeguimientoMB.fechaHoy}" yearRange="c-100:c"
+										onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column style="width: 5%;" styleClass="labelDer">
+							<p:outputLabel value="EG: " for="segEG" />
+						</p:column>
+						<p:column style="width: 15%;">
+							<p:spinner id="segEG" size="1" value="#{ceSeguimientoMB.seguimiento.eg}" onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="segEG" />
+							<p:outputLabel value=" semanas" for="segEG" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 5%;" styleClass="labelDer">
+							<p:outputLabel value="Peso: " for="segPeso" />
+						</p:column>
+						<p:column style="width: 20%;" styleClass="inputDerS1">
+							<p:inputText id="segPeso" value="#{ceSeguimientoMB.seguimiento.peso}" maxlength="5"  
+									 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="segPeso" />
+							<p:outputLabel value=" Kg." for="segPeso" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 5%;" styleClass="labelDer">
+							<p:outputLabel value="TA: " for="segTA" />
+						</p:column>
+						<p:column style="width: 40%;" styleClass="inputDerS1">
+							<p:inputText id="segTA" value="#{ceSeguimientoMB.seguimiento.ta}" maxlength="5"  
+									 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="segTA" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="DPF: " for="segDPF" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="segDPF" value="#{ceSeguimientoMB.seguimiento.dpf}" maxlength="5"  
+									 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="segDPF" />
+							<p:outputLabel value=" cm." for="segDPF" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="LCF: " for="segLCF" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="segLCF" value="#{ceSeguimientoMB.seguimiento.lcf}" maxlength="5"  
+									 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="segLCF" />
+							<p:outputLabel value=" latidos/m" for="segLCF" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="MsFs: " for="segMsFs" />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="segMsFs" value="#{ceSeguimientoMB.seguimiento.msfs.idMsFs}" >
+								<p:ajax event="change" listener="#{ceSeguimientoMB.setDescripcionMsFs()}" />
+								<f:selectItems value="#{ceSeguimientoMB.tipoMsFs}" var="tipoMsFs" itemLabel="#{tipoMsFs.descripcion}" 
+											   itemValue="#{tipoMsFs.idMsFs}" /> 
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Pres:" for="segPres" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu id="segPres" value="#{ceSeguimientoMB.seguimiento.pres.idPres}" >
+								<p:ajax event="change" listener="#{ceSeguimientoMB.setDescripcionPres()}" />
+								<f:selectItem itemLabel="Elija..." itemValue="" />
+								<f:selectItems value="#{ceSeguimientoMB.tipoPres}" var="tipoPres" itemLabel="#{tipoPres.descripcion}" 
+											   itemValue="#{tipoPres.idPres}" onkeydown='return revisarBase(event)' />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="P.Est: " for="segPEst" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="segPEst" value="#{ceSeguimientoMB.seguimiento.pest}" maxlength="5"  
+									 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="segPEst" />
+							<p:outputLabel value=" Kg." for="segPEst" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Edema: " for="segEdema" />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="segEdema" value="#{ceSeguimientoMB.seguimiento.edema.idEdema}" >
+								<p:ajax event="change" listener="#{ceSeguimientoMB.setDescripcionEdema()}" update="segEdemaX" />
+								<f:selectItems value="#{ceSeguimientoMB.tipoEdema}" var="tipoEdema" itemLabel="#{tipoEdema.descripcion}" 
+											   itemValue="#{tipoEdema.idEdema}" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column colspan="7" />
+						<p:column>
+							<p:selectOneRadio id="segEdemaX" value="#{ceSeguimientoMB.seguimiento.edemaX.idEdemaX}" disabled="#{!ceSeguimientoMB.bEdema}" >
+								<p:ajax event="change" listener="#{ceSeguimientoMB.setDescripcionEdemaX()}" />
+								<f:selectItems value="#{ceSeguimientoMB.tipoEdemaX}" var="tipoEdemaX" itemLabel="#{tipoEdemaX.descripcion}" 
+											   itemValue="#{tipoEdemaX.idEdemaX}" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer" colspan="11">
+							<p:commandButton id="ceSegLimpiar" value="Limpiar" icon="ui-icon-clipboard" update="cePgSeguimiento" process="@this" >
+								<p:resetInput target="cePgSeguimiento" />
+							</p:commandButton>
+							<p:commandButton id="ceSegAgregar" value="Registrar" icon="ui-icon-plusthick" action="#{ceSeguimientoMB.reinit()}" 
+											 update="cePgSeguimiento seguimiento" process="@this segFecha segEG segPeso segTA segDPF segLCF segMsFs segPres
+											 								   			   segPEst segEdema segEdemaX" >
+								<p:collector value="#{ceSeguimientoMB.seguimiento}" addTo="#{ceSeguimientoMB.seguimientos}" />
+			                </p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			
+			</p:outputPanel></p:column></p:row>
+			
+		</p:panelGrid></p:column></p:row>	
+	</p:panelGrid>
+			
+	<br />
+				
+	<p:panelGrid>
+		<p:row><p:column>
+			<p:outputPanel id="seguimiento" style="width: 1150px;" >
+				<p:dataTable styleClass="panelGrid-Tabla" id="ceTblSeguimiento" editable="true" widgetVar="tblSeguimiento" 
+							 emptyMessage="No se ha registrado algun seguimiento." value="#{ceSeguimientoMB.seguimientos}" var="seguimiento" >
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column headerText="Fecha" style="width: 12.5%;" />
+							<p:column headerText="EG" 	 style="width: 5%;" />
+							<p:column headerText="Peso"  style="width: 5%;" />
+							<p:column headerText="TA" 	 style="width: 5%;" />
+							<p:column headerText="DPF"	 style="width: 5%;" />
+							<p:column headerText="LCF"	 style="width: 5%;" />
+							<p:column headerText="MsFs"	 style="width: 15%;" />
+							<p:column headerText="Pres"	 style="width: 12.3%;" />
+							<p:column headerText="P.Est" style="width: 5%;" />
+							<p:column headerText="Edema" style="width: 25%;" />
+							<p:column colspan="2" headerText="Editar" style="width: 5%;" />
+						</p:row>
+					</p:columnGroup>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.fechaConsulta}">
+									<f:convertDateTime pattern="dd/MMM/yyyy" locale="es" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input" >
+								<p:calendar styleClass="inputDerM1" id="ceSegModelFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+											value="#{seguimiento.fechaConsulta}" showButtonPanel="true" navigator="true" 
+											effect="slideDown" readonlyInput="true" maxdate="#{ceSeguimientoMB.fechaHoy}" yearRange="c-100:c"
+											onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.eg}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:spinner id="ceSegModelEG" size="1" value="#{seguimiento.eg}" onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.peso}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText id="ceSegModelPeso" value="#{seguimiento.peso}" maxlength="5" 
+									 	 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.ta}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText id="ceSegModelTA" value="#{seguimiento.ta}" maxlength="5"  
+									 	 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.dpf}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText id="ceSegModelDPF" value="#{seguimiento.dpf}" maxlength="5"  
+									 	 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.lcf}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText id="ceSegModelLCF" value="#{seguimiento.lcf}" maxlength="5"  
+									 	 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{seguimiento.msfs.descripcion}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:selectOneRadio id="segMsFs" value="#{seguimiento.msfs.idMsFs}" >  
+									<p:ajax event="change" listener="#{ceSeguimientoMB.cambiarDescripcionMsFs(seguimiento)}" />
+									<f:selectItems value="#{ceSeguimientoMB.tipoMsFs}" var="tipoMsFs" itemLabel="#{tipoMsFs.descripcion}"
+												   itemValue="#{tipoMsFs.idMsFs}" /> 
+								</p:selectOneRadio>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.pres.descripcion}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:selectOneMenu id="segPres" value="#{seguimiento.pres.idPres}" style="width: 90%;" onkeydown='return revisarBase(event)' >
+									<p:ajax event="change" listener="#{ceSeguimientoMB.cambiarDescripcionPres(seguimiento)}" />
+									<f:selectItem itemLabel="Elija una opción" itemValue="" />
+									<f:selectItems value="#{ceSeguimientoMB.tipoPres}" var="tipoPres" itemLabel="#{tipoPres.descripcion}" itemValue="#{tipoPres.idPres}" />
+								</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.pest}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText id="ceSegModelPEst" value="#{seguimiento.pest}" maxlength="5"  
+									 	 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{seguimiento.edema.descripcion}" />
+								<h:outputText value=" " />
+								<h:outputText value="#{seguimiento.edemaX.descripcion}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:selectOneRadio id="segEdema" value="#{seguimiento.edema.idEdema}" >
+									<p:ajax event="change" listener="#{ceSeguimientoMB.cambiarDescripcionEdema(seguimiento)}" update="segEdemaX" />
+									<f:selectItems value="#{ceSeguimientoMB.tipoEdema}" var="tipoEdema" itemLabel="#{tipoEdema.descripcion}"
+												   itemValue="#{tipoEdema.idEdema}" />
+								</p:selectOneRadio>
+								<p:selectOneRadio id="segEdemaX" value="#{seguimiento.edemaX.idEdemaX}" disabled="#{!ceSeguimientoMB.bEdema}" >
+									<p:ajax event="change" listener="#{ceSeguimientoMB.cambiarDescripcionEdemaX(seguimiento)}" />
+									<f:selectItems value="#{ceSeguimientoMB.tipoEdemaX}" var="tipoEdemaX" itemLabel="#{tipoEdemaX.descripcion}" 
+												   itemValue="#{tipoEdemaX.idEdemaX}" />
+								</p:selectOneRadio>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:rowEditor id="ceReSeguimiento" />
+					</p:column>
+					<p:column>
+						<p:commandLink id="ceEliminarSeguimiento" styleClass="ui-icon ui-icon-trash" update=":formCE:seguimiento" 
+									   process=":formCE:seguimiento" >
+                           	<p:collector value="#{seguimiento}" removeFrom="#{ceSeguimientoMB.seguimientos}" />
+                           </p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+			
+		</p:column></p:row>
+	</p:panelGrid>
+
+</ui:composition>

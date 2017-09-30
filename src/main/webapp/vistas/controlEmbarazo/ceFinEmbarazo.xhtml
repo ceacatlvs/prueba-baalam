@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 800px;" >
+		<p:row>
+			<p:column styleClass="labelDer" style="width: 20% !important;" >
+				<p:outputLabel value="Fecha de término: " for="feFechaTermino" />
+			</p:column>
+			<p:column colspan="3" style="width: 80% !important;">
+				<p:calendar styleClass="inputDerM1" id="feFechaTermino" value="#{ceFinEmbarazoMB.finEmbarazo.fechaTermino}"
+							maxdate="#{ceFinEmbarazoMB.fechaHoy}" showOn="both" pages="3" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true"
+							navigator="true" effect="slideDown" readonlyInput="true" onkeydown='return revisarBase(event)' >
+					<p:ajax event="dateSelect"  update="feTblPartos"  listener="#{ceFinEmbarazoMB.cambiarFechaTermino()}"/>
+				</p:calendar>
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel value="Semanas de embarazo: " for="feSemanasEmbarazo" />
+			</p:column>
+			<p:column styleClass="inputDerS1">
+				<p:inputText id="feSemanasEmbarazo" value="#{ceFinEmbarazoMB.finEmbarazo.semanas}" maxlength="2"  
+							 onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' >
+					<p:ajax event="change" update="feTblPartos"  listener="#{ceFinEmbarazoMB.cambiarSemanas()}"/>
+				</p:inputText>
+				<p:watermark value="0" for="feSemanasEmbarazo" />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel value="¿Llegó a término?: " />
+			</p:column>
+			<p:column>
+				<p:selectOneRadio id="feTermino" value="#{ceFinEmbarazoMB.finEmbarazo.termino}"  >  
+					<f:selectItem itemLabel="Si" itemValue="S" />
+					<f:selectItem itemLabel="No" itemValue="N" />			
+					<p:ajax event="change" update="feOpAborto feOpNacimiento fePgPartos"/>
+				</p:selectOneRadio>
+			</p:column>
+		</p:row>
+	</p:panelGrid>	
+	
+	<p:panelGrid style="width: 800px;">	
+		<p:row><p:column colspan="2" style="width: 100%;">
+			<p:outputPanel id="feOpAborto" style="width: 100%;">
+				<p:panelGrid id="fePgAborto" rendered="#{ceFinEmbarazoMB.finEmbarazo.termino.equals('N')}" style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 19.3%;">
+							<p:outputLabel value="Tipo de aborto: " />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="feTipoAborto" value="#{ceFinEmbarazoMB.finEmbarazo.tipoAborto}">  
+								<f:selectItem itemLabel="Espontáneo" itemValue="E" />
+								<f:selectItem itemLabel="Inducido" itemValue="I" />
+							</p:selectOneRadio>
+						</p:column>					
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Diferido: " for="feDiferido" />
+						</p:column>
+						<p:column>
+							<p:selectBooleanCheckbox id="feDiferido" style="padding: 10px !important;" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Aborto: " />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="feAbortoCompleto" value="#{ceFinEmbarazoMB.finEmbarazo.completo}" >  
+								<f:selectItem itemLabel="Completo" itemValue="C" />
+								<f:selectItem itemLabel="Incompleto" itemValue="I" />
+								
+								<p:ajax event="change" update="feLUI" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="LUI: " for="feLUI" />
+						</p:column>
+						<p:column>
+							<p:selectBooleanCheckbox id="feLUI" disabled="#{ceFinEmbarazoMB.finEmbarazo.completo.equals('C')}"
+													 style="padding: 10px !important;" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+	</p:panelGrid>
+	
+	<p:panelGrid style="width: 800px;">	
+		<p:row><p:column colspan="2" style="width:100%;">
+			<p:outputPanel id="feOpNacimiento" style="width: 100%;">
+				<p:panelGrid id="fePgNacimiento" rendered="#{ceFinEmbarazoMB.finEmbarazo.termino.equals('S')}" style="width: 100%;">
+					
+					<p:row><p:column><p:spacer height="7" /></p:column></p:row>
+					<p:row>
+						<p:column colspan="2" styleClass="labelIzqMiddle">
+							<p:outputLabel value="Para agregar un término de embarazo a la tabla primero llene los campos 
+												  y después dé clic en el botón 'Agregar'." />
+						</p:column>
+					</p:row>
+					<p:row><p:column><p:spacer height="9" /></p:column></p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 19.3%;">
+							<p:outputLabel value="Nombre: " for="feNombreNacimiento" />
+						</p:column>
+						<p:column style="width: 80%;">
+							<p:inputText styleClass="inputIzqXL2" id="feNombreNacimiento" value="#{ceFinEmbarazoMB.parto.nombre}" 
+										 style="width: 95% !important;" onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Kg: " for="feKg" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="feKg" value="#{ceFinEmbarazoMB.parto.pesoKg}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="feKg" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Tipo de nacimiento: " />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="feTipoNacimiento" value="#{ceFinEmbarazoMB.parto.tipoNacimiento}">
+								<f:selectItem itemLabel="Parto" itemValue="Parto" />
+								<f:selectItem itemLabel="Cesárea" itemValue="Cesárea" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Sexo: " />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="feSexoNacimiento" value="#{ceFinEmbarazoMB.parto.sexo}">
+								<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+								<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDerTop1">
+							<p:outputLabel value="Indicación de cesárea: " for="feCesarea" />
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="feCesarea" value="#{ceFinEmbarazoMB.parto.indicacionCesarea}" style="width: 95% !important;"
+											 maxlength="500" autoResize="false" rows="7" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Complicaciones: " />
+						</p:column>
+						<p:column>
+							<p:selectBooleanCheckbox id="feDiabetes" itemLabel="Diabetes" value="#{ceFinEmbarazoMB.parto.diabetes}" style="padding: 10px !important;" />
+							<p:selectBooleanCheckbox id="feHipertension" itemLabel="Hipertensión" value="#{ceFinEmbarazoMB.parto.hipertension}" style="padding: 10px !important;" />
+							<p:selectBooleanCheckbox id="fePreclamsia" itemLabel="Preclamsia" value="#{ceFinEmbarazoMB.parto.preclamsia}" style="padding: 10px !important;" />
+							<p:selectBooleanCheckbox id="feDepresion" itemLabel="Depresión" value="#{ceFinEmbarazoMB.parto.depresion}" style="padding: 10px !important;" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDerTop1">
+							<p:outputLabel value="Otras complicaciones: " for="feOtrasComplicaciones" />
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="feOtrasComplicaciones" value="#{ceFinEmbarazoMB.parto.otra}" style="width: 95% !important;"
+											 maxlength="500" autoResize="false" rows="7" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:commandButton id="fePartoAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{ceFinEmbarazoMB.reinitParto()}"
+											 update="fePgNacimiento nacimientos" 
+											 process="@this feFechaTermino feNombreNacimiento feSemanasEmbarazo feTipoNacimiento feSexoNacimiento feCesarea 
+											 		  feKg feDiabetes feHipertension fePreclamsia feDepresion feOtrasComplicaciones">
+								<p:collector value="#{ceFinEmbarazoMB.parto}" addTo="#{ceFinEmbarazoMB.partos}"/>
+							</p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:column></p:row>
+	</p:panelGrid>
+	
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" id="fePgPartos" style="width: 100%; padding-left: 0px !important;" >
+		<p:row><p:column style="width: 100%;" colspan="2">
+	
+			<p:outputPanel id="nacimientos" rendered="#{ceFinEmbarazoMB.finEmbarazo.termino.equals('S')}" style="width: 1350px;" >
+				<p:dataTable styleClass="panelGrid-Tabla" id="feTblPartos" value="#{ceFinEmbarazoMB.partos}" var="parto" editable="true" 
+							 widgetVar="tblPartos" emptyMessage="No se tienen registrados nacimientos hasta el momento." style="width: 100% !important;" >
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column headerText="Término" style="width: 10%;" />
+							<p:column headerText="Nombre" style="width: 16%;" />
+							<p:column headerText="Semanas" style="width: 5%;" />
+							<p:column headerText="Peso" style="width: 6%;" />
+							<p:column headerText="Tipo de&lt;br/&gt;nacimiento" style="width: 5%;" />
+							<p:column headerText="Sexo" style="width: 5%;" />
+							<p:column headerText="Indicaciones&lt;br/&gt;de cesárea" style="width: 18%;" />
+							<p:column headerText="Complicaciones" style="width: 12%;" />
+							<p:column headerText="Otras&lt;br/&gt;complicaciones" style="width: 18%;" />
+							<p:column colspan="2" headerText="Editar" style="width: 5%;" />
+						</p:row>
+					</p:columnGroup>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel styleClass="labelDer" value="#{parto.fechaNacimiento}">
+									<f:convertDateTime pattern="dd/MMM/yyyy" locale="es" />
+								</p:outputLabel>
+							</f:facet>
+							<f:facet name="input">
+								<p:calendar styleClass="inputDerM2" id="feFechaTerminoModel" value="#{parto.fechaNacimiento}"
+											maxdate="#{ceFinEmbarazoMB.fechaHoy}" showOn="both" pages="3" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true"
+											navigator="true" effect="slideDown" readonlyInput="true" onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.nombre}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="feNombreNacimientoModel" value="#{parto.nombre}" style="width: 95% !important;" 
+											 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column styleClass="inputDerS2">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.semanasEmbarazo}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="feSemanasEmbarazoModel" value="#{parto.semanasEmbarazo}" maxlength="2"  
+							 	 		 	 onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column styleClass="inputDerS1">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.pesoKg} Kg" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="feKgModel" value="#{parto.pesoKg}" maxlength="5"  
+							 	 		 	 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.tipoNacimiento}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneRadio id="feTipoNacimientoModel" value="#{parto.tipoNacimiento}" layout="grid" columns="1" >
+									<f:selectItem itemLabel="Parto" itemValue="Parto" />
+									<f:selectItem itemLabel="Cesárea" itemValue="Cesárea" />
+								</p:selectOneRadio>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.sexo}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneRadio id="feSexoNacimientoModel" value="#{parto.sexo}" layout="grid" columns="1" >
+									<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+									<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+								</p:selectOneRadio>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.indicacionCesarea}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputTextarea id="feCesareaModel" value="#{parto.indicacionCesarea}" style="width: 95% !important;"
+											 	 maxlength="500" autoResize="false" rows="9" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">											
+								<p:outputLabel value="Diabetes&lt;br/&gt;" rendered="#{parto.diabetes}" escape="false" />
+								<p:outputLabel value="Hipertensión&lt;br/&gt;" rendered="#{parto.hipertension}" escape="false" />
+								<p:outputLabel value="Preclamsia&lt;br/&gt;" rendered="#{parto.preclamsia}" escape="false" />
+								<p:outputLabel value="Depresión&lt;br/&gt;" rendered="#{parto.depresion}" escape="false" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectBooleanCheckbox id="feDiabetesModel" itemLabel="Diabetes" value="#{parto.diabetes}" style="padding: 10px !important;" />
+								<p:selectBooleanCheckbox id="feHipertensionModel" itemLabel="Hipertensión" value="#{parto.hipertension}" style="padding: 10px !important;" />
+								<p:selectBooleanCheckbox id="fePreclamsiaModel" itemLabel="Preclamsia" value="#{parto.preclamsia}" style="padding: 10px !important;" />
+								<p:selectBooleanCheckbox id="feDepresionModel" itemLabel="Depresión" value="#{parto.depresion}" style="padding: 10px !important;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{parto.otra}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputTextarea id="feOtrasComplicacionesModel" value="#{parto.otra}" style="width: 95% !important;"
+												 maxlength="500" autoResize="false" rows="9" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:rowEditor id="feReParto" />
+					</p:column>
+					<p:column>
+						<p:commandLink id="feEliminarParto" styleClass="ui-icon ui-icon-trash" update=":formFE:nacimientos"
+									   process="@this :formFE:nacimientos">
+							<p:collector value="#{parto}" removeFrom="#{ceFinEmbarazoMB.partos}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+	
+		</p:column></p:row>
+	</p:panelGrid>
+
+</ui:composition>

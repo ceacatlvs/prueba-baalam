@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+   				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+   		
+	<h3>Consultas del día de hoy</h3>
+    
+    <h:form id="consultasDiaA" >
+    	<p:panelGrid styleClass="panelGrid-FormularioSimpleInicio" style="width: 99.9%" >
+        	<p:row>
+        		<p:column colspan="2" styleClass="tipoFuente" >
+        			<p:dataTable id="dtConsultas" value="#{inicioMB.consultasHoy}" var="consultaHoy" styleClass="tipoFuenteTabla" paginator="true"
+        						 rows="10" rowsPerPageTemplate="5,10,15" paginatorPosition="top" emptyMessage="No hay consultas registradas para el día de hoy."
+        						 rowStyleClass="#{consultaHoy.tipoConsulta eq 'P' ? 'fila-1raVez' : 'fila-sub'}"  
+             					 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+             					 
+             			<p:column styleClass="tipoFuenteTabla" style="width: 5%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Cita" />
+				        	</f:facet>
+				        	
+				        	<h:outputText value="#{consultaHoy.fechaCitaInicio}">
+				        		<f:convertDateTime pattern="HH:mm" timeZone="Mexico/General" />
+				        	</h:outputText>
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 40%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Nombre&#10;de paciente" />
+				        	</f:facet>
+				        	
+				        	<h:outputText value="#{consultaHoy.nombrePaciente}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 10%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Última&#10;consulta" />
+				        	</f:facet>
+				        	
+				        	<h:outputText value="#{consultaHoy.fechaUltimaCita}">
+				        		<f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" timeZone="Mexico/General" />
+				        	</h:outputText>
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 10%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Semanas&#10;de embarazo" />
+				        	</f:facet>
+				        	
+				        	<h:outputText value="#{consultaHoy.semanasEmbarazo}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 20%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Correo electrónico" />
+				        	</f:facet>
+				        		
+				        		<h:outputText value="#{paciente.mail}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 45%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Teléfonos" />
+				        	</f:facet>
+				        	<p:panelGrid styleClass="panelGrid-FormularioSimpleInicio" style="width: 99.9%;" >
+				        		<p:row>
+				        			<p:column styleClass="tipoFuenteTabla" style="width: 45%;">
+							        	<h:outputText value=" Móvil:" />
+							        	<h:outputText value=" #{paciente.telefonoMovil}" />
+				        			</p:column>
+				        		</p:row>
+				        		<p:row>
+				        			<p:column styleClass="tipoFuenteTabla" style="width: 45%;">
+				        			<h:outputText value="Casa: " />
+							        	<h:outputText value="#{paciente.telCasa}" />
+				        			</p:column>
+				        		</p:row>
+				        		<p:row>
+				        			<p:column styleClass="tipoFuenteTabla" style="width: 45%;">										
+							        	<h:outputText value=" Oficina: " />
+							        	<h:outputText value="#{paciente.telOficina}" />
+				        			</p:column>
+				        		</p:row>
+				        	</p:panelGrid>	
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 45%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Recibo de honorarios" />
+				        	</f:facet>
+				        		
+				        		<h:outputText value="" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Información&#10;de la paciente" />
+				        	</f:facet>
+				        	<p:commandLink styleClass="tipoFuenteLinks" action="#{fichaIdentificacionMB.verDetalle(consultaHoy.idPaciente, loginMB.usuario.rol.idRol)}" value="Ver&#10;detalle" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Ficha de&#10;identificación" />
+				        	</f:facet>
+				        	<p:commandLink styleClass="tipoFuenteLinks" action="#{fichaIdentificacionMB.iraFIDAsistente(consultaHoy.idPaciente)}"  value="Llenar" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 7%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Cancelar&#10;consulta" />
+				        	</f:facet>
+				        	
+				        	<p:commandLink styleClass="tipoFuenteLinks" value="Cancelar" actionListener="#{inicioMB.cancelarCitaHoy(consultaHoy.idCita)}"
+				        				   update=":consultasDiaA:dtConsultas" process="@this :consultasDiaA:dtConsultas" rendered="#{!consultaHoy.consultaDada}">
+								<p:confirm styleClass="tipoFuente" header="Cancelar cita" message="¿Está seguro de borrar la cita?" icon="ui-icon-alert" />
+							</p:commandLink>
+							
+							<p:confirmDialog styleClass="tipoFuente" global="true">
+								<p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" 
+												 update=":consultasDiaA:dtConsultas" process="@this :consultasDiaA:dtConsultas"/>
+								<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>							
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Cantidad pagada" />
+				        	</f:facet>
+				        	<h:outputText value="#{consultaHoy.monto}"/>				        					        	
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Registrar pago" />
+				        	</f:facet>				        	
+				        	<p:commandLink styleClass="tipoFuenteLinks" oncomplete="PF('dialogPago').show()" update=":consultasDiaA:dlgRegistrarPago" value="Registrar pago" rendered="#{consultaHoy.consultaDada}">
+				        		<f:setPropertyActionListener target="#{cpCobroConsultaMB.cobroConsulta.idCPCobroConsulta}" value="#{consultaHoy.idCPCobroConsulta}" />
+				        		<f:setPropertyActionListener target="#{cpCobroConsultaMB.cobroConsulta.pendientePagar}" value="#{consultaHoy.monto}" />
+				        		<f:setPropertyActionListener target="#{cpCobroConsultaMB.pago.cantidadPago}" value="#{consultaHoy.monto}" />
+				        	</p:commandLink>
+				        </p:column>
+             		</p:dataTable>
+             	</p:column>
+             </p:row>
+        </p:panelGrid>
+        
+       <p:dialog id="dlgRegistrarPago" header="Registro de pago" styleClass="tipoFuente" widgetVar="dialogPago" resizable="false" 
+			  draggable="true" height="350" width="500" focus="cpCantidadPago" >
+			<p:panelGrid id="pgDatosCita" styleClass="tipoFuente" style="width: 100%;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 35%;">
+						<p:outputLabel value="Fecha de consulta: " />
+					</p:column>
+					<p:column style="width: 65%;" >
+						<p:outputLabel value="#{cpCobroConsultaMB.cobroConsulta.padecimientoActual.fechaConsulta}">
+							<f:convertDateTime pattern="EEEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" timeZone="Mexico/General" />
+						</p:outputLabel>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 35%;">
+						<p:outputLabel value="Fecha de pago: " for="cpPagoFecha" />
+					</p:column>
+					<p:column style="width: 65%;" >
+						<p:calendar style="width: 100%;" styleClass="inputDer" id="cpPagoFecha" value="#{cpCobroConsultaMB.pago.fechaPago}"
+									showOn="both" yearRange="c-100:c+1" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true" 
+									navigator="true" effect="slideDown" readonlyInput="true" maxdate="#{cpCobroConsultaMB.fechaHoy}" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="2" >
+						<p:outputPanel styleClass="ui-messages-warn ui-corner-all" style="margin: 0px !important;" >
+							<p:outputLabel styleClass="ui-messages-warn-icon" />
+							<p:outputLabel styleClass=" ui-messages-warn-summary" 
+										   value="La cantidad de pago debe ser menor o igual a $#{cpCobroConsultaMB.cobroConsulta.pendientePagar}MN" />
+						</p:outputPanel>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 35%;">
+						<p:outputLabel value="Cantidad pago: " for="cpCantidadPago" />
+					</p:column>
+					<p:column style="width: 65%;">
+						<pe:inputNumber id="cpCantidadPago" value="#{cpCobroConsultaMB.pago.cantidadPago}" style="width: 50%;" styleClass="inputDer"
+										minValue="0.0" maxValue="#{cpCobroConsultaMB.cobroConsulta.pendientePagar}" onfocus="this.select()"
+										symbol="$" symbolPosition="p" decimalSeparator="." decimalPlaces="2" thousandSeparator="," />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="2" >
+						<p:outputPanel id="pnlTipoPago" styleClass="ui-messages-error ui-corner-all" style="margin: 0px !important;"
+									   rendered="#{cpCobroConsultaMB.pago.tipoPago.idTipoPago == 0}" >
+							<p:outputLabel styleClass="ui-messages-error-icon" />
+							<p:outputLabel styleClass=" ui-messages-error-summary" 
+										   value="Se necesita elegir un tipo de pago" />
+						</p:outputPanel>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 35%;">
+						<p:outputLabel value="Tipo de pago: " for="cpTipoPago" id="lblTipoPago" />
+					</p:column>
+					<p:column style="width: 65%;">
+						 <p:selectOneMenu id="cpTipoPago" value="#{cpCobroConsultaMB.pago.tipoPago.idTipoPago}" panelStyleClass="tipoFuente" 
+						 				  required="true" immediate="true" >
+				            <f:selectItem itemLabel="Elija..." itemValue="0" />  
+							<f:selectItems value="#{cpCobroConsultaMB.tiposPago}" var="tipoPago" itemLabel="#{tipoPago.descripcion}" itemValue="#{tipoPago.idTipoPago}" />
+							
+							<p:ajax event="change" update="pgDatosCita" />
+				        </p:selectOneMenu>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 35%;">
+						<p:outputLabel value="Notas del pago: " />
+					</p:column>
+					<p:column style="width: 65%;" >
+						<p:inputTextarea id="cpNotasPago" value="#{cpCobroConsultaMB.pago.notas}" maxlength="300" rows="3" style="width: 98%;" autoResize="false" />
+					</p:column>
+				</p:row>
+				
+				<p:row><p:column colspan="2"><p:spacer height="5" /></p:column></p:row>
+				
+				<p:row>
+					<p:column colspan="4" styleClass="labelDerTop1" style="width: 20%;" >
+						<p:commandButton id="btnCancelar" value="Cancelar" oncomplete="PF('dialogPago').hide();" />
+						<p:commandButton id="btnRegistrarPago" value="Registrar" oncomplete="PF('dialogPago').hide();" disabled="#{cpCobroConsultaMB.pago.tipoPago.idTipoPago == 0}"
+										 action="#{cpCobroConsultaMB.registrar(2)}" update=":consultasDiaA:dtConsultas" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>	
+		</p:dialog>
+    </h:form>
+    
+    <p:spacer height="9" />
+	
+	<h3>Búsqueda de pacientes</h3>
+	
+	<h:form id="buscarPacientesA">
+        <p:panelGrid styleClass="panelGrid-FormularioSimpleInicio" style="width: 99.9%;" >
+        	<p:row>
+        		<p:column styleClass="tipoFuente" >
+        			<p:inputText styleClass="inputIzqL1" id="nombrePaciente" value="#{inicioMB.nombrePaciente}">
+        				<p:watermark for="nombrePaciente" value="Nombre de la paciente..." />
+        			</p:inputText>
+        			&nbsp;
+        			<p:commandButton value="Buscar" icon="ui-icon-search" action="#{inicioMB.buscarPacientes()}" update="dtPacientes"/>
+        		</p:column>
+        	</p:row>
+        	
+        	<p:row>
+        		<p:column colspan="2" styleClass="tipoFuente" >
+        			<p:dataTable id="dtPacientes" var="paciente" styleClass="tipoFuenteTabla" value="#{inicioMB.busquedaPacientes}"
+             					paginator="true" rows="10" rowsPerPageTemplate="5,10,15" paginatorPosition="top" emptyMessage="No hay pacientes registradas."
+             					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+             					
+             			<f:facet name="header">
+             				<h:outputText value="Resultados de búsqueda" />
+             			</f:facet>
+             			
+             			<p:column styleClass="tipoFuenteTabla" style="width: 45%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Nombre de la paciente" />
+				        	</f:facet>
+				        		
+				        		<h:outputText value="#{paciente.nombrePaciente}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 10%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value=" Última &#10; consulta " />
+				        	</f:facet>
+				        	
+				        	<h:outputText value="#{paciente.fechaUltimaCita}">
+				        		<f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" timeZone="Mexico/General" />
+				        	</h:outputText>
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 20%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Correo electrónico" />
+				        	</f:facet>
+				        		
+				        		<h:outputText value="#{paciente.mail}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 45%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Teléfonos" />
+				        	</f:facet>
+				        	<p:panelGrid styleClass="panelGrid-FormularioSimpleInicio" style="width: 99.9%;" >
+				        		<p:row>
+				        			<p:column styleClass="tipoFuenteTabla" style="width: 45%;">
+							        	<h:outputText value=" Móvil:" />
+							        	<h:outputText value=" #{paciente.telefonoMovil}" />
+				        			</p:column>
+				        		</p:row>
+				        		<p:row>
+				        			<p:column styleClass="tipoFuenteTabla" style="width: 45%;">
+				        			<h:outputText value="Casa: " />
+							        	<h:outputText value="#{paciente.telCasa}" />
+				        			</p:column>
+				        		</p:row>
+				        		<p:row>
+				        			<p:column styleClass="tipoFuenteTabla" style="width: 45%;">										
+							        	<h:outputText value=" Oficina: " />
+							        	<h:outputText value="#{paciente.telOficina}" />
+				        			</p:column>
+				        		</p:row>
+				        	</p:panelGrid>	
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 45%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Recibo de honorarios" />
+				        	</f:facet>
+				        		
+				        		<h:outputText value="" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				       		<f:facet name="header">
+				        		<h:outputText value="Información &#10;de la paciente" />
+				        	</f:facet>
+				        	
+				        	<p:commandLink styleClass="tipoFuenteLinks" action="#{fichaIdentificacionMB.verDetalle(paciente.idPaciente, loginMB.usuario.rol.idRol)}" value="ir a información de la paciente" ajax="false"/>
+				       </p:column>
+				       
+				       <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Ficha de&#10;identificación" />
+				        	</f:facet>
+				        	
+				        	<p:commandLink styleClass="tipoFuenteLinks" action="#{fichaIdentificacionMB.iraFIDAsistente(paciente.idPaciente)}"  value="Actualizar" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" style="width: 15%;" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Pagos" />
+				        	</f:facet>
+				        	
+				        	<p:commandLink styleClass="tipoFuenteLinks" action="#{cpCobroConsultaMB.verDetallePagos(paciente.idPaciente, loginMB.usuario.rol.idRol)}" value="Ir a pagos" />
+				        </p:column>
+             		</p:dataTable>
+        		</p:column>
+        	</p:row>
+        </p:panelGrid>
+    </h:form>
+    
+    <p:spacer height="9" />
+    
+    <p:spacer height="30" />
+    <!-- voy aquí, ya pasé el dialog al inicio de la asistente, hay q poner lo dl update como está en datos pago -->
+    
+</ui:composition>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:head>
+    	<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+    	
+    	<title>
+    		<ui:insert name="title" />
+    	</title>
+    </h:head>
+    
+    <h:body>
+    	<h:outputStylesheet name="css/login.css" />
+    	
+    	<p:layout fullPage="true" resizeTitle="resize">
+
+			<p:layoutUnit position="west" id="left" size="1%" resizable="false" collapsible="true" gutter="0" styleClass="ui-left panelFormulario" />
+           	
+           	<p:layoutUnit position="center" id="center" size="98%" resizable="false" collapsible="true" gutter="0" styleClass="ui-center panelFormulario" >
+           		<p:layout>
+           			<p:layoutUnit position="west" id="ctrLeft" size="60%" resizable="false" collapsible="true" gutter="0" styleClass="ui-ctrLeft panelFormulario">
+           				<ui:insert name="contenido" />
+                	</p:layoutUnit>
+                	
+                	<p:layoutUnit position="center" id="ctrCenter" size="40%" resizable="false" collapsible="true" gutter="0" styleClass="ui-ctrCenter panelFormulario">
+                		<p:growl id="growlLogin" autoUpdate="true" showDetail="true" showSummary="true" sticky="false" life="3000" />
+                		<ui:insert name="forma" />
+                	</p:layoutUnit>
+                </p:layout>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="east" id="right" size="1%" resizable="false" collapsible="true" gutter="0" styleClass="ui-right panelFormulario" />
+        	
+        	<p:layoutUnit position="south" id="bottom" size="7%" resizable="false" collapsible="true" gutter="0" styleClass="ui-bottom">
+        		<p:layout>
+        			<p:layoutUnit position="west" id="btmLeft" size="30%" resizable="false" collapsible="true" gutter="0" styleClass="ui-btmLeft">
+        				&copy; Séeb 2014, Baalam v1.0
+        			</p:layoutUnit>
+        			
+        			<p:layoutUnit position="center" id="btmCenter" size="70%" resizable="false" collapsible="true" gutter="0" styleClass="ui-btmCenter">
+        				<h:link styleClass="links" value="Aviso de privacidad" />
+        				&nbsp;&nbsp;&nbsp; 
+        				<h:link styleClass="links" value="Términos y condiciones" />
+        				&nbsp;&nbsp;&nbsp; 
+        				<h:link styleClass="links" value="Contacto" /> 
+        			</p:layoutUnit>
+        		</p:layout>
+        	</p:layoutUnit>
+    	</p:layout>
+    </h:body>
+    
+</html>

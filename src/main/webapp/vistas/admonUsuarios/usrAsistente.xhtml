@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:f="http://java.sun.com/jsf/core">
+        
+	<h:head />
+        
+	<h:body>
+       
+		<ui:composition template="/WEB-INF/templates/asistente/templateAdmonUsuarioAsistente.xhtml">
+			
+			<ui:define name="title">
+				Baalam :: Administración de usuario
+			</ui:define>
+    		
+			<ui:param name="activeIndex" value="0" />
+    		
+			<ui:define name="content">
+				<h:form id="formAsistente">
+    				
+    				<ui:include src="../admonUsuarios/datosAsistente.xhtml" />
+    				
+    				<p:panelGrid style="width:70%; height:100px;" styleClass="panelGrid-FormularioSimple">
+        				<p:row>
+        					<p:column styleClass="tipoFuente labelDer" colspan="5">
+								<p:commandButton value="Guardar datos" action="#{datosUsuarioMB.registrar(2)}" ajax="false"/>
+								<p:commandButton value="Continuar" />  
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+				</h:form>
+    		</ui:define>
+    	
+    	</ui:composition>
+	
+	</h:body>
+        
+</html>

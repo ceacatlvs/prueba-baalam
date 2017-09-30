@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+			
+	<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid style="width: 100% !important;">
+		
+		<p:row><p:column colspan="3"><p:outputPanel styleClass="tipoFuente" id="idOpDiagnosticos">
+			<p:row><p:column colspan="2"><p:panelGrid id="idPgDiagnosticos" styleClass="panelGrid-Tabla" style="width: 100% !important;">
+				<f:facet name="header">
+					<p:row>
+						<p:column style="width: 85% !important;">
+							<p:outputLabel value="Diagnóstico clínico" />
+						</p:column>
+						<p:column style="width: 15% !important;" />
+					</p:row>
+				</f:facet>
+				
+				<p:row><p:column colspan="2" styleClass="labelIzqMiddle">
+					<p:outputLabel value="Para agregar un diagnóstico a la tabla primero llene el campo 
+							   		 	  y después dé clic en el botón 'Agregar'." />
+				</p:column></p:row>
+				
+				<p:row>
+					<p:column style="width: 20% !important;">
+						<p:inputTextarea id="idDiagnostico" value="#{impresionDiagnosticaMB.diagnostico.diagnostico}" autoResize="false" 
+								 		 rows="3" style="width: 98%;" maxlength="1000" />
+					</p:column>
+					<p:column style="width: 15% !important;">
+						<p:commandButton id="idDiagnosticosAgregar" value="Agregar" action="#{impresionDiagnosticaMB.reinit()}" 
+									 	 update="idPgDiagnosticos diagnosticos" process="@this idDiagnostico">
+							<p:collector value="#{impresionDiagnosticaMB.diagnostico}" addTo="#{impresionDiagnosticaMB.diagnosticos}" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid></p:column></p:row>
+			
+			<p:outputPanel id="diagnosticos" style="width: 100% !important;">
+				<p:dataTable styleClass="panelGrid-Tabla hide-column-names" id="idTblDiagnosticos" value="#{impresionDiagnosticaMB.diagnosticos}"
+							 var="diagnostico" editable="true" widgetVar="tblDiagnosticos" emptyMessage="No se ha registrado algún diagnóstico todavía." 
+							 style="width: 99.8% !important;">
+					<p:column style="width: 85%;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{diagnostico.diagnostico}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputTextarea id="idModelDiagnostico" value="#{diagnostico.diagnostico}" autoResize="false" 
+								 				 rows="3" style="width: 98%;" maxlength="1000" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 11.1%;">
+						<p:rowEditor id="idReDiagnostico" />
+					</p:column>
+					<p:column style="width: 1.8%;">
+						<p:commandLink id="idEliminarDiagnostico" styleClass="ui-icon ui-icon-trash" update=":formID:diagnosticos"
+									   process="@this :formID:diagnosticos">
+							<p:collector value="#{diagnostico}" removeFrom="#{impresionDiagnosticaMB.diagnosticos}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:outputPanel></p:column></p:row>
+		
+		<p:row><p:column><p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 15% !important;">
+					<p:outputLabel value="Plan: " />
+				</p:column>
+				<p:column style="width: 13% !important;">
+					<p:selectBooleanCheckbox id="idPlanInfo" itemLabel="Información" value="#{impresionDiagnosticaMB.id.planInformacion}"/>
+				</p:column>
+				<p:column style="width: 17% !important;">
+					<p:selectBooleanCheckbox id="idPlanTratMed" itemLabel="Tratamiento médico" value="#{impresionDiagnosticaMB.id.planTratMedico}"/>
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="idPlanTratQuir" itemLabel="Tratamiento quirúrgico" value="#{impresionDiagnosticaMB.id.planTratQuirurgico}"/>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column></p:column>
+				<p:column colspan="3">
+					<p:inputTextarea id="idPlan" value="#{impresionDiagnosticaMB.id.planNotas}" autoResize="false" 
+								 	 rows="3" style="width: 98%;" maxlength="1000" />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column><p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 15% !important;">
+					<p:outputLabel value="Interconsulta: " for="idInterconsulta" />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="idInterconsulta" value="#{impresionDiagnosticaMB.id.interconsulta}" >
+						<p:ajax event="change" update="idEspecialista" />
+					</p:selectBooleanCheckbox>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel value="Especialista: " />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="idEspecialista" value="#{impresionDiagnosticaMB.id.catEspecialidad.idEspecialidad}" effect="fade" 
+									 editable="false" disabled="#{!impresionDiagnosticaMB.id.interconsulta}">  
+						<f:selectItems value="#{impresionDiagnosticaMB.especialistas}" var="especialistas" itemLabel="#{especialistas.nombreEspecialidad}" 
+									   itemValue="#{especialistas.idEspecialidad}"/>
+	       			</p:selectOneMenu>
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column><p:panelGrid style="width: 100% !important;">
+			<p:row>
+				<p:column styleClass="labelDer" style="width: 15% !important;">
+					<p:outputLabel value="Próxima visita: " />
+				</p:column>
+				<p:column colspan="3">
+					<p:calendar styleClass="inputDerM1" id="idProxVisita" showOn="both" locale="es" pages="3"
+								showButtonPanel="true" navigator="true" readonlyInput="true" yearRange="c-100:c" 
+								value="#{impresionDiagnosticaMB.id.proximaVisita}" mindate="#{impresionDiagnosticaMB.fechaHoy}"
+								onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+	</p:panelGrid></p:column></p:row>
+		
+</ui:composition>
+				

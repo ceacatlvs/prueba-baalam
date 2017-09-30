@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaQsEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaQsEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+							  		showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+							  		maxdate="#{epQSMB.fechaHoy}" value="#{epQSMB.epQS.fechaQS}" onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="options" value="#{epQSMB.epQS.quimicaSang}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 13% !important;" >
+						<p:outputLabel for="estudiosQsGluco" value="Glucosa:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosQsGluco" value="#{epQSMB.epQS.glucosa}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsGluco"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 13% !important;" >
+						<p:outputLabel for="estudiosQsBUN" value="BUN:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosQsBUN" value="#{epQSMB.epQS.bun}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsBUN"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 13% !important;" >
+						<p:outputLabel for="estudiosQsCrea" value="Creatinina:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosQsCrea" value="#{epQSMB.epQS.creatinina}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsCrea"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 13% !important;">
+						<p:outputLabel for="estudiosQsAcUr" value="Ácido úrico:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 12% !important;" >
+						<p:inputText id="estudiosQsAcUr" value="#{epQSMB.epQS.acidoUrico}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsAcUr"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosQsCol" value="Colesterol:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:inputText id="estudiosQsCol" value="#{epQSMB.epQS.colesterol}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsCol"/>
+					</p:column>
+					<p:column />
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosQsTrig" value="Triglicéridos:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:inputText id="estudiosQsTrig" value="#{epQSMB.epQS.trigliceridos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsTrig"/>
+					</p:column>
+					<p:column />
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosQsHDL" value="HDL:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:inputText id="estudiosQsHDL" value="#{epQSMB.epQS.hdl}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsHDL"/>
+					</p:column>
+					<p:column />
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosQsLDL" value="LDL:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:inputText id="estudiosQsLDL" value="#{epQSMB.epQS.ldl}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosQsLDL"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel for="estudiosQsOtro" value="Otro:" />
+					</p:column>
+					<p:column colspan="10">
+						<p:inputTextarea id="estudiosQsOtro" value="#{epQSMB.epQS.otro}" autoResize="false" 
+								 		 rows="3" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>			
+		
+	</p:panelGrid>
+	
+</ui:composition>

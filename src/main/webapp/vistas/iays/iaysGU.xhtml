@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+		
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="5" style="width: 100%;">
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUNeg" itemLabel="Negativo" value="#{iaysGeniMB.iaysGeni.negativo}"/>						
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUHema" itemLabel="Hematuria" value="#{iaysGeniMB.iaysGeni.hematuria}"/>				
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUDis" itemLabel="Disuria" value="#{iaysGeniMB.iaysGeni.disuria}"/>						
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUPola" itemLabel="Polaquiuria" value="#{iaysGeniMB.iaysGeni.polaquiuria}"/>					  
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUUrg" itemLabel="Urgencia" value="#{iaysGeniMB.iaysGeni.urgencia}"/>					  
+					</p:column>
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUVacIncom" itemLabel="Vaciado Incompleto" value="#{iaysGeniMB.iaysGeni.vaciadoIncompleto}"/>				
+					</p:column>
+					<p:column styleClass="labelIzq" colspan="2">
+						<p:selectBooleanCheckbox id="iaysGUInconUrg" itemLabel="Incontinencia de urgencia" value="#{iaysGeniMB.iaysGeni.incontinenciaUrgencia}"/>			
+					</p:column>
+					<p:column styleClass="labelIzq" colspan="2">
+						<p:selectBooleanCheckbox id="iaysGUInconEsf" itemLabel="Incontinencia de esfuerzo" value="#{iaysGeniMB.iaysGeni.incontinenciaEsfuerzo}"/>					
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUDispa" itemLabel="Dispaurenia" value="#{iaysGeniMB.iaysGeni.dispaurenia}"/>					  
+					</p:column>
+					<p:column styleClass="labelIzq" colspan="2">
+						<p:selectBooleanCheckbox id="iaysGUSanVag" itemLabel="Sangrado vaginal anormal" value="#{iaysGeniMB.iaysGeni.sangradoVagAnormal}"/>				  
+					</p:column>
+					<p:column styleClass="labelIzq" colspan="2">
+						<p:selectBooleanCheckbox id="iaysGULeuco" itemLabel="Leucorrea anormal" value="#{iaysGeniMB.iaysGeni.leucorreaAnormal}"/>					  
+					</p:column>
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysGUPrur" itemLabel="Prurito" value="#{iaysGeniMB.iaysGeni.prurito}"/>					
+					</p:column>
+					<p:column styleClass="labelIzq" colspan="2">
+						<p:selectBooleanCheckbox id="iaysGUArdor" itemLabel="Ardor" value="#{iaysGeniMB.iaysGeni.ardor}"/>
+					</p:column>		
+					<p:column styleClass="labelIzq" colspan="2">
+						<p:selectBooleanCheckbox id="iaysGUmalOlor" itemLabel="Mal olor" value="#{iaysGeniMB.iaysGeni.malOlor}"/>
+					</p:column>		
+				</p:row>
+			</p:panelGrid>
+			
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelDer" style="width: 15%;">
+						<p:outputLabel value="Otro:" for="iaysGUOtro1" />			
+					</p:column>
+					<p:column style="width: 85%;">
+						<p:inputText id="iaysGUOtro1" style="width: 75%;" value="#{iaysGeniMB.iaysGeni.otro}"
+									 onkeydown='return revisarBase(event)' />
+					</p:column>				
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones:" for="iaysGUObserv1" />						
+					</p:column>	
+					<p:column>
+						<p:inputTextarea id="iaysGUObserv1" value="#{iaysGeniMB.iaysGeni.observaciones}" autoResize="false" 
+								 	 	 rows="5" style="width: 75%;" maxlength="500" />
+					</p:column>		
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>				
+	</p:panelGrid>
+	
+</ui:composition>

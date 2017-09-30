@@ -1,0 +1,527 @@
+.ui-top {
+	border: none;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-center {
+	border: none;
+	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-topLeft {
+	border: none;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-topCenter {
+	border: none;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-topRight {
+	border: none !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-ctrTop {
+	border: none;	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+ 	
+ 	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+}
+
+.ui-ctrTop .ui-layout-unit-content {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-ctrCenter {
+	height: 94% !important;
+	border: none;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+}
+
+.ui-ctrCenterII {
+	height: 94% !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-bottom: none;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+}
+
+.ui-ctrCenterIII {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-left: none !important;
+	border-right: none !important;
+	border-bottom: none !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+}
+
+.ui-ctrCenterIV {
+	height: 97% !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-bottom: none;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+}
+
+.ui-ctrWest {
+	height: 100% !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-bottom: none;
+	border-top: none;
+	border-right: none;
+	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+}
+
+.panelGrid-PacienteFecha {
+	text-align: right;
+	padding-top: 0 !important;
+	padding-right: 9 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.panelGrid-FormularioSimple {
+	margin-top: 0 !important;
+	margin-left: 12px !important;
+}
+
+.panelGrid-FormularioSimple tr, .panelGrid-FormularioSimple td {
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.panelGrid-FormularioMenu {
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.panelGrid-FormularioMenu tr, .panelGrid-FormularioMenu td {
+	border: none !important;
+	margin-top: 0 !important;
+}
+
+.tituloSeccionTab {
+	width: 450px;
+	color: #FF0000;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: left;
+	
+	padding-top: 9px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+.nombreMedico {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.nombreAsistente {
+	color: #33CC00;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.fechaAsistente {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.nombreSeccionAsistente {
+	color: #00CC33;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 19px;
+	font-weight: bold;
+}
+
+.nombrePaciente {
+	width: 200px;
+	color: #0066FF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: right;
+}
+
+.fechaConsulta {
+	width: 200px;
+	color: #303030;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: right;
+}
+
+.panelGrid-Medico td {
+	border: none !important;
+ 	border-style: hidden !important;
+    padding-top: 5px !important;
+	padding-right: 3px !important;
+	padding-bottom: 3px !important;
+	padding-left: 5px !important;
+}
+
+.panelGrid-Medico tr {
+    border: none !important;
+}
+
+.panelGrid-MenuGeneral td {
+	border: none !important;
+ 	border-style: hidden !important;
+    text-align: center !important;
+    
+    padding-top: 3px !important;
+	padding-right: 7px !important;
+	padding-bottom: 3px !important;
+	padding-left: 7px !important;
+}
+
+.ui-menuConsulta {
+	height: 65px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-menuConsulta .ui-tabmenu-nav {
+	height: 65px !important;
+	font-size: 12px !important;
+	background-color: #dfeffc !important;
+	background-image: none !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 3px !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-menuConsulta .ui-tabmenuitem {
+	height: 27px !important;
+	
+	margin-top: 1px !important;
+	margin-right: 1px !important;
+	margin-bottom: 2px !important;
+	margin-left: 1px !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-menuConsultaSimple {
+	height: 33px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-menuConsultaSimple .ui-tabmenu-nav {
+	height: 33px !important;
+	font-size: 12px !important;
+	background-color: #dfeffc !important;
+	background-image: none !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 3px !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-menuConsultaSimpleAsistente .ui-tabmenuitem {
+	height: 27px !important;
+	
+	margin-top: 1px !important;
+	margin-right: 1px !important;
+	margin-bottom: 2px !important;
+	margin-left: 1px !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.ui-menuSubSeccion  {
+	width: 500px !important;
+	font-size: 10px !important;
+	position: absolute !important;
+	
+	-moz-transform: rotate(90deg);  /* FF3.5+ */
+	-moz-transform-origin: 0% 100%;
+	
+	-o-transform: rotate(90deg);  /* Opera 10.5 */
+	-o-transform-origin: 0% 100%;
+	
+	-webkit-transform: rotate(90deg);  /* Saf3.1+, Chrome */
+	-webkit-transform-origin: 0% 100%;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-menuSubSeccion .ui-tabmenu-nav {
+	background-color: white !important;
+	background-image: none !important;
+	
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.nombreSeccion {
+	color: #00CC33;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 21px;
+	font-weight: bold;
+}
+
+.fecha {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.datosMedico {
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.paciente {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.menuGeneral {
+	color: #003399 !important;
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-size: 10px !important;
+	font-weight: bold !important;
+}
+
+.menuAdmon {
+	color: #003399;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.menuMain {
+	color: #003399;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.doctor {
+	color: #0066FF;
+	font-size: 12px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+
+.eventoOcupado, .eventoOcupado .fc-event-skin, .eventoOcupado a{
+    background-color: #999999; 
+    color: white;
+    border-color: #999999;
+}
+.eventoSub, .eventoSub .fc-event-skin, .eventoSub a{
+    background-color: #8ad63e; 
+    color: black;
+    border-color: #8ad63e;
+}
+.eventoPrimera, .eventoPrimera .fc-event-skin, .eventoPrimera a{
+    background-color: #3d89d6; 
+    color: black;
+    border-color: #3d89d6;
+}
+

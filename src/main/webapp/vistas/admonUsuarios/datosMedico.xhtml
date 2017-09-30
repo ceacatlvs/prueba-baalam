@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple" >
+		<p:row>
+			<p:column style="width:40px;">
+				<h:graphicImage value="/resources/gfx/userSetup.png" width="40" height="40" />
+			</p:column> 
+			<p:column style="height:30px;" styleClass="tituloSeccionAzul">
+				<h:outputText value="Datos personales de médico" />
+			</p:column>  
+	    </p:row>
+		
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid>
+					<p:row>
+						<p:column style="width:150px;" styleClass="labelDer">
+							<p:outputLabel for="medNombres" value="Nombres:" />
+						</p:column>
+						<p:column colspan="4">
+							<p:inputText styleClass="inputIzqL1" id="medNombres" value="#{datosUsuarioMB.doctor.nombre}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medApaterno" value="Apellido paterno:" />
+						</p:column>
+						<p:column colspan="4">
+							<p:inputText styleClass="inputIzqL1" id="medApaterno" value="#{datosUsuarioMB.doctor.aPaterno}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medAmaterno" value="Apellido materno:" />
+						</p:column>
+						<p:column colspan="4">
+							<p:inputText styleClass="inputIzqL1" id="medAmaterno" value="#{datosUsuarioMB.doctor.aMaterno}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+		
+		<p:row>  
+	    	<p:column style="height:25px;" colspan="5" styleClass="tituloSubSeccion">
+	    		<h:outputText value="Datos de usuario" />
+	    	</p:column>  
+	    </p:row>
+		
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid>
+					<p:row>
+						<p:column style="width:150px;" styleClass="labelDer">
+							<p:outputLabel for="medUsuario" value="Usuario:" />
+						</p:column>
+						<p:column colspan="4">
+							<p:inputText styleClass="inputIzqL1" id="medUsuario" value="#{datosUsuarioMB.doctor.usuario.username}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medContrasena" value="Contraseña:" />
+						</p:column>
+						<p:column colspan="4">
+							<p:password styleClass="inputIzqL1" id="medContrasena" feedback="true" inline="true" 
+										value="#{datosUsuarioMB.doctor.usuario.password}" match="medContrasenaConfirm" required="true"
+										onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medContrasenaConfirm" value="Confirmar contraseña:" />
+						</p:column>
+						<p:column colspan="4">
+							<p:password styleClass="inputIzqL1" id="medContrasenaConfirm" feedback="true" inline="true" 
+										value="#{datosUsuarioMB.doctor.usuario.password}" required="true" onkeydown='return revisarBase(event)'/>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+		
+		<p:row>  
+	    	<p:column style="height:25px;" colspan="5" styleClass="tituloSubSeccion">
+	    		<h:outputText value="Datos de contacto" />
+	    	</p:column>  
+	    </p:row>
+		
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid>
+					<p:row>
+						<p:column style="width:150px;" styleClass="labelDer">
+							<p:outputLabel for="medCelular1" value="Celular 1:" />
+						</p:column>
+						<p:column>
+							<p:inputMask id="medCelular1" mask="99-9999-9999" styleClass="inputIzqL1"
+										 value="#{datosUsuarioMB.doctor.celular}" onkeydown='return revisarBase(event)' />
+							<p:watermark value="55-5555-5555" for="medCelular1"/>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medCelular2" value="Celular 2:" />
+						</p:column>
+						<p:column>
+							<p:inputMask id="medCelular2" mask="99-9999-9999" styleClass="inputIzqL1"
+										 value="#{datosUsuarioMB.doctor.celular2}" onkeydown='return revisarBase(event)' />
+							<p:watermark value="55-5555-5555" for="medCelular2"/>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medEmail1" value="Email 1:" />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="medEmail1" value="#{datosUsuarioMB.doctor.correo1}"
+										 validatorMessage="La cuenta de correo no es válida" onkeydown='return revisarBase(event)' >
+								<f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />  
+		                		<p:ajax update="msgEmail1" event="keyup" />  
+		            		</p:inputText>  
+		            		<p:watermark value="correo1@dominio.com" for="medEmail1"/>
+		            		<p:message for="medEmail1" id="msgEmail1" display="La cuenta de correo no es válida." />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medEmail2" value="Email 2:" />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="medEmail2" value="#{datosUsuarioMB.doctor.correo2}"
+										 validatorMessage="La cuenta de correo no es válida" onkeydown='return revisarBase(event)' >
+								<f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />
+								<p:ajax update="msgEmail2" event="keyup" />
+							</p:inputText>
+							<p:watermark value="correo2@dominio.com" for="medEmail2"/>
+							<p:message for="medEmail2" id="msgEmail2" display="La cuenta de correo no es válida." />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="medPagInternet" value="Página de internet:" />
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="inputIzqL1" id="medPagInternet" value="#{datosUsuarioMB.doctor.sitioWeb}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>	
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+	</p:panelGrid>	
+</ui:composition>

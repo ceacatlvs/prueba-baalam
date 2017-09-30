@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;" >
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="5" style="width: 100%;" >
+			<p:panelGrid style="width: 100%;" >
+				<p:row>
+					<p:column styleClass="labelIzq" style="width: 15%;" >
+						<p:selectBooleanCheckbox id="iaysBaofNeg" itemLabel="Negativo" value="#{iaysBaofMB.iaysBaof.negativo}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 15%;" >
+						<p:selectBooleanCheckbox id="iaysBaofOtal" itemLabel="Otalgia" value="#{iaysBaofMB.iaysBaof.otalgia}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 15%;" >
+						<p:selectBooleanCheckbox id="iaysBaofAcu" itemLabel="Acufenos" value="#{iaysBaofMB.iaysBaof.acufenos}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 20%;" >
+						<p:selectBooleanCheckbox id="iaysBaofCefa" itemLabel="Cefalea" value="#{iaysBaofMB.iaysBaof.cefalea}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 35%;" >
+						<p:selectBooleanCheckbox id="iaysBaofProbBoca" itemLabel="Problemas en la boca" value="#{iaysBaofMB.iaysBaof.problemasBoca}"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysBaofSinu" itemLabel="Sinusitis" value="#{iaysBaofMB.iaysBaof.sinusitis}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysBaofLarin" itemLabel="Laringitis" value="#{iaysBaofMB.iaysBaof.laringitis}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysBaofULc" itemLabel="Úlceras" value="#{iaysBaofMB.iaysBaof.ulceras}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysBaofPerdAud" itemLabel="Pérdida de audición" value="#{iaysBaofMB.iaysBaof.perdidaAudicion}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysBaofProbDien" itemLabel="Problemas en los dientes" value="#{iaysBaofMB.iaysBaof.problemasDientes}"/> 
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelDer" style="width: 15%;">
+						<p:outputLabel value="Otro:" for="iaysBaofOtro1"/>			
+					</p:column>
+					<p:column style="width: 85%;">
+						<p:inputText id="iaysBaofOtro1" style="width: 75%;" value="#{iaysBaofMB.iaysBaof.otro}"
+									 onkeydown='return revisarBase(event)' />
+					</p:column>				
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones:" for="iaysBaofObserv1"/>						
+					</p:column>	
+					<p:column>
+						<p:inputTextarea id="iaysBaofObserv1" value="#{iaysBaofMB.iaysBaof.observaciones}" autoResize="false" 
+								 	 	 rows="5" style="width: 75%;" maxlength="500" />
+					</p:column>		
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+	</p:panelGrid>
+	
+</ui:composition>

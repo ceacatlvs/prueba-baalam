@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;"> 
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid id="ahfPgFallecimientosFamiliares" style="width: 100%;">
+			<p:row>
+				<p:column colspan="6" styleClass="tituloSubSeccion">
+					<p:outputLabel value="Fallecimientos familiares" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelIzqBold" style="width: 25%;">
+					<p:selectBooleanCheckbox id="ahfChkMadre" itemLabel="Madre: " value="#{antecedentesHFMB.fallecimientoMadre.fallecido}">
+						<p:ajax event="change" update="ahfOpMadre" />
+					</p:selectBooleanCheckbox>
+				</p:column>
+				<p:column colspan="4" style="width: 75%;">
+					<p:outputPanel id="ahfOpMadre">
+						<p:panelGrid id="ahfPgMadre" rendered="#{antecedentesHFMB.fallecimientoMadre.fallecido}">
+							<p:row>
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="ahfEdadMadre" value="Edad:" />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="ahfEdadMadre" value="#{antecedentesHFMB.fallecimientoMadre.edad}" maxlength="3" 
+												 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' />
+									<p:watermark value="0" for="ahfEdadMadre"/>
+								</p:column>
+								<p:column styleclass="labelIzq">
+									<p:outputLabel value="años" for="ahfEdadMadre" />
+								</p:column>
+								<p:column />
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="ahfCausaMadre" value="Causa:" />
+								</p:column>
+								<p:column>
+									<p:inputText styleClass="inputIzqL2" id="ahfCausaMadre" value="#{antecedentesHFMB.fallecimientoMadre.causa}"
+												 onkeydown='return capturarBase(event)' />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+	
+			<p:row>
+				<p:column styleClass="labelIzqBold" style="width: 25%;">
+					<p:selectBooleanCheckbox id="ahfChkPadre" itemLabel="Padre: " value="#{antecedentesHFMB.fallecimientoPadre.fallecido}">
+						<p:ajax event="change" update="ahfOpPadre" />
+					</p:selectBooleanCheckbox>
+				</p:column>
+				<p:column colspan="4" style="width: 75%;">
+					<p:outputPanel id="ahfOpPadre">
+						<p:panelGrid id="ahfPgPadre" rendered="#{antecedentesHFMB.fallecimientoPadre.fallecido}">
+							<p:row>
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="ahfEdadPadre" value="Edad:" />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="ahfEdadPadre" value="#{antecedentesHFMB.fallecimientoPadre.edad}" maxlength="3"
+												 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' />
+									<p:watermark value="0" for="ahfEdadPadre"/>
+								</p:column>
+								<p:column styleclass="labelIzq">
+									<p:outputLabel value="años" for="ahfEdadPadre" />
+								</p:column>
+								<p:column />
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="ahfCausaPadre" value="Causa:" />
+								</p:column>
+								<p:column>
+									<p:inputText styleClass="inputIzqL2" id="ahfCausaPadre" value="#{antecedentesHFMB.fallecimientoPadre.causa}"
+												 onkeydown='return capturarBase(event)' />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+	
+			<p:row>
+				<p:column styleClass="labelIzqBold" style="width: 25%;">
+					<p:selectBooleanCheckbox id="ahfChkHermanos" itemLabel="Hermanos:" value="#{antecedentesHFMB.fHermanos}">
+						<p:ajax event="change" update="ahfOpHermanos fallecimientos" />
+					</p:selectBooleanCheckbox>
+				</p:column>
+				<p:column colspan="4" style="width: 75%;">
+					<p:outputPanel id="ahfOpHermanos">
+						<p:panelGrid id="ahfPgHermanos" rendered="#{antecedentesHFMB.fHermanos}" style="width: 100%;">
+							<p:row>
+								<p:column styleClass="labelDer" style="width: 23%;">
+									<p:outputLabel for="ahfNumHermanos" value=" Hermanos vivos:" />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 15%;">
+									<p:inputText id="ahfNumHermanos" value="#{antecedentesHFMB.hermanosVivos}" maxlength="3" 
+												 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' />
+									<p:watermark value="0" for="ahfNumHermanos"/>
+								</p:column>
+								<p:column styleClass="labelDer" style="width: 27%;">
+									<p:outputLabel for="ahfHFallecidos" value="Hermanos fallecidos:" />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 35%;">
+									<p:inputText id="ahfHFallecidos" value="#{antecedentesHFMB.hermanosMuertos}" maxlength="3" 
+												 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' >
+										<p:ajax event="change" update="ahfTblFallecimientos" listener="#{antecedentesHFMB.actualizarFallecimientosHermanos}" />
+									</p:inputText>
+									<p:watermark value="0" for="ahfHFallecidos"/>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+	
+			<p:row>
+				<p:column style="width: 25%;"/>
+				<p:column colspan="4" style="width: 75%;">
+					<p:outputPanel id="fallecimientos">
+						<p:dataTable styleClass="panelGrid-Tabla" id="ahfTblFallecimientos" value="#{antecedentesHFMB.fallecimientosHermanos}" 
+									 var="fallecimiento" editable="true" widgetVar="tblFallecimientos" 
+									 emptyMessage="No se ha registrado algún fallecimiento de hermanos." rendered="#{antecedentesHFMB.fHermanos}">
+							<p:columnGroup type="header"><p:row>
+								<p:column headerText="Edad" />
+								<p:column headerText="Causa de fallecimiento" />
+							</p:row></p:columnGroup>
+	
+							<p:column styleClass="inputDerS1">
+								<p:inputText id="ahfModelEdad" value="#{fallecimiento.edad}" maxlength="3" 
+											 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' />
+								<p:watermark value="0" for="ahfModelEdad"/>
+							</p:column>
+							<p:column>
+								<p:inputText styleClass="inputIzqXL1" id="ahfModelCausa" value="#{fallecimiento.causa}"
+											 onkeydown='return capturarBase(event)' />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid id="ahfEnfermedadesFamiliaresSubSeccion" style="width: 100%;">
+			<p:row><p:column colspan="6" styleClass="tituloSubSeccion">
+				<p:outputLabel value="Enfermedades familiares" />
+			</p:column></p:row>
+			
+			<p:row><p:column colspan="6" styleClass="labelIzqMiddle">
+				<p:outputLabel value="Para agregar una enfermedad familiar a la tabla primero llene los campos 
+							   		  y después dé clic en el botón 'Agregar'." />
+			</p:column></p:row>
+			
+			<p:row><p:column styleClass="tipoFuente">
+				<p:panelGrid id="ahfEnfermedadesFamiliares" styleClass="panelGrid-Tabla" style="width: 100%;">
+					<f:facet name="header"><p:row>
+						<p:column style="width: 21%;"><p:outputLabel value="Enfermedad" /></p:column>
+						<p:column style="width: 21%;"><p:outputLabel value="Parentesco" /></p:column>
+						<p:column style="width: 15%;"><p:outputLabel value="Edad inicio" /></p:column>
+						<p:column style="width: 33%;"><p:outputLabel value="Observaciones" /></p:column>
+						<p:column style="width: 12%;"><p:outputLabel value=" " /></p:column>
+					</p:row></f:facet>
+					<p:row>
+						<p:column style="width: 21%;">
+							<p:autoComplete id="acEnfermedad" forceSelection="false" value="#{antecedentesHFMB.enfermedad.enfermedad}"
+											completeMethod="#{antecedentesHFMB.buscarEnfermedades}" onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 21%">
+							<p:inputText id="acEnfermedadParentesco" value="#{antecedentesHFMB.enfermedad.parentesco}" styleClass="inputIzqXL1" 
+										 style="width: 90%;" onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 15% !important;" styleClass="inputDerS1">
+							<p:inputText id="ahfEnfermedadEdadInicio" value="#{antecedentesHFMB.enfermedad.edadInicio}" maxlength="3" 
+										 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' style="width: 40% !important;" />
+							<p:watermark value="0" for="ahfEnfermedadEdadInicio"/>
+							<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+						</p:column>
+						<p:column style="width: 33% !important;">
+							<p:inputTextarea id="ahfEnfermedadObservaciones" value="#{antecedentesHFMB.enfermedad.observaciones}" autoResize="false" 
+								 	 	 	 rows="2" style="width: 95%;" maxlength="500" />
+						</p:column>
+						<p:column style="width: 12% !important;">
+							<p:commandButton id="ahfEnfermedadAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesHFMB.reinitEnfermedad()}"
+											 update="ahfEnfermedadesFamiliares ahfOPEnfermedades" 
+											 process="@this ahfEnfermedadEdadInicio acEnfermedadParentesco ahfEnfermedadObservaciones acEnfermedad">
+								<p:collector value="#{antecedentesHFMB.enfermedad}" addTo="#{antecedentesHFMB.enfermedades}" />
+							</p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<p:outputPanel id="ahfOPEnfermedades" style="width: 100%;" >
+					<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.8%;" id="ahfDTEnfermedades" 
+								 value="#{antecedentesHFMB.enfermedades}" var="enfermedadDT" editable="true" widgetVar="ahfDTEnfermedades" 
+								 emptyMessage="No se tienen registradas enfermedades de familiares.">
+						<p:column style="width: 21.3%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{enfermedadDT.enfermedad}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:autoComplete id="ahfacEnfermedad" forceSelection="false" value="#{enfermedadDT.enfermedad}"
+													completeMethod="#{antecedentesHFMB.buscarEnfermedades}" onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column style="width: 21.4%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{enfermedadDT.parentesco}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="acEnfermedadParentesco" value="#{enfermedadDT.parentesco}" styleClass="inputIzqXL1" 
+										 		 style="width: 90%;" onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column style="width: 15% !important;" styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{enfermedadDT.edadInicio} años" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="ahfCEEdadInicio" value="#{enfermedadDT.edadInicio}" maxlength="3" 
+												 onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' 
+												 style="width: 40% !important;" />
+									<p:watermark value="0" for="ahfCEEdadInicio"/>
+									<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column style="width: 33.4% !important;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{enfermedadDT.observaciones}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputTextarea id="ahfCEObservaciones" value="#{enfermedadDT.observaciones}" autoResize="false" 
+								 	 	 	 		 rows="2" style="width: 95%;" maxlength="500" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column style="width: 8.9% !important;">
+							<p:rowEditor id="ahfREenfemedad" />
+						</p:column>
+						<p:column style="width: 2% !important;">
+							<p:commandLink id="ahfCLEliminarEnfermedad" styleClass="ui-icon ui-icon-trash" 
+										   update=":formAntecedentes:ahfFrmMain:ahfDTEnfermedades"
+										   process="@this :formAntecedentes:ahfFrmMain:ahfDTEnfermedades">
+								<p:collector value="#{enfermedadDT}" removeFrom="#{antecedentesHFMB.enfermedades}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:column></p:row>
+			
+		</p:panelGrid></p:column></p:row>		
+	</p:panelGrid>
+</ui:composition>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition	xmlns="http://www.w3.org/1999/xhtml"
+       			xmlns:ui="http://java.sun.com/jsf/facelets"
+       			xmlns:h="http://java.sun.com/jsf/html"
+       			xmlns:p="http://primefaces.org/ui"
+       			xmlns:pe="http://primefaces.org/ui/extensions"
+       			xmlns:f="http://java.sun.com/jsf/core"
+       			template="/WEB-INF/templates/templateDetallesPaciente.xhtml">
+    
+    <ui:param name="subMenu" value="true" />
+    
+	<ui:define name="menuSub">
+		<h:form id="menuIAyS">
+ 			<p:tabMenu id="tabIAyS" styleClass="ui-menuSubSeccion" style="top: -77px !important;" activeIndex="#{activeIndexSM}" >
+				<p:menuitem value="Sintomas generales" url="detallePaciente_IAyS_SG.xhtml" />
+				<p:menuitem value="Vista" url="detallePaciente_IAyS_Vista.xhtml" />
+				<p:menuitem value="Boca, audición, olfación y fonación" url="detallePaciente_IAyS_BAOF.xhtml" />
+				<p:menuitem value="Cardiovascular" url="detallePaciente_IAyS_Cardio.xhtml" />
+				<p:menuitem value="Respiratorio" url="detallePaciente_IAyS_Resp.xhtml" />
+				<p:menuitem value="Digestivo" url="detallePaciente_IAyS_Dig.xhtml" />
+				<p:menuitem value="Genitourinario" url="detallePaciente_IAyS_Geni.xhtml" />
+				<p:menuitem value="Músculo esquelético" url="detallePaciente_IAyS_ME.xhtml" />
+				<p:menuitem value="Neurológico" url="detallePaciente_IAyS_Neuro.xhtml" />
+				<p:menuitem value="Esfera mental" url="detallePaciente_IAyS_EM.xhtml" />
+				<p:menuitem value="Endocrino" url="detallePaciente_IAyS_Endo.xhtml" />
+				<p:menuitem value="Hematopoyético y linfático" url="detallePaciente_IAyS_HyL.xhtml" />
+				<p:menuitem value="Piel" url="detallePaciente_IAyS_Piel.xhtml" />
+				<p:menuitem value="Mamas" url="detallePaciente_IAyS_Mamas.xhtml" />
+			</p:tabMenu>
+		</h:form>
+	</ui:define>
+	 		
+	<ui:define name="content">
+	 	<p:panelGrid styleClass="panelGrid-FormularioMenu">
+        	<p:row>  
+		    	<p:column rowspan="2" colspan="4" styleClass="tituloSeccionTab">
+		    		<ui:insert name="seccion" />
+		    	</p:column>
+		    	
+		    	<p:column styleClass="nombrePaciente"><h:outputText value="#{fichaIdentificacionMB.paciente.nombrePaciente}" /></p:column>  
+	    	</p:row>
+	    	
+			<p:row>
+				<p:column styleClass="fechaConsulta" />
+			</p:row>
+    	
+   			<p:row><p:column colspan="5" style="width: 75% !important;" styleClass="tipoFuente">
+				<h:form id="formIAyS">
+					<ui:insert name="contentIAyS" />
+				</h:form>
+			</p:column></p:row>
+		</p:panelGrid>
+	</ui:define>
+    
+</ui:composition>

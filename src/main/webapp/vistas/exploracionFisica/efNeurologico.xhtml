@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+	
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel value="Orientación: " />
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 16% !important;" >
+						<p:selectBooleanCheckbox id="efnOrTiempo" itemLabel="Tiempo" value="#{efNeurologicoMB.efNEM.orientacionTiempo}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 16% !important;" >
+						<p:selectBooleanCheckbox id="efnOrLoE" itemLabel="Lugar o espacio" value="#{efNeurologicoMB.efNEM.orientacionEspacio}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 16% !important;" >
+						<p:selectBooleanCheckbox id="efnOrPersona" itemLabel="Persona" value="#{efNeurologicoMB.efNEM.orientacionPersona}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 16% !important;" >
+						<p:selectBooleanCheckbox id="efnOrComentarios" itemLabel="Comentarios" value="#{efNeurologicoMB.efNEM.orientacionComentarios}"/>
+					</p:column>
+					<p:column style="width: 21% !important;" />
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Conducta o afecto: " />
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efnCANormal" itemLabel="Normal" value="#{efNeurologicoMB.efNEM.conductaNormal}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efnCADeprimido" itemLabel="Deprimido" value="#{efNeurologicoMB.efNEM.conductaDeprimido}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efnCAAnsioso" itemLabel="Ansioso" value="#{efNeurologicoMB.efNEM.conductaAnsioso}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efnCAAgitado" itemLabel="Agitado" value="#{efNeurologicoMB.efNEM.conductaAgitado}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efnCAOtro" itemLabel="Otro" value="#{efNeurologicoMB.efNEM.conductaOtro}"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 10% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 75% !important;" >
+						<p:inputTextarea id="efnObservaciones" value="#{efNeurologicoMB.efNEM.observaciones}" autoResize="false" 
+								 		 rows="7" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

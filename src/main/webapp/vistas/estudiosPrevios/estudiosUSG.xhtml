@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100%;" >
+			<p:panelGrid style="width: 100%;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10%;">
+						<p:outputLabel for="estudiosUsgFecha" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90%;" colspan="4">
+						<p:calendar id="estudiosUsgFecha" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+									maxdate="#{epUltrasonidoMB.fechaHoy}" value="#{epUltrasonidoMB.epUSG.fechaColposcopia}"
+									onkeydown='return revisarBase(event)' />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+			
+		<p:row><p:column styleClass="tipoFuente" colspan="4">
+			<p:panelGrid style="width: 100%;">
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 80%;" colspan="4">
+						<p:selectOneRadio id="estudiosUsgPelTrans" value="#{epUltrasonidoMB.epUSG.tipoUltrasonido}">  
+	           				<f:selectItem itemLabel="Pélvico" itemValue="Pélvico" />  
+	           				<f:selectItem itemLabel="Transvaginal" itemValue="Transvaginal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 80%;" colspan="4">
+						<p:selectOneRadio id="estudiosUsg" value="#{epUltrasonidoMB.epUSG.resultadoUltrasonido}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgTamUt" value="Tamaño uterino:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 80%;" colspan="4">
+						<p:inputText id="estudiosUsgTamUt" value="#{epUltrasonidoMB.epUSG.tamanoUterino}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgTamUt"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgEco" value="Ecogenicidad:" />
+					</p:column>
+					<p:column style="width: 80%;" colspan="4">
+						<p:selectOneRadio id="estudiosUsgEco" value="#{epUltrasonidoMB.epUSG.ecogenicidad}">  
+	           				<f:selectItem itemLabel="Homogéneo" itemValue="Homogéneo" />  
+	           				<f:selectItem itemLabel="Heterogéneo" itemValue="Heterogéneo" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgEndoGros" value="Grosor de endometrio:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 80%;" colspan="4">
+						<p:inputText id="estudiosUsgEndoGros" value="#{epUltrasonidoMB.epUSG.grosorEndometrio}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgEndoGros"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDer" >
+						<p:outputLabel value="Miomas:" />
+					</p:column>
+					<p:column style="width: 15%;" >
+						<p:selectBooleanCheckbox id="estudiosUsgMioSub" itemLabel="Subserosos" value="#{epUltrasonidoMB.epUSG.miomasSubserosos}"/>
+	       			</p:column>
+	       			<p:column style="width: 10%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgMioSubTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 55%;" colspan="2" >
+						<p:inputText id="estudiosUsgMioSubTam" value="#{epUltrasonidoMB.epUSG.mssTamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgMioSubTam"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" >
+						<p:selectBooleanCheckbox id="estudiosUsgMioInt" itemLabel="Intramurales" value="#{epUltrasonidoMB.epUSG.miomasIntramurales}"/>
+	       			</p:column>
+	       			<p:column style="width: 10%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgMioIntTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 55%;" colspan="2" >
+						<p:inputText id="estudiosUsgMioIntTam" value="#{epUltrasonidoMB.epUSG.mimTamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgMioIntTam"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" >
+						<p:selectBooleanCheckbox id="estudiosUsgMioSubm" itemLabel="Submucosos" value="#{epUltrasonidoMB.epUSG.miomasSubmucosos}"/>
+	       			</p:column>
+	       			<p:column style="width: 10%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgMioSubmTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 55%;" colspan="2" >
+						<p:inputText id="estudiosUsgMioSubmTam" value="#{epUltrasonidoMB.epUSG.msmTamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgMioSubmTam"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDer"
+						><p:outputLabel value="Pólipos:" />
+					</p:column>
+					<p:column style="width: 80%;" colspan="4">
+						<p:selectOneRadio id="estudiosUsgPol" value="#{epUltrasonidoMB.epUSG.polipos}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgPolNum" value="Número:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10%;" >
+						<p:inputText id="estudiosUsgPolNum" value="#{epUltrasonidoMB.epUSG.polNumero}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgPolNum"/>
+					</p:column>
+					<p:column style="width: 10%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgPolTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 45%;" >
+						<p:inputText id="estudiosUsgPolTam" value="#{epUltrasonidoMB.epUSG.polTamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgPolTam"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDerTop1">
+						<p:outputLabel for="estudiosUsgObserv" value="Observaciones:" />
+					</p:column>
+					<p:column style="width: 80%;" colspan="4">
+						<p:inputTextarea id="estudiosUsgObserv" maxlength="500" rows="3" autoResize="false" value="#{epUltrasonidoMB.epUSG.observacionesUtero}" 
+										 style="width: 90%;" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 100%;" colspan="5" styleClass="tituloSubSeccion">
+						<p:outputLabel value="Ovario derecho" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaDerTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 80%;" colspan="4">
+						<p:inputText id="estudiosUsgOvaDerTam" value="#{epUltrasonidoMB.epUSG.odTamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgOvaDerTam"/>
+					</p:column>										
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDerBold">
+						<p:outputLabel value="Quistes:" />
+					</p:column>
+					<p:column style="width: 80%;" colspan="4">
+	       			</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaDerQuisNum" value="Número:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 65%;" colspan="4">
+						<p:inputText id="estudiosUsgOvaDerQuisNum" value="#{epUltrasonidoMB.epUSG.odQNumero}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgOvaDerQuisNum"/>
+					</p:column>										
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaDerEcoOpt" value="Ecogenicidad:" />
+					</p:column>
+					<p:column style="width: 65%;" colspan="4">
+						<p:selectOneRadio id="estudiosUsgOvaDerEcoOpt" value="#{epUltrasonidoMB.epUSG.odEcogenicidad}">  
+	           				<f:selectItem itemLabel="Homogéneo" itemValue="Homogéneo" />  
+	           				<f:selectItem itemLabel="Heterogéneo" itemValue="Heterogéneo" />    
+	       				</p:selectOneRadio>
+	       			</p:column>										
+				</p:row>
+				<p:row>				
+					<p:column style="width: 20%;" />	
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaDerEcoTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 65%;" colspan="4">
+						<p:inputText id="estudiosUsgOvaDerEcoTam" value="#{epUltrasonidoMB.epUSG.odETamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgOvaDerEcoTam"/>
+					</p:column>										
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 100%;" colspan="5" styleClass="tituloSubSeccion">
+						<p:outputLabel value="Ovario izquierdo" />
+					</p:column>
+				</p:row>
+				<p:row>					
+					<p:column style="width: 20%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaIzqTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 80%;" colspan="4">
+						<p:inputText id="estudiosUsgOvaIzqTam" value="#{epUltrasonidoMB.epUSG.oiTamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgOvaIzqTam"/>
+					</p:column>										
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDerBold">
+						<p:outputLabel value="Quistes:" />
+					</p:column>
+					<p:column style="width: 80%;" colspan="4" />
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaIzqQuisNum" value="Número:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 65%;" colspan="3">
+						<p:inputText id="estudiosUsgOvaIzqQuisNum" value="#{epUltrasonidoMB.epUSG.oiQNumero}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgOvaIzqQuisNum"/>
+					</p:column>										
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaIzqEco" value="Ecogenicidad:" />
+					</p:column>
+					<p:column style="width: 65%;" colspan="4">
+						<p:selectOneRadio id="estudiosUsgOvaIzqEco" value="#{epUltrasonidoMB.epUSG.oiEcogenicidad}">  
+	           				<f:selectItem itemLabel="Homogéneo" itemValue="Homogéneo" />  
+	           				<f:selectItem itemLabel="Heterogéneo" itemValue="Heterogéneo" />    
+	       				</p:selectOneRadio>
+	       			</p:column>										
+				</p:row>
+				<p:row>
+					<p:column style="width: 20%;" />
+					<p:column style="width: 15%;" styleClass="labelDer">
+						<p:outputLabel for="estudiosUsgOvaIzqEcoTam" value="Tamaño:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 65%;" colspan="4">
+						<p:inputText id="estudiosUsgOvaIzqEcoTam" value="#{epUltrasonidoMB.epUSG.oiETamano}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosUsgOvaIzqEcoTam"/>
+					</p:column>										
+				</p:row>
+				
+				<p:row>
+					<p:column colspan="5">
+						<p:spacer height="9px" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column style="width: 20%;" styleClass="labelDerTop1">
+						<p:outputLabel for="estudiosUsgObserv2" value="Observaciones:" />
+					</p:column>
+					<p:column style="width: 80%;" colspan="4">
+						<p:inputTextarea id="estudiosUsgObserv2" maxlength="500" rows="3" autoResize="false" value="#{epUltrasonidoMB.epUSG.observaciones}" 
+										 style="width: 90%;" />
+					</p:column>
+				</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

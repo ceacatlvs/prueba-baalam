@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:row>
+		<p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="svFecha" styleClass="labelIzqBold"
+							value="Fecha de consulta: " />
+					</p:column>
+					<p:column colspan="2">
+						<p:calendar styleClass="inputDerM1" id="svFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true" 
+							navigator="true" effect="slideDown" readonlyInput="false" yearRange="c-100:c+1" maxdate="#{efSignosVitalesMB.fechaHoy}"
+							value="#{efSignosVitalesMB.efSV.fechaConsulta}" onkeydown='return revisarBase(event)' />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="svHora" styleClass="labelIzqBold"
+							value="Hora: " />
+					</p:column>
+					<p:column style="width: 15% !important;" >
+						<p:calendar styleClass="inputDerM1" id="svHora" locale="es" pattern="HH:mm" timeOnly="true" 
+									value="#{efSignosVitalesMB.horaConsulta}" onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 70% !important;" >
+						<p:selectBooleanCheckbox id="svAcudio" itemLabel="Acudió en fecha" value="#{efSignosVitalesMB.efSV.acudioCita}" />
+					</p:column>
+				</p:row>
+				
+				<p:row rowspan="2">
+					<p:column />
+				</p:row>
+			</p:panelGrid>
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column colspan="4" style="width: 100% !important;" >
+						<p:panelGrid style="width: 100% !important;" >
+							<p:row>
+								<p:column styleClass="tituloSubSeccion" colspan="2">
+									<p:outputLabel value="Signos vitales" />
+								</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column />
+							</p:row>
+
+							<p:row>
+								<p:column styleClass="labelDer" style="width: 10% !important;" >
+									<p:outputLabel for="svPeso" value="Peso: " />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 10% !important;">
+									<p:inputText id="svPeso" value="#{efSignosVitalesMB.efSV.pesoKg}" maxlength="5"
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+										<p:ajax event="change" listener="#{efSignosVitalesMB.cambioPeso()}" update="svPesoLb svIMC" process="@this svTalla" />
+									</p:inputText>
+									<p:watermark value="0.0" for="svPeso"/>
+									<p:outputLabel styleClass="labelIzqMiddle" for="svPeso" value="Kg" />
+								</p:column>
+								
+								<p:column style="width: 2% !important;" />
+								
+								<p:column styleClass="labelDer" style="width: 10% !important;" >
+									<p:outputLabel for="svTalla" value="Talla: " />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 10% !important;">
+									<p:inputText id="svTalla" value="#{efSignosVitalesMB.efSV.tallaCm}" maxlength="5" 
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+							 			<p:ajax event="change" listener="#{efSignosVitalesMB.cambioTalla()}" update="svTallaIn svTallaFt svIMC svPI svPILb"
+												process="@this svPeso" />
+							 		</p:inputText>
+							 		<p:watermark value="0.0" for="svTalla"/>
+									<p:outputLabel styleClass="labelIzqMiddle" for="svTalla" value="cm" />
+								</p:column>
+
+								<p:column style="width: 11% !important;" />
+
+								<p:column styleClass="labelDer" style="width: 6% !important;" >
+									<p:outputLabel value="IMC: " />
+								</p:column>
+								<p:column style="width: 9% !important;" >
+									<p:outputLabel styleClass="inputDerS1" id="svIMC" value="#{efSignosVitalesMB.efSV.imc}" />
+								</p:column>
+
+								<p:column style="width: 2% !important;" />
+
+								<p:column styleClass="labelDer" style="width: 10% !important;" >
+									<p:outputLabel for="svPI" value="Peso ideal: " />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 20% !important;" >
+									<p:inputText id="svPI" value="#{efSignosVitalesMB.efSV.pesoIdealKg}" maxlength="5"  
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+							 			<p:ajax event="change" listener="#{efSignosVitalesMB.convertirPesoIdealKgALb()}" update="svPILb" process="@this" />
+							 		</p:inputText>
+							 		<p:watermark value="0.0" for="svPI"/>
+									<p:outputLabel styleClass="labelIzqMiddle" for="svPI" value="Kg" />
+								</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svPesoLb" value=" " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svPesoLb" value="#{efSignosVitalesMB.efSV.pesoLb}" maxlength="5"  
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+							 			<p:ajax event="change" listener="#{efSignosVitalesMB.convertirPesoLbAKg()}" update="svPeso" process="@this" />
+							 		</p:inputText>
+							 		<p:watermark value="0.0" for="svPesoLb"/>
+							 		<p:outputLabel styleClass="labelIzqMiddle" for="svPesoLb" value="Lb" />
+								</p:column>
+
+								<p:column />
+
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svTallaIn" value=" " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svTallaFt" value="#{efSignosVitalesMB.efSV.tallaPies}" maxlength="5"  
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+							 			<p:ajax event="change" listener="#{efSignosVitalesMB.convertirTallaACm()}" update="svTalla"
+							 					process="@this svTallaIn" />
+							 		</p:inputText>
+							 		<p:watermark value="0.0" for="svTallaFt"/>
+									<p:outputLabel styleClass="labelIzqMiddle" for="svTallaFt" value="ft" />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svTallaIn" value="#{efSignosVitalesMB.efSV.tallaIn}" maxlength="5"  
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+							 			<p:ajax event="change" listener="#{efSignosVitalesMB.convertirTallaACm()}" update="svTalla" 
+												process="@this svTallaFt" />
+									</p:inputText>
+									<p:watermark value="0.0" for="svTallaIn"/>
+									<p:outputLabel styleClass="labelIzqMiddle" for="svTallaIn" value="in" />
+								</p:column>
+
+								<p:column />
+
+								<p:column styleClass="labelDer"></p:column>
+								<p:column></p:column>
+
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svPILb" value=" " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svPILb" value="#{efSignosVitalesMB.efSV.pesoIdealLb}" maxlength="5"  
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' >
+							 			<p:ajax event="change" listener="#{efSignosVitalesMB.convertirPesoIdealLbAKg()}" update="svPI" process="@this" />
+							 		</p:inputText>
+							 		<p:watermark value="0.0" for="svPILb"/>
+									<p:outputLabel styleClass="labelIzqMiddle" for="svPILb" value="Lb" />
+								</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column />
+							</p:row>
+
+							<p:row>
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svTA" value="TA: " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svTA" value="#{efSignosVitalesMB.efSV.ta}" maxlength="5"  
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							 		<p:watermark value="0.0" for="svTA" />
+								</p:column>
+
+								<p:column />
+
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svFC" value="FC: " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svFC" value="#{efSignosVitalesMB.efSV.fc}" maxlength="5" 
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							 		<p:watermark value="0.0" for="svFC" />
+								</p:column>
+
+								<p:column />
+
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svFR" value="FR: " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svFR" value="#{efSignosVitalesMB.efSV.fr}" maxlength="5" 
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							 		<p:watermark value="0.0" for="svFR" />
+								</p:column>
+
+								<p:column />
+
+								<p:column styleClass="labelDer">
+									<p:outputLabel for="svTemp" value="Temp: " />
+								</p:column>
+								<p:column styleClass="inputDerS1">
+									<p:inputText id="svTemp" value="#{efSignosVitalesMB.efSV.temp}" maxlength="5" 
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							 		<p:watermark value="0.0" for="svTemp" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+			
+						<p:panelGrid style="width: 100% !important;" >
+							<p:row>
+								<p:column style="width: 20%;" styleClass="labelDer" >
+									<p:outputLabel value="Circunferencia abdominal: " />
+								</p:column>
+								<p:column style="width: 80%;" styleClass="inputDerS1" >
+									<p:inputText id="efsvCA" value="#{efSignosVitalesMB.efSV.circunfAbdominal}" maxlength="5" 
+							 					 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							 		<p:watermark value="0.0" for="efsvCA" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+			
+						<p:panelGrid style="width: 100% !important;" >
+							<p:row>
+								<p:column style="width: 20%;" styleClass="labelDerTop1" >
+									<p:outputLabel value="Observaciones: " />
+								</p:column>
+								<p:column style="width: 80%;" styleClass="inputDerS1" >
+									<p:inputTextarea id="efsvObservaciones" value="#{efSignosVitalesMB.efSV.observaciones}" autoResize="false" 
+								     				 rows="7" style="width: 75%;" maxlength="500" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:column>
+				</p:row>
+
+
+			</p:panelGrid>
+		</p:column>
+	</p:row>
+
+</ui:composition>

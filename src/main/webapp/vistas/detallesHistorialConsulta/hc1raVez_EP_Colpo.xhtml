@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:f="http://java.sun.com/jsf/core">
+        
+	<h:head />
+	
+	<h:body>
+		
+		<ui:composition template="/WEB-INF/templates/templateDetallesPaciente1raVezEP.xhtml">
+		
+			<ui:define name="title">
+				Baalam :: Detalle de consulta 1ra vez
+			</ui:define>
+			
+			<ui:param name="activeIndex" value="2" />
+			
+			<ui:define name="seccion">
+				Colposcopía
+			</ui:define>
+			
+			<ui:param name="activeIndexSM" value="7" />
+	
+			<ui:define name="contentEP">
+				<p:panelGrid style="width:95%; height:35px;" styleClass="panelGrid-FormularioSimple">
+	  				<p:row><p:column colspan="6" styleClass="tipoFuente labelDer">
+						<p:commandButton value="Regresar a historial de consultas" action="../detallesHistorialConsulta/historialConsultas.xhtml?faces-redirect=true"/>
+						<p:commandButton value="Guardar y continuar con ultrasonido" action="#{epColposcopiaMB.registrar(3)}"/>
+					</p:column></p:row>
+	  			</p:panelGrid>
+				
+				<ui:include src="../estudiosPrevios/estudiosColp.xhtml" />
+				
+				<p:panelGrid style="width:95%; height:100px;" styleClass="panelGrid-FormularioSimple">
+	  				<p:row><p:column colspan="6" styleClass="tipoFuente labelDer">
+						<p:commandButton value="Regresar a historial de consultas" action="../detallesHistorialConsulta/historialConsultas.xhtml?faces-redirect=true"/>
+						<p:commandButton value="Guardar y continuar con ultrasonido" action="#{epColposcopiaMB.registrar(3)}"/>
+					</p:column></p:row>
+	  			</p:panelGrid>
+			</ui:define>
+			
+		</ui:composition>
+		
+	</h:body>
+        
+</html>

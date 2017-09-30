@@ -1,0 +1,215 @@
+h1 {
+	font-size: 16px;
+	color: #FF0000;
+	padding-top: 9px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 32px;
+}
+
+h2 {
+	font-size: 28px;
+	color: #2E6E9E;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 14px;
+}
+
+h3 {
+	font-size: 14px;
+	color: #2E6E9E;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 14px;
+}
+
+.ui-top {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-topLeft {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-topCenter {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-topRight {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-center {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-style: hidden !important;
+	border: none !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-ctrCenter {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border-left: none !important;
+	border-right: none !important;
+	border-bottom: none !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.panelGrid-Medico td {
+	border: none !important;
+ 	border-style: hidden !important;
+ 	
+    padding-top: 5px !important;
+	padding-right: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 5px !important;
+}
+
+.panelGrid-Medico tr {
+    border: none !important;
+}
+
+.panelGrid-MenuGeneral td {
+	text-align: center;
+    
+    border: none !important;
+ 	border-style: hidden !important;
+ 	
+    padding-top: 3px !important;
+	padding-right: 7px !important;
+	padding-bottom: 3px !important;
+	padding-left: 7px !important;
+}
+
+.seccion {
+	color: #66CC22;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.nombreMedico {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.nombreAsistente {
+	color: #33CC00;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.fechaAsistente {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.datosMedico {
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.fecha {
+	color: #0066FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.doctor {
+	color: #0066FF;
+	font-size: 12px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+
+.menuGeneral {
+	color: #003399;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.menuAdmon {
+	color: #003399;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.ui-selectonemenu {
+	font-size: 12px;
+	font-family:Arial,Helvetica,sans-serif !important;
+}
+
+.ui-selectonemenu label.ui-selectonemenu-label {
+	padding-right: 28px;
+	text-align: left;
+}
+
+.ui-selectonemenu label.ui-selectonemenu-label.ui-inputfield {
+	width: 83% !important;
+}

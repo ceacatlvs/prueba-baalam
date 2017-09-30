@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 60%;">
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100%;"><p:panelGrid style="width: 100%;">
+			
+			<p:row><p:column colspan="8" style="width: 100%;"><p:outputPanel id="ceOpLaboratorio" style="width: 100%;">
+				<p:panelGrid id="cePgLaboratorio" style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDer"><p:outputLabel for="labFecha" value="Fecha: " /></p:column>
+						<p:column colspan="10">
+							<p:calendar styleClass="inputDerM1" id="labFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+								  		showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c+1"
+								  		value="#{ceLaboratorioMB.laboratorio.fechaLaboratorio}" onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="BH: " for="labBH" />
+						</p:column>
+						<p:column style="width: 10%;" styleClass="inputDerS1">
+							<p:inputText id="labBH" value="#{ceLaboratorioMB.laboratorio.bh}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labBH" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="G/GPC: " for="labGGPC" />
+						</p:column>
+						<p:column style="width: 10%;" styleClass="inputDerS1">
+							<p:inputText id="labGGPC" value="#{ceLaboratorioMB.laboratorio.ggpc}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labGGPC" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="CRE/AU: " for="labCREAU" />
+						</p:column>
+						<p:column style="width: 10%;" styleClass="inputDerS1">
+							<p:inputText id="labCREAU" value="#{ceLaboratorioMB.laboratorio.creau}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labCREAU" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="TP: " for="labTP" />
+						</p:column>
+						<p:column style="width: 10%;" styleClass="inputDerS1">
+							<p:inputText id="labTP" value="#{ceLaboratorioMB.laboratorio.tp}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labTP" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="TTP: " for="labTTP" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="labTTP" value="#{ceLaboratorioMB.laboratorio.ttp}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labTTP" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="VDRL: " for="labVDRL" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="labVDRL" value="#{ceLaboratorioMB.laboratorio.vdrl}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labVDRL" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="EGO: " for="labEGO" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="labEGO" value="#{ceLaboratorioMB.laboratorio.ego}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labEGO" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="UROC: " for="labUROC" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="labUROC" value="#{ceLaboratorioMB.laboratorio.uroc}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labUROC" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Cul.Vag.: " for="labCulVag" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="labCulVag" value="#{ceLaboratorioMB.laboratorio.culVag}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labCulVag" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="VIH: " for="labVIH" />
+						</p:column>
+						<p:column styleClass="inputDerS1" colspan="7">
+							<p:inputText id="labVIH" value="#{ceLaboratorioMB.laboratorio.vih}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="labVIH" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDerTop1">
+							<p:outputLabel for="labOtros" value="Otros:" />
+						</p:column>
+						<p:column styleClass="labelIzq" colspan="10">
+							<p:inputTextarea id="labOtros" value="#{ceLaboratorioMB.laboratorio.otros}" autoResize="false" 
+								     		 rows="5" style="width: 75%;" maxlength="500" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer" colspan="11">
+							<p:commandButton id="ceLabLimpiar" value="Limpiar" icon="ui-icon-clipboard" update="cePgLaboratorio" process="@this" >
+								<p:resetInput target="cePgLaboratorio" />
+							</p:commandButton>
+	                           <p:commandButton id="ceLabAgregar" value="Registrar" icon="ui-icon-plusthick" action="#{ceLaboratorioMB.reinit()}"
+	                            				update="cePgLaboratorio laboratorio" 
+	                           					process="@this labFecha labBH labGGPC labCREAU labTP labTTP labVDRL labEGO labUROC
+	                           							 labCulVag labVIH labOtros" >
+								<p:collector value="#{ceLaboratorioMB.laboratorio}" addTo="#{ceLaboratorioMB.laboratorios}" />
+			                </p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel></p:column></p:row>
+		
+		</p:panelGrid></p:column></p:row>
+
+	</p:panelGrid>
+				
+	<br />
+		
+	<p:panelGrid>
+		<p:row>
+			<p:column>
+				<p:outputPanel id="laboratorio" style="width: 1100px;" >
+					<p:dataTable styleClass="panelGrid-Tabla" id="ceTblLaboratorio" editable="true" widgetVar="tblLaboratorio" 
+								 emptyMessage="No se tienen registros de laboratorio." value="#{ceLaboratorioMB.laboratorios}" var="laboratorio" >
+						<p:columnGroup type="header">
+							<p:row>
+								<p:column headerText="Fecha" style="width: 13%" />
+								<p:column headerText="BH" 	 style="width: 5%" />
+								<p:column headerText="G/GPC" style="width: 5%" />
+								<p:column headerText="CRE/AU" style="width: 5%" />
+								<p:column headerText="TP" 	 style="width: 5%" />
+								<p:column headerText="TTP"	 style="width: 5%" />
+								<p:column headerText="VDRL"	 style="width: 5%" />
+								<p:column headerText="EGO"	 style="width: 5%" />
+								<p:column headerText="UROC"	 style="width: 5%" />
+								<p:column headerText="Cul. Vag." style="width: 8%" />
+								<p:column headerText="VIH"	 style="width: 5%" />
+								<p:column headerText="Otros" style="width: 32%" />
+								<p:column colspan="2" headerText="Editar" style="width: 5%" />
+							</p:row>
+						</p:columnGroup>
+						
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.fechaLaboratorio}"><f:convertDateTime pattern="dd/MMM/yyyy" /></h:outputText>
+								</f:facet>
+								<f:facet name="input" >
+									<p:calendar styleClass="inputDerM1" id="ceLabModelFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+								  				showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c+1"
+								  				value="#{laboratorio.fechaLaboratorio}" onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.bh}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelBH" value="#{laboratorio.bh}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.ggpc}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelGGPC" value="#{laboratorio.ggpc}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.creau}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelCREAU" value="#{laboratorio.creau}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.tp}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelTP" value="#{laboratorio.tp}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.ttp}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelTTP" value="#{laboratorio.ttp}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.vdrl}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelVDRL" value="#{laboratorio.vdrl}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.ego}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelEGO" value="#{laboratorio.ego}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.uroc}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelUROC" value="#{laboratorio.uroc}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.culVag}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelCulVag" value="#{laboratorio.culVag}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.vih}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceLabModelVIH" value="#{laboratorio.vih}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{laboratorio.otros}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputTextarea id="ceLabModelOtros" value="#{laboratorio.otros}" autoResize="false" 
+								     		 		 rows="3" style="width: 95%;" maxlength="500" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column>
+							<p:rowEditor id="ceReLaboratorio" />
+						</p:column>
+						<p:column>
+							<p:commandLink id="ceEliminarLaboratorio" styleClass="ui-icon ui-icon-trash"
+										   update=":formCE:laboratorio" process=":formCE:laboratorio" >
+                            	<p:collector value="#{laboratorio}" removeFrom="#{ceLaboratorioMB.laboratorios}" />
+                            </p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+
+</ui:composition>

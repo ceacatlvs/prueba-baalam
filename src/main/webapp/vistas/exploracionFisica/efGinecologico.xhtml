@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Mamas: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgMamas" value="#{efGinecologicoMB.efGineco.mamas}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsMamas" value="#{efGinecologicoMB.efGineco.mamasObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Axila: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgAxila" value="#{efGinecologicoMB.efGineco.axila}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsAxila" value="#{efGinecologicoMB.efGineco.axilaObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Espacio supraclavicular: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgEsup" value="#{efGinecologicoMB.efGineco.espacioSupraclav}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsEsup" value="#{efGinecologicoMB.efGineco.ecObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Genitales externos: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgGenitExt" value="#{efGinecologicoMB.efGineco.genitalesExternos}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsGenitExt" value="#{efGinecologicoMB.efGineco.geObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Meato uretral: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgMeaUr" value="#{efGinecologicoMB.efGineco.meatoUretral}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsMeaUr" value="#{efGinecologicoMB.efGineco.muObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Uretra: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgUretra" value="#{efGinecologicoMB.efGineco.uretra}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsUretra" value="#{efGinecologicoMB.efGineco.uretraObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Vejiga: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgVejiga" value="#{efGinecologicoMB.efGineco.vejiga}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsVejiga" value="#{efGinecologicoMB.efGineco.vejigaObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Vagina: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgVagina" value="#{efGinecologicoMB.efGineco.vagina}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Soporte pélvico: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgPelvico" value="#{efGinecologicoMB.efGineco.soportePelvico}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:selectBooleanCheckbox id="efgPerineEficiente" itemLabel="Periné eficiente" value="#{efGinecologicoMB.efGineco.perineEficiente}"/>
+					</p:column>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Insuficiencia perineal: " />
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 64% !important;" >
+						<p:selectOneRadio id="efgGrados" label="Insuficiencia perineal:" >
+							<f:selectItem itemLabel="Grado I" value="#{efGinecologicoMB.efGineco.insuficienciaPerI}" />
+							<f:selectItem itemLabel="Grado II" value="#{efGinecologicoMB.efGineco.insuficienciaPerII}" />
+							<f:selectItem itemLabel="Grado III" value="#{efGinecologicoMB.efGineco.insuficienciaPerIII}" />
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 18% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:inputTextarea id="efgObsVagina" value="#{efGinecologicoMB.efGineco.vaginaObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Cérvix: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgCervix" value="#{efGinecologicoMB.efGineco.cervix}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsCervix" value="#{efGinecologicoMB.efGineco.cervixObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Colposcopía: " />
+					</p:column>
+					<p:column style="width: 32% !important;" >
+						<p:selectOneRadio id="efgColposcopia" value="#{efGinecologicoMB.efGineco.colposcopia}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 50% !important;" >
+						<p:selectBooleanCheckbox id="efgColpSatisfactoria" itemLabel="Satisfactoria" value="#{efGinecologicoMB.efGineco.colpsSatisfactoria}"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 18% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:inputTextarea id="efgObsColposcopia" value="#{efGinecologicoMB.efGineco.colpsObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 18% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerBold" style="width: 100% !important;" >
+						<p:outputLabel value="Útero" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Sensibilidad: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgUtSensibilidad" value="#{efGinecologicoMB.efGineco.uteroSensibilidad}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Situación: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgUtSituacion" value="#{efGinecologicoMB.efGineco.uteroSituacion}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Tamaño: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgUtTamano" value="#{efGinecologicoMB.efGineco.uteroTamano}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Superficie: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgUtSuperficie" value="#{efGinecologicoMB.efGineco.uteroSuperficie}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Consistencia: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgUtConsistencia" value="#{efGinecologicoMB.efGineco.uteroConsistencia}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Movilidad: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgUtMovilidad" value="#{efGinecologicoMB.efGineco.uteroMovilidad}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 18% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:inputTextarea id="efgObsUtero" value="#{efGinecologicoMB.efGineco.uteroObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Anexos: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgAnexos" value="#{efGinecologicoMB.efGineco.anexos}">
+							<f:selectItem itemLabel="Palpables" itemValue="Palpables"/>
+							<f:selectItem itemLabel="No palpables" itemValue="No palpables"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Sensibilidad: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgAnSens" value="#{efGinecologicoMB.efGineco.sensibilidad}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Masas: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgAnMasas" value="#{efGinecologicoMB.efGineco.masas}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 18% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:inputTextarea id="efgObsAnexos" value="#{efGinecologicoMB.efGineco.anexosObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 18% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerBold" style="width: 100% !important;" >
+						<p:outputLabel value="Parametrios" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Sensibilidad: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgParSensibilidad" value="#{efGinecologicoMB.efGineco.parametriosSensibilidad}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Consistencia: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgParConsistencia" value="#{efGinecologicoMB.efGineco.parametriosConsistencia}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Masas: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efgParMasas" value="#{efGinecologicoMB.efGineco.parametriosMasas}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 18% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:inputTextarea id="efgObsPar" value="#{efGinecologicoMB.efGineco.parametriosObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Periné: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgPerine" value="#{efGinecologicoMB.efGineco.perine}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsPerine" value="#{efGinecologicoMB.efGineco.perineObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Ano: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgAno" value="#{efGinecologicoMB.efGineco.ano}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsAno" value="#{efGinecologicoMB.efGineco.anoObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 18% !important;" >
+						<p:outputLabel value="Recto: " />
+					</p:column>
+					<p:column style="width: 82% !important;" >
+						<p:selectOneRadio id="efgRecto" value="#{efGinecologicoMB.efGineco.recto}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="efgObsRecto" value="#{efGinecologicoMB.efGineco.rectoObservaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

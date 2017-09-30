@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions"
+				template="/WEB-INF/templates/templateControlEmbarazo.xhtml">
+	
+	<ui:param name="activeIndex" value="9" />
+	
+	<ui:define name="ceSeguimiento">
+		<ui:include src="ceSeguimiento.xhtml" />
+	</ui:define>
+	
+	<ui:define name="ceUltrasonido">
+		<ui:include src="ceUltrasonido.xhtml" />
+	</ui:define>
+	
+	<ui:define name="ceLaboratorio">
+		<ui:include src="ceLaboratorio.xhtml" />
+	</ui:define>
+	
+</ui:composition>

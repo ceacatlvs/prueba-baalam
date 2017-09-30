@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition	xmlns="http://www.w3.org/1999/xhtml"
+       			xmlns:ui="http://java.sun.com/jsf/facelets"
+       			xmlns:h="http://java.sun.com/jsf/html"
+       			xmlns:p="http://primefaces.org/ui"
+       			xmlns:pe="http://primefaces.org/ui/extensions"
+       			xmlns:f="http://java.sun.com/jsf/core"
+       			template="/WEB-INF/templates/templateDetallesPaciente1raVez.xhtml">
+    
+    <ui:param name="subMenu" value="true" />
+    
+	<ui:define name="menuSub">
+		<h:form id="menuEP" style="height: 98% !important;" >
+ 			<p:tabMenu id="tabEP" styleClass="ui-menuSubSeccion" style="top: -77px !important;" activeIndex="#{activeIndexSM}" >
+				<p:menuitem value="Biometría hemática" url="hc1raVez_EP_BH.xhtml" />
+				<p:menuitem value="Química sanguínea" url="hc1raVez_EP_QS.xhtml" />
+				<p:menuitem value="VDRL HIV" url="hc1raVez_EP_VDRL.xhtml" />
+				<p:menuitem value="Examen general de orina" url="hc1raVez_EP_EGO.xhtml" />
+				<p:menuitem value="Urocultivo" url="hc1raVez_EP_URO.xhtml" />
+				<p:menuitem value="Cultivo de secreciones genitales" url="hc1raVez_EP_CSG.xhtml" />
+				<p:menuitem value="Citología cervical" url="hc1raVez_EP_CC.xhtml" />
+				<p:menuitem value="Colposcopia" url="hc1raVez_EP_Colpo.xhtml" />
+				<p:menuitem value="Ultrasonido" url="hc1raVez_EP_Ultra.xhtml" />
+				<p:menuitem value="Mamografías y USG mama" url="hc1raVez_EP_MUM.xhtml" />
+				<p:menuitem value="Densitometría" url="hc1raVez_EP_Densi.xhtml" />
+				<p:menuitem value="Otros estudios" url="hc1raVez_EP_OE.xhtml" />
+			</p:tabMenu>
+		</h:form>
+	</ui:define>
+	 		
+	<ui:define name="content">
+	 	<p:panelGrid styleClass="panelGrid-FormularioMenu">
+        	<p:row>  
+		    	<p:column rowspan="2" colspan="4" styleClass="tituloSeccionTab">
+		    		<ui:insert name="seccion" />
+		    	</p:column>
+		    	
+		    	<p:column styleClass="nombrePaciente"><h:outputText value="#{fichaIdentificacionMB.paciente.nombrePaciente}" /></p:column>  
+	    	</p:row>
+	    	
+			<p:row>
+				<p:column styleClass="fechaConsulta"><h:outputText rendered="#{activeIndex>1}" value="#{padecimientoActualMB.padecimientoActual.fechaConsulta}"><f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" /></h:outputText></p:column>
+			</p:row>
+    	
+   			<p:row><p:column colspan="5" style="width: 75% !important;" styleClass="tipoFuente">
+				<h:form id="formEP">
+					<ui:insert name="contentEP" />
+				</h:form>
+			</p:column></p:row>
+		</p:panelGrid>
+	</ui:define>
+    
+</ui:composition>

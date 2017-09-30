@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="schedule.js" />
+	
+	<p:panelGrid id="agendapg" styleClass="panelGrid-FormularioSimpleInicio" style="width: 100%; height: 100%; align-text:center; align:center;" >
+		<p:row>
+			<p:column styleClass="tipoFuente" rowspan="2" style="width: 73%;" >
+				<p:schedule id="agendaM" widgetVar="agendaWV" value="#{agendaMB.modeloEvento}" locale="es" timeZone="Mexico/General" 
+							view="#{agendaMB.vistaAgenda}" firstHour="11" aspectRatio="1.6" allDaySlot="false"
+							style="width:725px; padding-top:0px; padding-left:0px; padding-bottom:0px; text-align: center; align:center;" 
+							initialDate="#{agendaMB.fechaAgendaInicio}" minTime="#{agendaMB.horarioConsultorioInicio}" 
+							maxTime="#{agendaMB.horarioConsultorioFin}" >
+							
+					<p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}" update="pgDatosCita opDatosCita1raVez opDatosCitaSub" 
+							onstart="PF('buiCargandoWV').show();" oncomplete="PF('dialogCita').show(); PF('buiCargandoWV').hide();" />
+					<p:ajax event="eventSelect" listener="#{agendaMB.onEventSelect}" update="pgDatosCita" onstart="PF('buiCargandoWV').show();"
+							oncomplete="PF('dialogCita').show(); PF('buiCargandoWV').hide();" />
+					<p:ajax event="eventMove" listener="#{agendaMB.onEventMove}" onstart="PF('buiGuardandoWV').show();" 
+							oncomplete="PF('agendaWV').update(); PF('buiGuardandoWV').hide();" />
+					<p:ajax event="eventResize" listener="#{agendaMB.onEventResize}" onstart="PF('buiGuardandoWV').show();" 
+							oncomplete="PF('agendaWV').update(); PF('buiGuardandoWV').hide();" />
+				</p:schedule>
+			</p:column>
+			<p:column styleClass="labelIzqTopBold panelGrid-FormularioAgenda tipoFuente" style="width: 27%;" >
+				<p:commandButton id="actualizarAgenda" value="Actualizar agenda" icon="ui-icon-arrowrefresh-1-e" styleClass="tipoFuenteAzul"
+								 action="#{agendaMB.cancelar()}" process="@this" update="formAgenda agendapg dlgDatosCita" 
+								 onstart="PF('buiActualizarWV').show();" oncomplete="PF('buiActualizarWV').hide();" >
+					<p:resetInput target="formAgenda agendapg dlgDatosCita" />
+				</p:commandButton>
+			</p:column>
+		</p:row>
+		<p:row>
+			<p:column />
+		</p:row>
+	</p:panelGrid>
+	
+	<p:dialog id="dlgDatosCita" header="Detalle de cita" styleClass="tipoFuente" widgetVar="dialogCita" resizable="false" draggable="true" >
+		<p:ajax event="close" listener="#{agendaMB.reiniciarObjetosCita()}" />
+		
+		<p:panelGrid id="pgFechaInvalida" styleClass="tipoFuente panelGrid-FormularioAgenda" style="width:600px;" collapsible="true" gutter="0" 
+					 rendered="#{agendaMB.fechaInicio.before(agendaMB.fechaHoy)}" >
+			<p:row>
+				<p:column colspan="3">
+					<p:outputLabel value="Por favor elija una fecha superior a #{agendaMB.fechaHoy}" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputPanel id="opBotones" collapsible="true" gutter="0" >
+						<p:commandButton id="salirVentana" value="Salir" icon="ui-icon-cancel" action="#{agendaMB.cancelar()}" 
+										 update="formAgenda agendapg dlgDatosCita" onstart="PF('buiCargandoWV').show();" process="@this"
+										 oncomplete="PF('agendaWV').update(); PF('dialogCita').hide(); PF('buiCargandoWV').hide();" >
+							<p:resetInput target="formAgenda agendapg dlgDatosCita" />
+						</p:commandButton>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid id="pgDatosCita" styleClass="tipoFuente panelGrid-FormularioAgenda" style="width:600px;" collapsible="true" gutter="0" 
+					 rendered="#{agendaMB.fechaInicio.after(agendaMB.fechaHoy)}" >
+					 
+			<p:row>
+				<p:column colspan="3">
+					<p:outputLabel value="#{agendaMB.fechaInicio} y #{agendaMB.fechaHoy} es #{agendaMB.fechaInicio.after(agendaMB.fechaHoy)}" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDer tipoFuente" style="width: 23%;" >
+					<p:outputLabel value="Tipo de consulta: " />
+				</p:column>
+				
+				<p:column colspan="2" styleClass="tipoFuente" style="width: 77%;" >
+					<p:selectOneRadio id="citaTipo" value="#{agendaMB.cita.tipoConsulta}" disabled="#{!agendaMB.editarTipoCita}">
+						<f:selectItem itemLabel="Primera Vez" itemValue="P" />
+						<f:selectItem itemLabel="Subsecuente" itemValue="S" />
+						<f:selectItem itemLabel="Marcar Ocupado" itemValue="O" />
+						
+						<p:ajax listener="#{agendaMB.crearNuevoPanelCita()}" update="pgDatosCita opDatosCita1raVez opDatosCitaSub opBotonesCita" />
+					</p:selectOneRadio>
+				</p:column>
+			</p:row>
+			
+			<p:row rendered="#{agendaMB.cita.tipoConsulta.equalsIgnoreCase('P')}">
+				<p:column colspan="3">
+					<p:outputPanel id="opDatosCita1raVez" styleClass="tipoFuente panelGrid-FormularioAgenda" collapsible="true" gutter="0" >
+						<p:panelGrid id="pgDatosCita1raVez" styleClass="tipoFuente panelGrid-FormularioAgenda" style="width: 100%;"
+									 collapsible="true" gutter="0" >
+							<p:row>
+								<p:column style="width: 30%;" />
+								<p:column style="width: 25%;" />
+								<p:column style="width: 20%;" />
+								<p:column style="width: 25%;" />
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezPaciente" value="Nombre de la paciente: " />
+									<p:outputLabel for="cita1raVezPaciente" value="*" styleClass="labelRoja" />
+								</p:column>
+								
+								<p:column styleClass="tipoFuente inputIzqL1" colspan="3" >
+									<p:inputText id="cita1raVezPaciente" value="#{agendaMB.cita.paciente.nombrePaciente}" maxlength="250" 
+							 					 validatorMessage="El nombre de la paciente es necesario, favor de llenarlo" 
+							 					 disabled="#{agendaMB.citaPasada}" 
+							 					 style="width: 96.5%;" onkeypress='return revisarBase(event)' >
+										<p:ajax event="blur" update="msgNombrePaciente" process="@this"/>
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column />
+								<p:column colspan="3" >
+									<p:message for="cita1raVezPaciente" id="msgNombrePaciente" showSummary="true" showDetail="false" display="text" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="labelDer" >
+									<p:outputLabel for="cita1raVezRecomendo" value="Recomendó:" />
+								</p:column>
+								<p:column styleClass="tipoFuente inputIzqL1" colspan="3" >
+									<p:inputText id="cita1raVezRecomendo" value="#{agendaMB.cita.paciente.recomendo}" maxlength="250"
+												 disabled="#{agendaMB.citaPasada}" style="width: 96.5%;" 
+												 onkeypress='return revisarBase(event)' />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezTelefonoMovil" value="Teléfono móvil: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:inputMask id="cita1raVezTelefonoMovil" mask="99-9999-9999" style="width: 90%;" 
+												 disabled="#{agendaMB.citaPasada}"
+												 value="#{agendaMB.cita.paciente.telefonoMovil}" onkeypress='return revisarBase(event)' />
+									<p:watermark value="55-5555-5555" for="cita1raVezTelefonoMovil"/>
+								</p:column>
+								
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezTelefonoCasa" value="Teléfono casa: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:inputMask id="cita1raVezTelefonoCasa" mask="(99)9999-9999" style="width: 90%;" 
+												 disabled="#{agendaMB.citaPasada}"
+												 value="#{agendaMB.cita.paciente.telCasa}" title="Favor de incluir la clave LADA."
+												 onkeypress='return revisarBase(event)' />
+									<p:watermark value="(55)5555-5555" for="cita1raVezTelefonoCasa"/>
+									<p:tooltip id="ttCita1raVezTelCasa" for="cita1raVezTelefonoCasa" showEvent="focus" hideEvent="blur" styleClass="tipoFuente" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column />
+								<p:column styleClass="tipoFuente labelIzq" colspan="3">
+									<p:messages id="mensajes1ra" showDetail="true" autoUpdate="true" closable="true"  />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezFechaInicio" value="Fecha: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:calendar id="cita1raVezFechaInicio" value="#{agendaMB.fechaInicio}" pattern="dd/MMM/yyyy" readonlyInput="true"
+												style="width: 90%;" navigator="true" locale="es" />
+								</p:column>
+								
+								<!-- p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezFechaFin" value="Fecha fin: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:calendar id="cita1raVezFechaFin" value="#{agendaMB.fechaFin}" pattern="dd/MMM/yyyy" 
+											    style="width: 90%;" navigator="true" locale="es" onkeypress='return revisarBase(event)' />
+								</p:column -->
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezInicio" value="Hora inicio: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<pe:timePicker id="cita1raVezInicio" value="#{agendaMB.cita.citaInicio}" widgetVar="tpHoraInicio"
+												   startHours="#{agendaMB.horarioConsultorioInicio}" endHours="#{agendaMB.horarioConsultorioFin}"
+												   intervalMinutes="30" mode="popup" showOn="focus" showPeriod="false" showCloseButton="true" 
+												   locale="es" onkeypress='return revisarBase(event)'>
+										<p:ajax event="close" listener="#{agendaMB.establecerHoraCitaFin()}" update="cita1raVezFin" process="@this"/>
+									</pe:timePicker>
+								</p:column>
+								
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="cita1raVezFin" value="Hora fin: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<pe:timePicker id="cita1raVezFin" value="#{agendaMB.cita.citaFin}" widgetVar="tpHoraFin"
+												   startHours="#{agendaMB.horarioConsultorioInicio}" endHours="#{agendaMB.horarioConsultorioFin+1}"
+												   intervalMinutes="30" mode="popup" showOn="focus" showPeriod="false" showCloseButton="true" 
+												   locale="es" onkeypress='return revisarBase(event)'/>
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDerTop1">
+									<p:outputLabel for="cita1raVezNotas" value="Notas: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1" colspan="3" >
+									<p:inputTextarea id="cita1raVezNotas" value="#{agendaMB.cita.notasCita}" autoResize="false" rows="3" style="width: 96.5%;" 
+													 maxlength="300" disabled="#{agendaMB.citaPasada}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+					
+					<p:blockUI block="pgDatosCita" trigger="citaTipo" >
+						Cargando...<br />
+        				<p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+					</p:blockUI>
+				</p:column>
+			</p:row>
+			
+			<p:row rendered="#{agendaMB.cita.tipoConsulta.equalsIgnoreCase('S')}">
+				<p:column colspan="3">
+					<p:outputPanel id="opDatosCitaSub" styleClass="tipoFuente panelGrid-FormularioAgenda" collapsible="true" gutter="0" >
+						<p:panelGrid id="pgDatosCitaSub" styleClass="tipoFuente panelGrid-FormularioAgenda" style="width: 100%;"
+									 collapsible="true" gutter="0" >
+							<p:row>
+								<p:column style="width: 30%;" />
+								<p:column style="width: 25%;" />
+								<p:column style="width: 20%;" />
+								<p:column style="width: 25%;" />
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubPaciente" value="Nombre de la paciente: " />
+									<p:outputLabel for="citaSubPaciente" value="*" styleClass="labelRoja" />
+								</p:column>
+								<p:column styleClass="tipoFuente inputIzqL1" colspan="3" >
+									<p:autoComplete id="citaSubPaciente" forceSelection="true" minQueryLength="3" value="#{agendaMB.cita.paciente}"
+													converter="pacienteConverter" completeMethod="#{agendaMB.buscarPacientesNombre}" 
+													var="paciente" itemLabel="#{paciente.nombrePaciente}" itemValue="#{paciente}"
+													validatorMessage="El nombre de la paciente es necesario, favor de llenarlo">
+										<p:ajax event="itemSelect" update="msgNombrePacienteSub citaSubTelefonoMovil citaSubTelefonoCasa" />
+									</p:autoComplete>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column />
+								<p:column colspan="3" >
+									<p:message for="citaSubPaciente" id="msgNombrePacienteSub" showSummary="true" showDetail="false" display="text" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubTelefonoMovil" value="Teléfono móvil: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:inputMask id="citaSubTelefonoMovil" mask="99-9999-9999" style="width: 90%;" disabled="#{agendaMB.citaPasada}"
+												 value="#{agendaMB.cita.paciente.telefonoMovil}" onkeypress='return revisarBase(event)' />
+									<p:watermark value="55-5555-5555" for="citaSubTelefonoMovil"/>
+								</p:column>
+								
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubTelefonoCasa" value="Teléfono casa: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:inputMask id="citaSubTelefonoCasa" mask="(99)9999-9999" style="width: 90%;" disabled="#{agendaMB.citaPasada}"
+												 value="#{agendaMB.cita.paciente.telCasa}" title="Favor de incluir la clave LADA."
+												 onkeypress='return revisarBase(event)' />
+									<p:watermark value="(55)5555-5555" for="citaSubTelefonoCasa"/>
+									<p:tooltip id="ttCitaSubVezTelCasa" for="citaSubTelefonoCasa" showEvent="focus" hideEvent="blur" styleClass="tipoFuente" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column />
+								<p:column styleClass="tipoFuente labelIzq" colspan="3">
+									<p:messages id="mensajesSub" showDetail="true" autoUpdate="true" closable="true" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubFechaInicio" value="Fecha inicio: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:calendar id="citaSubFechaInicio" value="#{agendaMB.fechaInicio}" pattern="dd/MMM/yyyy" readonlyInput="true"
+												style="width: 90%;" navigator="true" locale="es" onkeypress='return revisarBase(event)' />
+								</p:column>
+								
+								<!-- p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubFechaFin" value="Fecha fin: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:calendar id="citaSubFechaFin" value="#{agendaMB.fechaFin}" pattern="dd/MMM/yyyy" 
+											    style="width: 90%;" navigator="true" locale="es" onkeypress='return revisarBase(event)' />
+								</p:column -->
+							</p:row>
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubInicio" value="Hora inicio: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<pe:timePicker id="citaSubInicio" value="#{agendaMB.cita.citaInicio}" widgetVar="tpsHoraInicio" 
+												   startHours="#{agendaMB.horarioConsultorioInicio}" endHours="#{agendaMB.horarioConsultorioFin}" 
+												   intervalMinutes="30" mode="popup" showOn="focus" showPeriod="false" showCloseButton="true" 
+												   locale="es" onkeypress='return revisarBase(event)'>
+										<p:ajax event="close" listener="#{agendaMB.establecerHoraCitaFin()}" update="citaSubFin" process="@this"/>
+									</pe:timePicker>			   
+								</p:column>
+								
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="citaSubFin" value="Hora fin: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<pe:timePicker id="citaSubFin" value="#{agendaMB.cita.citaFin}" widgetVar="tpsHoraFin" 
+												   startHours="#{agendaMB.horarioConsultorioInicio}" endHours="#{agendaMB.horarioConsultorioFin+1}" 
+												   intervalMinutes="30" mode="popup" showOn="focus" showPeriod="false" showCloseButton="true" 
+												   locale="es" onkeypress='return revisarBase(event)'/>
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDerTop1">
+									<p:outputLabel for="citaSubNotas" value="Notas: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1" colspan="3" >
+									<p:inputTextarea id="citaSubNotas" value="#{agendaMB.cita.notasCita}" autoResize="false" 
+													 disabled="#{agendaMB.citaPasada}" rows="3" style="width: 96.5%;" maxlength="300"/>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+					
+					<p:blockUI block="opDatosCitaSub" trigger="citaSubPaciente" >
+						Cargando datos...<br />
+        				<p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+					</p:blockUI>
+					
+					<p:blockUI block="pgDatosCita" trigger="citaTipo" >
+						Cargando...<br />
+        				<p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+					</p:blockUI>
+				</p:column>
+			</p:row>
+			
+			<p:row rendered="#{agendaMB.cita.tipoConsulta.equalsIgnoreCase('O')}">
+				<p:column colspan="3">
+					<p:outputPanel id="opDatosOcupado" styleClass="tipoFuente panelGrid-FormularioAgenda" collapsible="true" gutter="0" >
+						<p:panelGrid id="pgDatosOcupado" styleClass="tipoFuente panelGrid-FormularioAgenda" style="width: 100%;"
+									 collapsible="true" gutter="0" >
+							<p:row>
+								<p:column style="width: 30%;" />
+								<p:column style="width: 25%;" />
+								<p:column style="width: 20%;" />
+								<p:column style="width: 25%;" />
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="ocupado" value="Motivo: " />
+									<p:outputLabel for="ocupado" value="*" styleClass="labelRoja" />
+								</p:column>
+								<p:column styleClass="tipoFuente inputIzqL1" colspan="3" >
+									<p:inputText id="ocupado" value="#{agendaMB.cita.motivoOcupado}" maxlength="250" 
+							 					 validatorMessage="El motivo es necesario, favor de llenarlo" disabled="#{agendaMB.citaPasada}"
+							 					 style="width: 96.5%;" onkeypress='return revisarBase(event)' >
+										<p:ajax event="blur" update="msgOcupado" process="@this"/>
+									</p:inputText>
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column />
+								<p:column colspan="3" >
+									<p:message for="ocupado" id="msgOcupado" showSummary="true" showDetail="false" display="text" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column />
+								<p:column styleClass="tipoFuente labelIzq" colspan="3">
+									<p:messages id="mensajesOcupado" showDetail="true" autoUpdate="true" closable="true" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="ocupadoFechaInicio" value="Fecha inicio: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:calendar styleClass="tipoFuente" id="ocupadoFechaInicio" value="#{agendaMB.fechaInicio}" 
+												pattern="dd/MMM/yyyy" navigator="true" locale="es" readonlyInput="true" 
+												onkeypress='return revisarBase(event)' />
+								</p:column>
+								
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="ocupadoFechaFin" value="Fecha fin: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<p:calendar styleClass="tipoFuente" id="ocupadoFechaFin" value="#{agendaMB.fechaFin}"
+											    pattern="dd/MMM/yyyy" navigator="true" locale="es" readonlyInput="true" 
+											    onkeypress='return revisarBase(event)' />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="ocupadoInicio" value="Hora inicio: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<pe:timePicker id="ocupadoInicio" value="#{agendaMB.cita.citaInicio}" widgetVar="tpoHoraInicio" 
+												   intervalMinutes="30" mode="popup" showOn="focus" showPeriod="false" showCloseButton="true" 
+												   locale="es" onkeypress='return revisarBase(event)'>
+										<p:ajax event="close" listener="#{agendaMB.establecerHoraCitaFin()}" update="ocupadoFin" process="@this"/>
+									</pe:timePicker>
+								</p:column>
+								
+								<p:column styleClass="tipoFuente labelDer">
+									<p:outputLabel for="ocupadoFin" value="Hora fin: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1">
+									<pe:timePicker id="ocupadoFin" value="#{agendaMB.cita.citaFin}" widgetVar="tpoHoraFin" 
+												   intervalMinutes="30" mode="popup" showOn="focus" showPeriod="false" showCloseButton="true" 
+												   locale="es" onkeypress='return revisarBase(event)' >										
+									</pe:timePicker>				
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDerTop1">
+									<p:outputLabel for="ocupadoNotas" value="Notas: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1" colspan="3" >
+									<p:inputTextarea id="ocupadoNotas" value="#{agendaMB.cita.notasCita}" autoResize="false"
+													 disabled="#{agendaMB.citaPasada}" rows="3" style="width: 96.5%;" maxlength="300" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+					
+					<p:blockUI block="pgDatosCita" trigger="citaTipo" >
+						Cargando...<br />
+        				<p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+					</p:blockUI>
+				</p:column>
+			</p:row>
+			
+			<p:row rendered="#{!agendaMB.cancelarCita}" >
+				<p:column styleClass="tipoFuente labelIzq">
+					<p:commandButton id="cancelacion" value="Cancelar cita" actionListener="#{agendaMB.mostrarCancelar}" icon="ui-icon-trash"
+									 rendered="#{!agendaMB.editarTipoCita}"	update="pgDatosCita opBotonesCita" />
+				</p:column>
+				
+				<p:column styleClass="tipoFuente labelCtr" rendered="#{!agendaMB.cita.tipoConsulta.equals('O')}" >					
+					<p:selectBooleanCheckbox id="confirmar" itemLabel="Cita confirmada" value="#{agendaMB.cita.citaConfirmada}" 
+											 rendered="#{agendaMB.cita.idCita > 0}" disabled="#{agendaMB.cita.citaConfirmada || agendaMB.citaPasada}" />				
+				</p:column>
+				
+				<p:column styleClass="tipoFuente labelCtr" rendered="#{agendaMB.cita.tipoConsulta.equals('O')}" >					
+					<p:selectBooleanCheckbox id="todoElDia" itemLabel="Todo el día" value="#{agendaMB.todoElDia}" disabled="#{agendaMB.citaPasada}" />				
+				</p:column>
+				
+				<p:column styleClass="labelDer">
+					<p:outputPanel id="opBotonesCita" collapsible="true" gutter="0" >
+						<p:commandButton id="salir" value="Salir sin guardar" icon="ui-icon-cancel" action="#{agendaMB.cancelar()}" 
+										 update="formAgenda agendapg dlgDatosCita" onstart="PF('buiCargandoWV').show();" process="@this"
+										 oncomplete="PF('agendaWV').update(); PF('dialogCita').hide(); PF('buiCargandoWV').hide();" >
+							<p:resetInput target="formAgenda agendapg dlgDatosCita" />
+						</p:commandButton>
+						
+						<p:commandButton id="actualizar" rendered="#{!agendaMB.editarTipoCita and 1 == agendaMB.cita.tipoConsulta.length()}" 
+										 value="Guardar cambios" icon="ui-icon-disk" actionListener="#{agendaMB.addEvent}" onstart="PF('buiGuardandoWV').show();"
+										 oncomplete="if (args &amp;&amp; !args.validationFailed) {PF('agendaWV').update(); PF('dialogCita').hide();
+										 PF('buiGuardandoWV').hide();}" />
+						
+						<p:commandButton id="registro" rendered="#{agendaMB.editarTipoCita and 1 == agendaMB.cita.tipoConsulta.length()}" 
+										 value="Registrar cita" icon="ui-icon-disk" actionListener="#{agendaMB.addEvent}" 
+										 onstart="PF('buiGuardandoWV').show();"
+										 oncomplete="if (args &amp;&amp; !args.validationFailed) {PF('agendaWV').update(); PF('dialogCita').hide();
+										 PF('buiGuardandoWV').hide();} else {PF('buiGuardandoWV').hide();}" />
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="tipoFuente" colspan="3">
+					<p:outputPanel id="opCancelar" styleClass="tipoFuente panelGrid-FormularioAgenda" collapsible="true" gutter="0" >
+						<p:panelGrid id="pgCancelar" styleClass="tipoFuente panelGrid-FormularioAgenda" style="width: 100%;"
+									 collapsible="true" gutter="0" rendered="#{agendaMB.cancelarCita}" >
+							<p:row>
+								<p:column style="width: 30%;" />
+								<p:column style="width: 25%;" />
+								<p:column style="width: 20%;" />
+								<p:column style="width: 25%;" />
+							</p:row>
+							
+							<p:row>
+								<p:column styleClass="tipoFuente labelDerTop1">
+									<p:outputLabel for="motivoCancelacion" value="Motivo de cancelación: " />
+								</p:column>
+								<p:column styleClass="tipoFuente inputDerM1" colspan="3" >
+									<p:inputTextarea id="motivoCancelacion" value="#{agendaMB.cita.motivoCambioCita}" autoResize="false"
+													 rows="3" style="width: 96.5%;" maxlength="300" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column colspan="4" styleClass="labelDer">
+									<p:outputPanel id="opBotonesCancelar" >
+										<p:commandButton id="cancelarConfirmar" value="Confirmar cancelación" icon="ui-icon-trash" 
+														actionListener="#{agendaMB.removeEvent}" oncomplete="PF('agendaWV').update(); PF('dialogCita').hide();"/>
+										
+										<p:commandButton id="cancelarRegresar" value="Conservar cita" icon="ui-icon-arrowreturnthick-1-w"
+														 action="#{agendaMB.ocultarCancelar}" update="pgDatosCita opCancelar opDatosCita1raVez" />
+									</p:outputPanel>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</p:dialog>
+	
+	<p:blockUI id="buiActualizar" block="agendapg" widgetVar="buiActualizarWV" >
+		Actualizando...<br />
+        <p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+	</p:blockUI>
+	
+	<p:blockUI id="buiCargando" block="agendapg" widgetVar="buiCargandoWV" >
+		Cargando...<br />
+        <p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+	</p:blockUI>
+	
+	<p:blockUI id="buiGuardando" block="agendapg" widgetVar="buiGuardandoWV" >
+		Guardando cambios...<br />
+        <p:graphicImage value="/resources/gfx/ajax-loader.gif" />
+	</p:blockUI>
+	
+</ui:composition>

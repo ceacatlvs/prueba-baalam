@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:dialog id="dlgAgenda" header="Agenda de #{fichaIdentificacionMB.login.doctor.nombre} #{fichaIdentificacionMB.login.doctor.aPaterno} #{fichaIdentificacionMB.login.doctor.aMaterno}" styleClass="tipoFuente" 
+	
+    		  widgetVar="dlgAgendaWV" modal="true" maximizable="false" draggable="true" resizable="false" width="700" height="450" >  
+		<p:outputPanel>
+			<h:form id="formVerAgenda" style="align-text:center; align:center;">
+				<p:panelGrid id="verAgendaPG" styleClass="panelGrid-FormularioSimpleInicio" style="width: 99%; align-text:center; align:center;" >
+					<p:row>
+						<p:column colspan="2" styleClass="tipoFuente" >
+							<p:schedule id="verAgenda" widgetVar="verAgendaWV" value="#{agendaMB.modeloEvento}" locale="es" timeZone="Mexico/General" view="agendaWeek"
+										aspectRatio="1.65" style="width:650px; padding-top:0px; padding-left:0px; padding-bottom:0px; text-align: center; align:center;"
+										draggable="false" resizable="false" firstHour="11" initialDate="#{agendaMB.fechaAgendaInicio}"
+										minTime="#{agendaMB.horarioConsultorioInicio}" maxTime="#{agendaMB.horarioConsultorioFin+1}" >
+							</p:schedule>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</h:form>
+   		</p:outputPanel>
+	</p:dialog>	
+	
+</ui:composition>

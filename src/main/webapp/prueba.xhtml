@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		
+		<title>
+			Pruebas
+		</title>
+	</h:head>
+	
+	<body>
+		<h:form>
+			<p:messages id="messages"/>  
+	  
+			<h:panelGrid columns="2">  
+			    <h:panelGroup id="messageDetailGroup" layout="block" style="margin-right: 20px;">  
+			        <h:panelGrid id="messageDetail" columns="1" columnClasses="formColumn">  
+			            <h:outputText value="Subject *"/>  
+			            <h:inputText label="Subject"/>  
+			            <h:outputText value="Text *"/>  
+			            <h:inputText label="Text"/>  
+			        </h:panelGrid>  
+			  
+			        <p:commandButton id="addMsgButton" value="Add message" action="#{prueba.addMessage}"  
+			                         process="messageDetailGroup" update="messageDetail"  
+			                         style="margin-top: 20px;" icon="ui-icon-plusthick"  
+			                         onstart="PF('blockUIWidget1').block()" oncomplete="PF('blockUIWidget1').unblock()"/>  
+			    </h:panelGroup>  
+			</h:panelGrid>  
+			  
+			<pe:blockUI target="messageDetailGroup" widgetVar="blockUIWidget1">  
+			    <h:panelGrid columns="2">  
+			        <h:outputText value="Adding message..." style="white-space: nowrap;"/>  
+			    </h:panelGrid>  
+			</pe:blockUI>  
+			  
+			<h:outputStylesheet id="blockUICSS">  
+			    #blockUIContent td {  
+			        border: none !important;  
+			        padding: 0 !important;  
+			    }  
+			</h:outputStylesheet> 
+		</h:form>
+	</body>
+        
+</html>

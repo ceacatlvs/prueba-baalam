@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple">
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid>
+			<p:row>
+        		<p:column colspan="2" styleClass="tipoFuente" >
+        			<p:dataTable id="histConsultas" var="consulta" styleClass="tipoFuenteTabla" emptyMessage="No se han registrado consultas todavía." value="#{historiaConsultasMB.consultas}">  
+	        	        <p:column styleClass="tipoFuenteTabla" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Fecha de última consulta" />
+				        	</f:facet>
+				        	<h:outputText value="#{consulta.fechaConsulta}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Padecimiento" />
+				        	</f:facet>
+				        	<h:outputText value="#{consulta.motivoConsulta}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" >
+				        	<f:facet name="header">
+				        		<h:outputText value="Tratamiento" />
+				        	</f:facet>
+				        	<h:outputText value="#{consulta.chOtros}" />
+				        </p:column>
+				        
+				        <p:column styleClass="tipoFuenteTabla" rendered="#{loginMB.permiso}">
+				        	<f:facet name="header">
+				        		<h:outputText value="Ver consulta" />
+				        	</f:facet>
+				        	<p:commandLink action="#{padecimientoActualMB.verDetalle(consulta.idConsulta)}">
+				        		<h:outputText value="Ver&#10;detalle" />
+				        	</p:commandLink>				   
+				        </p:column>
+    				</p:dataTable> 
+        		</p:column>
+        	</p:row>
+		</p:panelGrid></p:column></p:row>
+	
+	</p:panelGrid>	
+	
+</ui:composition>

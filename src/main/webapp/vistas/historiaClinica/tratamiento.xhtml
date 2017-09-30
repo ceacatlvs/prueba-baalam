@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+				
+	<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100%;"><p:panelGrid id="pgTratamiento" style="width: 100%;">
+	
+		<p:row><p:column style="width: 100%;"><p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column styleClass="tituloSubSeccion" colspan="2">
+					<p:outputLabel value="1. Educación en salud" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="tratESMin" value="Minutos: " />
+				</p:column>
+				<p:column>
+					<pe:inputNumber styleClass="inputDerS1" id="tratESMin" maxValue="999" decimalPlaces="0" 
+									value="#{tratamientoMB.tratamiento.minutosEducacionSalud}" 
+									onkeypress='return capturarNumero(event)' onkeydown='return capturarBase3(event)' />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column style="width: 95px;" styleClass="labelDerTop1">
+					<p:outputLabel for="tratESObs" value="Observaciones: " />
+				</p:column>
+				<p:column>
+					<p:inputTextarea id="tratESObs" value="#{tratamientoMB.tratamiento.observacionesEducacionSalud}" autoResize="false" 
+								     rows="9" style="width: 75%;" maxlength="500" />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column style="width: 100%;"><p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column styleClass="tituloSubSeccion" colspan="5">
+					<p:outputLabel value="2. Cuidados higiénicos" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column styleClass="labelIzq" style="width: 15%;">
+					<p:selectBooleanCheckbox id="tratCHReposo" itemLabel="Reposo" value="#{tratamientoMB.tratamiento.chReposo}"/>
+				</p:column>
+				<p:column styleClass="labelIzq" style="width: 15%;">
+					<p:selectBooleanCheckbox id="tratCHActNorm" itemLabel="Actividad normal" value="#{tratamientoMB.tratamiento.chActividadNormal}"/>
+				</p:column>
+				<p:column styleClass="labelIzq" style="width: 15%;">
+					<p:selectBooleanCheckbox id="tratCHEjer" itemLabel="Ejercicio" value="#{tratamientoMB.tratamiento.chEjercicio}"/>
+				</p:column>
+				<p:column styleClass="labelIzq" style="width: 15%;">
+					<p:selectBooleanCheckbox id="tratCHBaño" itemLabel="Baño" value="#{tratamientoMB.tratamiento.chBano}"/>
+				</p:column>
+				<p:column styleClass="labelIzq" style="width: 40%;">
+					<p:selectBooleanCheckbox id="tratCHActSex" itemLabel="Actividad sexual" value="#{tratamientoMB.tratamiento.chActividadSexual}"/>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+			
+		<p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column style="width: 95px;" styleClass="labelDerTop1">
+					<p:outputLabel for="tratCHOtros" value="Otros: " />
+				</p:column>
+				<p:column colspan="4">
+					<p:inputTextarea id="tratCHOtros" value="#{tratamientoMB.tratamiento.chOtros}" autoResize="false" 
+								 	 rows="9" style="width: 75%;" maxlength="500" />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column style="width: 100%;"><p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column styleClass="tituloSubSeccion" colspan="2">
+					<p:outputLabel value="3. Dieta" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="2">
+					<p:selectOneRadio id="tratDieta" value="#{tratamientoMB.tratamiento.dieta}">
+						<f:selectItem itemLabel="Normal" itemValue="Normal" />
+						<f:selectItem itemLabel="Especial" itemValue="Especial" />
+					</p:selectOneRadio>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column style="width: 95px;" styleClass="labelDerTop1">
+					<p:outputLabel for="tratDObs" value="Observaciones: " />
+				</p:column>
+				<p:column>
+					<p:inputTextarea id="tratDObs" value="#{tratamientoMB.tratamiento.dietaObservaciones}" autoResize="false" 
+								 	 rows="9" style="width: 75%;" maxlength="500" />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column><p:panelGrid id="tratFarmacosPG">
+			<p:row>
+				<p:column styleClass="tituloSubSeccion" colspan="3">
+					<p:outputLabel value="4. Fármacos" />
+				</p:column>
+			</p:row>
+			
+			<p:row><p:column colspan="3"><p:outputPanel styleClass="tipoFuente" id="tratOpFarmacos">
+				<p:row><p:column colspan="2"><p:panelGrid id="tratPgFarmacos" styleClass="panelGrid-Tabla" >
+					<f:facet name="header">
+						<p:row>
+							<p:column style="width: 15% !important;">
+								<p:outputLabel for="tratMed" value="Medicamento" />
+							</p:column>
+							<p:column style="width: 20% !important;">
+								<p:outputLabel for="tratVA" value="Vía de admon." />
+							</p:column>
+							<p:column style="width: 10% !important;">
+								<p:outputLabel for="tratDosis" value="Dosis" />
+							</p:column>
+							<p:column style="width: 20% !important;">
+								<p:outputLabel for="tratFrec" value="Frecuencia" />
+							</p:column>
+							<p:column style="width: 20% !important;">
+								<p:outputLabel for="tratDur" value="Duración" />
+							</p:column>
+							<p:column style="width: 15% !important;" />
+						</p:row>
+					</f:facet>
+					
+					<p:row>
+						<p:column style="width: 15% !important;">
+							<p:inputText styleClass="inputIzqM1" id="tratMed" value="#{tratamientoMB.farmaco.medicamento}" 
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 20% !important;">
+							<p:inputText styleClass="inputIzqM1" id="tratVA" value="#{tratamientoMB.farmaco.viaAdmon}" 
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 10% !important;">
+							<p:inputText styleClass="inputDerS2" id="tratDosis" value="#{tratamientoMB.farmaco.dosis}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 20% !important;">
+							<p:inputText styleClass="inputIzqM1" id="tratFrec" value="#{tratamientoMB.farmaco.frecuencia}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 20% !important;">
+							<p:inputText styleClass="inputIzqM1" id="tratDur" value="#{tratamientoMB.farmaco.duracion}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+						<p:column style="width: 15% !important;">
+							<p:commandButton id="tratFarmacosAgregar" value="Agregar" action="#{tratamientoMB.reinit()}" 
+										 	 update="tratPgFarmacos @parent farmacos" process="@this tratMed tratVA tratDosis tratFrec tratDur">
+							<p:collector value="#{tratamientoMB.farmaco}" addTo="#{tratamientoMB.farmacos}" />
+							</p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid></p:column></p:row>
+				
+				<p:outputPanel id="farmacos">
+					<p:dataTable styleClass="panelGrid-Tabla hide-column-names" id="tratTblFarmacos" value="#{tratamientoMB.farmacos}"
+								 var="farmaco" editable="true" widgetVar="tblFarmacos" emptyMessage="No se han registrado farmacos."  >
+						<p:column style="width: 20%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{farmaco.medicamento}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText styleClass="inputIzqM1" id="tratMedicamentoModelFarmaco" value="#{farmaco.medicamento}"
+												 onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column style="width: 20%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{farmaco.viaAdmon}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText styleClass="inputIzqM1" id="tratViaAdmonModelFarmaco" value="#{farmaco.viaAdmon}"
+												 onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column style="width: 8.5%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{farmaco.dosis}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText styleClass="inputDerS2" id="tratDosisModelFarmaco" value="#{farmaco.dosis}"
+												 onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column style="width: 20%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{farmaco.frecuencia}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText styleClass="inputIzqM1" id="tratFrecuenciaModelFarmaco" value="#{farmaco.frecuencia}"
+												 onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column style="width: 20%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{farmaco.duracion}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText styleClass="inputIzqM1" id="tratDuracionModelFarmaco" value="#{farmaco.duracion}"
+												 onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column style="width: 6.5%;">
+							<p:rowEditor id="tratReFarmaco" />
+						</p:column>
+						<p:column style="width: 5%;">
+							<p:commandLink id="tratEliminarFarmaco" styleClass="ui-icon ui-icon-trash" update=":formTratamiento:farmacos"
+										   process="@this :formTratamiento:farmacos">
+								<p:collector value="#{farmaco}" removeFrom="#{tratamientoMB.farmacos}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:outputPanel></p:column></p:row>
+			
+			<p:row>
+				<p:column></p:column>
+				<p:column>
+					<p:outputLabel value="Ver efectos secundarios en la siguiente liga: " />
+					<h:outputLink target="new" value="http://www.facmed.unam.mx/bmnd/dirijo.php?bib_vv=6" style="font-weight: bold;">
+						<h:outputText value="PLM" escape="false" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row><p:column colspan="2"><p:panelGrid>	
+			<p:row>
+				<p:column styleClass="tituloSubSeccion"><p:outputLabel value="Próxima cita: " /></p:column>
+				<p:column>
+					<p:calendar styleClass="inputDerM1" id="tratProxCita" showOn="both" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true"
+								navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c+1" 
+								value="#{tratamientoMB.tratamiento.proximaCita}" mindate="#{tratamientoMB.fechaHoy}"
+								onkeydown='return revisarBase(event)' />
+				</p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+	</p:panelGrid></p:column></p:row>
+	
+</ui:composition>

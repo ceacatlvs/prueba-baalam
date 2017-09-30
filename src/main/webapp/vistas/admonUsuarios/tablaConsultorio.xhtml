@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple" >
+		<p:row>
+			<p:column style="width:40px;">
+				<h:graphicImage value="/resources/gfx/Hospital.png" width="40" height="40" />
+			</p:column> 
+			<p:column style="height:30px;" styleClass="tituloSeccionAzul">
+				<h:outputText value="Información de consultorios" />
+			</p:column>  
+	    </p:row>
+	</p:panelGrid>
+		
+	<p:panelGrid styleClass="panelGrid-FormularioSimple" style="width: 95%;" >
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;" >
+					<p:row>
+		        		<p:column colspan="2" styleClass="tipoFuente" >
+		        			<p:dataTable id="medConsultorios" var="consultorio" styleClass="tipoFuenteTabla"  value="#{datosConsultorioMB.consultorios}"
+		        							emptyMessage="No hay datos de consultorios." style="width: 90%;" >  
+			        	        <p:column styleClass="tipoFuenteTabla" style="width: 30%;" >
+						        	<f:facet name="header">
+						        		<h:outputText value="Nombre del consultorio" />
+						        	</f:facet>
+						        	<h:outputText value="#{consultorio.nombre}" />				        
+						        </p:column>
+						        
+						        <p:column styleClass="tipoFuenteTabla" style="width: 20%;" >
+						        	<f:facet name="header">
+						        		<h:outputText value="Horario" />
+						        	</f:facet>
+						        	<h:outputText value="#{consultorio.horario}" />
+						        </p:column>
+						        
+						        <p:column styleClass="tipoFuenteTabla" style="width: 40%;" >
+						        	<f:facet name="header">
+						        		<h:outputText value="Dirección" />
+						        	</f:facet>
+						        	<h:outputText value="#{consultorio.calle}" />
+						        	<h:outputText value="#{consultorio.numeroExterior}" />
+						        	<h:outputText value="#{consultorio.numeroInterior}" />
+						        	<h:outputText value="#{consultorio.cp}" />
+						        	<h:outputText value="#{consultorio.colonia}" />
+						        	<h:outputText value="#{consultorio.delegMuni}" />
+						        </p:column>
+						        
+						        <!-- p:column styleClass="tipoFuenteTabla" >
+						        	<f:facet name="header">
+						        		<h:outputText value="Descripción" />
+						        	</f:facet>
+						        	<h:outputText value="#{consultorio.descripcion}" />
+						        </p:column>-->
+						        
+						        <p:column styleClass="tipoFuenteTabla" style="width: 10%;" >
+						        	<f:facet name="header">
+						        		<h:outputText value="Detalle" />
+						        	</f:facet>
+						        	<p:commandLink styleClass="tipoFuenteLinks" value="Ver detalle" oncomplete="PF('wdlgDatosConsultorio').show();" style="text-decoration: none;" update=":formTablaConsultorio:dlgDatosConsultorio" ajax="false">
+										 <f:setPropertyActionListener target="#{datosConsultorioMB.consultorio}" value="#{consultorio}" /> 
+									</p:commandLink>
+						        </p:column>
+		    				</p:dataTable> 
+		        		</p:column>
+		        	</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+	
+	</p:panelGrid>	
+	
+	<p:dialog id="dlgDatosConsultorio" header="Datos de consultorio" widgetVar="wdlgDatosConsultorio" resizable="false" maximizable="false" 
+			  draggable="false" height="450" width="800">    				
+			<ui:include src="../admonUsuarios/datosConsultorio.xhtml" />
+			
+			<p:panelGrid style="width:90%;" styleClass="panelGrid-FormularioSimple">
+	        	<p:row>
+					<p:column style="height:50px;" styleClass="tipoFuente labelDer" colspan="5">
+						<p:button value="Cancelar" onclick="PF('wdlgDatosConsultorio').hide();" />
+						<p:commandButton value="Guardar los datos del consultorio" action="#{datosConsultorioMB.registrar(1)}" 
+										 update=":formTablaConsultorio:medConsultorios" oncomplete="PF('wdlgDatosConsultorio').hide();"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid> 
+	</p:dialog>
+	
+</ui:composition>

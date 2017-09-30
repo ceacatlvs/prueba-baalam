@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+
+	<p:panelGrid style="width: 85%;" >
+		<p:row>
+			<p:column style="width: 20%;" />
+			<p:column style="width: 30%;" />
+			<p:column style="width: 20%;" />
+			<p:column style="width: 30%;" />
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Paciente: " for="dfPaciente" />
+			</p:column>
+			
+			<p:column colspan="3">
+				<p:outputLabel id="dfPaciente" value="#{fichaIdentificacionMB.paciente.nombrePaciente}" />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="RFC: " for="dfRFC" />
+			</p:column>
+			
+			<p:column colspan="3">
+				<p:inputText id="dfRFC" maxlength="13" style="width: 95%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column />
+			
+			<p:column colspan="3" >
+				<p:selectBooleanCheckbox id="dfDatos" itemLabel="Los siguientes datos son los mismos que los de la paciente." />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Razón social: " for="dfRazon" />
+			</p:column>
+			
+			<p:column colspan="3">
+				<p:inputText id="dfRazon" maxlength="250" style="width: 95%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Domicilio (calle y nro.): " for="dfDirFiscal" />
+			</p:column>
+			
+			<p:column colspan="3">
+				<p:inputText id="dfDirFiscal" maxlength="250" style="width: 95%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Colonia: " for="dfColFiscal" />
+			</p:column>
+			
+			<p:column>
+				<p:inputText id="dfColFiscal" maxlength="250" style="width: 85%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+			
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Delegación o municipio: " for="dfDelFiscal" />
+			</p:column>
+			
+			<p:column>
+				<p:inputText id="dfDelFiscal" maxlength="250" style="width: 85%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Estado: " for="dfEstado" />
+			</p:column>
+			
+			<p:column>
+				<p:selectOneMenu id="dfEstado" effect="fade" >           			 							 
+           			<f:selectItems value="#{fichaIdentificacionMB.entidades}" var="entidad" itemLabel="#{entidad.descripcion}" 
+           						   itemValue="#{entidad.idEntidadFedereativa}" />  
+       			</p:selectOneMenu>
+			</p:column>
+			
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Código postal: " for="dfCPFiscal" />
+			</p:column>
+			
+			<p:column>
+				<p:inputMask id="dfCPFiscal" mask="99999" value="#{fichaIdentificacionMB.paciente.cp}" maxlength="6"
+							 style="width: 85%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="País: " for="dfPaisFiscal" />
+			</p:column>
+			
+			<p:column colspan="3">
+				<p:inputText id="dfPaisFiscal" maxlength="250" style="width: 95%;" onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Teléfono: " for="dfTelefono" />
+			</p:column>
+			
+			<p:column>
+				<p:inputText id="dfTelefono" style="width: 85%;"  maxlength="20"
+							 onkeypress='return capturarTelefono(event)' onkeydown='return revisarBase(event)' />
+				<p:watermark value="(55)5555-5555" for="dfTelefono"/>
+			</p:column>
+			
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Correo electrónico: " for="dfMail" />
+			</p:column>
+			
+			<p:column>
+				<p:inputText id="dfMail" maxlength="250" 
+							 style="width: 85%;" validatorMessage="La cuenta de correo es inválida." onkeydown='return revisarBase(event)' >
+					<f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />  
+                	<p:ajax event="blur" update="msgEmail1" />
+            	</p:inputText>
+            	<p:watermark value="correo@dominio.com" for="dfMail"/>
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column />
+			<p:column colspan="3" >
+				<p:message for="dfMail" id="msgEmail1" showSummary="true" showDetail="false" display="text" />
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+	
+</ui:composition>

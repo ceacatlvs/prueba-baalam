@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaUroEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaUroEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+							        showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+							        maxdate="#{epUrocultivoMB.fechaHoy}" value="#{epUrocultivoMB.epUro.fechaUrocultivo}"
+							        onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="options" value="#{epUrocultivoMB.epUro.resultadoUrocultivo}">  
+	           				<f:selectItem itemLabel="Positivo" itemValue="Positivo" />  
+	           				<f:selectItem itemLabel="Negativo" itemValue="Negativo" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 20% !important;" >
+						<p:outputLabel for="estudiosUroBact" value="Bacteria:" />
+					</p:column>
+					<p:column style="width: 80% !important;" >
+						<p:inputText styleClass="inputIzqXL2" id="estudiosUroBact" value="#{epUrocultivoMB.epUro.bacteria}"
+									 onkeydown='return revisarBase(event)' />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosUroAnti" value="Antibiograma:" />
+					</p:column>
+					<p:column>
+						<p:inputText styleClass="inputIzqXL2" id="estudiosUroAnti" value="#{epUrocultivoMB.epUro.antibiograma}"
+									 onkeydown='return revisarBase(event)' />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

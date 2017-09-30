@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="3" style="width: 100%;">
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelIzq" style="width: 20%;">
+						<p:selectBooleanCheckbox id="iaysRespNeg" itemLabel="Negativo" value="#{iaysRespMB.iaysResp.negativo}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 20%;">
+						<p:selectBooleanCheckbox id="iaysRespDisnea" itemLabel="Disnea" value="#{iaysRespMB.iaysResp.disnea}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width: 60%;">
+						<p:selectBooleanCheckbox id="iaysRespTaqui" itemLabel="Taquipnea" value="#{iaysRespMB.iaysResp.taquipnea}"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysRespTos" itemLabel="Tos" value="#{iaysRespMB.iaysResp.tos}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysRespSib" itemLabel="Sibilancias" value="#{iaysRespMB.iaysResp.sibilancias}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="iaysRespHemop" itemLabel="Hemoptisis" value="#{iaysRespMB.iaysResp.hemoptisis}"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:panelGrid style="width: 100%;">
+				<p:row>					
+					<p:column styleClass="labelDer" style="width: 15%;">
+						<p:outputLabel value="Otro:" for="iaysRespOtro1"/>			
+					</p:column>
+					<p:column style="width: 85%;">
+						<p:inputText id="iaysRespOtro1" style="width: 75%;" value="#{iaysRespMB.iaysResp.otro}"
+									 onkeydown='return revisarBase(event)' />
+					</p:column>				
+				</p:row>
+				
+				<p:row>					
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Observaciones:" for="iaysRespObserv1"/>						
+					</p:column>	
+					<p:column>
+						<p:inputTextarea id="iaysRespObserv1" value="#{iaysRespMB.iaysResp.observaciones}" autoResize="false" 
+								 	 	 rows="5" style="width: 75%;" maxlength="500" />
+					</p:column>		
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+	</p:panelGrid>
+	
+</ui:composition>

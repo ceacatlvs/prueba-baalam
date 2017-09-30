@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width:100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelIzq" style="width:25%;" >
+						<p:selectBooleanCheckbox id="efigBienDesarrollado" itemLabel="Bien desarrollado" value="#{efInspeccionGralMB.efIG.bienDesarrollado}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width:25%;" >
+						<p:selectBooleanCheckbox id="efigDeformidades" itemLabel="Deformidades" value="#{efInspeccionGralMB.efIG.deformidades}"/>
+					</p:column>
+					<p:column styleClass="labelIzq" style="width:50%;" >
+						<p:selectBooleanCheckbox id="efigBienNutrido" itemLabel="Bien nutrido" value="#{efInspeccionGralMB.efIG.bienNutrido}"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efigBienAseado" itemLabel="Bien aseado" value="#{efInspeccionGralMB.efIG.bienAseado}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efigHabitoNormal" itemLabel="Hábito normal" value="#{efInspeccionGralMB.efIG.habitoNormal}"/>
+					</p:column>
+					<p:column styleClass="labelIzq">
+						<p:selectBooleanCheckbox id="efigObeso" itemLabel="Obeso" value="#{efInspeccionGralMB.efIG.obeso}"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width:10%;" >
+						<p:outputLabel value="Observaciones:" />
+					</p:column>
+					<p:column style="width:75%;" >
+						<p:inputTextarea id="efigObservaciones" value="#{efInspeccionGralMB.efIG.observaciones}" autoResize="false" 
+								 		 rows="7" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

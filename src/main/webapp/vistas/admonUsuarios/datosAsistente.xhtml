@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple">
+		<p:row>
+			<p:column style="width:40px;"><h:graphicImage value="/resources/gfx/userSetup.png" width="40" height="40" /></p:column> 
+			<p:column style="height:30px;" styleClass="tituloSeccionAzul"><h:outputText value="Datos personales de asistente" /></p:column>  
+	    </p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid>
+			<p:row>
+				<p:column style="width:150px;" styleClass="labelDer"><p:outputLabel for="medNombres" value="Nombres:" /></p:column>
+				<p:column colspan="4"><p:inputText styleClass="inputIzqL1" id="medNombres" value="#{datosUsuarioMB.secretaria.nombre}"/></p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer"><p:outputLabel for="medApaterno" value="Apellido paterno:" /></p:column>
+				<p:column colspan="4"><p:inputText styleClass="inputIzqL1" id="medApaterno" value="#{datosUsuarioMB.secretaria.aPaterno}"/></p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer"><p:outputLabel for="medAmaterno" value="Apellido materno:" /></p:column>
+				<p:column colspan="4"><p:inputText styleClass="inputIzqL1" id="medAmaterno" value="#{datosUsuarioMB.secretaria.aMaterno}"/></p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row>  
+	    	<p:column style="height:25px;" colspan="5" styleClass="tituloSubSeccion"><h:outputText value="Datos de usuario" /></p:column>  
+	    </p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid>
+			<p:row>
+				<p:column style="width:150px;" styleClass="labelDer"><p:outputLabel for="medUsuario" value="Usuario:" /></p:column>
+				<p:column colspan="4"><p:inputText styleClass="inputIzqL1" id="medUsuario" value="#{datosUsuarioMB.secretaria.usuario.username}"/></p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer"><p:outputLabel for="medContrasena" value="Contraseña:" /></p:column>
+				<p:column colspan="4"><p:password styleClass="inputIzqL1" id="medContrasena" feedback="true" inline="true" 
+												value="#{datosUsuarioMB.secretaria.usuario.password}" match="medContrasenaConfirm" required="true"/></p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer"><p:outputLabel for="medContrasenaConfirm" value="Confirmar contraseña:" /></p:column>
+				<p:column colspan="4"><p:password styleClass="inputIzqL1" id="medContrasenaConfirm" feedback="true" inline="true" 
+												value="#{datosUsuarioMB.secretaria.usuario.password}" required="true"/></p:column>
+			</p:row>
+		</p:panelGrid></p:column></p:row>
+		
+		<p:row>  
+	    	<p:column style="height:25px;" colspan="5" styleClass="tituloSubSeccion"><h:outputText value="Datos de contacto" /></p:column>  
+	    </p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid>
+			<p:row>
+				<p:column style="width:150px;" styleClass="labelDer"><p:outputLabel for="medTelefono" value="Teléfono:" /></p:column>
+				<p:column><p:inputMask styleClass="inputIzqL1" id="medTelefono" mask="(99) 9999-9999" value="#{datosUsuarioMB.secretaria.telContacto}"/></p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="labelDer"><p:outputLabel for="medCelular" value="Celular:" /></p:column>
+				<p:column><p:inputMask styleClass="inputIzqL1" id="medCelular" mask="(99) 9999-9999" value="#{datosUsuarioMB.secretaria.telContacto2}"/></p:column>
+			</p:row>			
+			<p:row>
+				<p:column styleClass="labelDer"><p:outputLabel for="medEmail1" value="Email 1:" /></p:column>
+				<p:column>
+					<p:inputText styleClass="inputIzqL1" id="medEmail1" value="#{datosUsuarioMB.secretaria.correo1}"
+								 validatorMessage="La cuenta de correo no es válida" >
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />  
+                		<p:ajax update="msgEmail1" event="keyup" />  
+            		</p:inputText>  
+            		<p:message for="medEmail1" id="msgEmail1" display="La cuenta de correo no es válida" />
+				</p:column>
+			</p:row>			
+		</p:panelGrid></p:column></p:row>		
+	</p:panelGrid>	
+</ui:composition>

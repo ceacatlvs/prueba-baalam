@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition	xmlns="http://www.w3.org/1999/xhtml"
+       			xmlns:ui="http://java.sun.com/jsf/facelets"
+       			xmlns:h="http://java.sun.com/jsf/html"
+       			xmlns:p="http://primefaces.org/ui"
+       			xmlns:pe="http://primefaces.org/ui/extensions"
+       			xmlns:f="http://java.sun.com/jsf/core"
+       			template="/WEB-INF/templates/templateDetallesPaciente.xhtml">
+    
+    <ui:param name="subMenu" value="false" />
+    
+	<ui:define name="content">
+	 	<p:panelGrid styleClass="panelGrid-FormularioSimple" style="width: 97%;">
+        	<p:row>  
+		    	<p:column rowspan="2" colspan="4" styleClass="tituloSeccionTab">
+		    		<ui:insert name="seccion" />
+		    	</p:column>
+		    	
+		    	<p:column styleClass="nombrePaciente"><h:outputText value="#{fichaIdentificacionMB.paciente.nombreFavorito}" /></p:column>
+	    	</p:row>
+	    	
+			<p:row>
+				<p:column styleClass="fechaConsulta"><h:outputText value="#{cpCobroConsultaMB.fechaHoy}"><f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" timeZone="Mexico/General" /></h:outputText></p:column>
+			</p:row>
+			
+   			<p:row><p:column colspan="5" style="width: 75% !important;" styleClass="tipoFuente">
+				<ui:insert name="contentSimple" />
+			</p:column></p:row>
+		</p:panelGrid>
+	</ui:define>
+    
+</ui:composition>

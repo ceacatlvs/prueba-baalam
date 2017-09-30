@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Paridad:" for="agoParidad" />
+						</p:column>
+						<p:column colspan="3" styleClass="inputDerM1" style="width: 67%;">
+							<p:inputText id="agoParidad" value="#{antecedentesGOMB.histGinecologica.paridad}"
+										 onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoParidad"/>
+							<p:outputLabel styleClass="labelIzqMiddle" value="(G P C Ab)" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Fecha de última menstruación normal:" for="agoFechaMens" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:calendar styleClass="inputDerM1" id="agoFechaMens" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+										showButtonPanel="true" pages="3" navigator="true" effect="slideDown" 
+										value="#{antecedentesGOMB.histGinecologica.fum}" maxdate="#{antecedentesGOMB.fechaHoy}" 
+										onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="# de días entre periodo:" for="agoDiasPeriodo" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;" styleClass="inputDerS1">
+							<p:inputText id="agoDiasPeriodo" value="#{antecedentesGOMB.histGinecologica.diasEntrePeriodo}"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoDiasPeriodo"/>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="# de días de sangrado:" for="agoDiasSangrado" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;" styleClass="inputDerS1">
+							<p:inputText id="agoDiasSangrado" value="#{antecedentesGOMB.histGinecologica.diasSangrado}"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoDiasSangrado"/>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Cantidad de sangrado:" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:selectOneRadio id="agoCantidadSangrado" value="#{antecedentesGOMB.histGinecologica.cantidadSangrado}">
+								<f:selectItem itemLabel="Escasa" itemValue="1" />
+								<f:selectItem itemLabel="Moderada" itemValue="2" />
+								<f:selectItem itemLabel="Abundante" itemValue="3" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Dismenorrea:" for="agoDismenorrea" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:selectBooleanCheckbox id="agoDismenorrea" value="#{antecedentesGOMB.histGinecologica.dismenorrea}" 
+													 style="padding-left: 12px !important;" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Síndrome premenstrual:" for="agoSindromePre" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:selectBooleanCheckbox id="agoSindromePre" value="#{antecedentesGOMB.histGinecologica.spm}" 
+													 style="padding-left: 12px !important;" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Cambios recientes en periodo:" for="agoCambiosPeriodo" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:selectBooleanCheckbox id="agoCambiosPeriodo" value="#{antecedentesGOMB.histGinecologica.cambiosRecientesPeriodo}" 
+													 style="padding-left: 12px !important;" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Inicio de vida sexual activa:" for="agoVidaSexual" />
+						</p:column>
+						<p:column style="width: 67%;">
+							<p:selectBooleanCheckbox id="agoVidaSexual" value="#{antecedentesGOMB.histGinecologica.inicioVidaSexualActiva}" 
+													 style="padding-left: 12px !important;">
+								<p:ajax update="agoOpVidaSexual" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+					</p:row>
+					<p:row><p:column colspan="2" style="width: 100%;"><p:outputPanel id="agoOpVidaSexual" style="width: 100%;">
+						<p:panelGrid style="width: 100%;" rendered="#{antecedentesGOMB.histGinecologica.inicioVidaSexualActiva}" >
+							<p:row>
+								<p:column styleClass="labelDer" style="width: 32.5%;">
+									<p:outputLabel value="Edad:" for="agoEdadVidaSexual" />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 67.5%;">
+									<p:inputText id="agoEdadVidaSexual" value="#{antecedentesGOMB.histGinecologica.edadVidaSexual}"
+									 	 		 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+									<p:watermark value="0" for="agoEdadVidaSexual"/>
+									<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="labelDer" style="width: 32.5%;">
+									<p:outputLabel value="Sexualmente activa:" for="agoActivaSexual" />
+								</p:column>
+								<p:column colspan="3" style="width: 67.5%;">
+									<p:selectBooleanCheckbox id="agoActivaSexual" value="#{antecedentesGOMB.histGinecologica.sexualmenteActiva}" 
+															 style="padding-left: 12px !important;" >
+										<p:ajax update="agoOpActivaSexual" />
+									</p:selectBooleanCheckbox>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel></p:column></p:row>
+					<p:row><p:column colspan="2" style="width: 100%;"><p:outputPanel id="agoOpActivaSexual" style="width: 100%;">
+						<p:panelGrid style="width: 100%;" rendered="#{antecedentesGOMB.histGinecologica.sexualmenteActiva}" >
+							<p:row>
+								<p:column styleClass="labelDer" style="width: 32.5%;">
+									<p:outputLabel value="# de parejas sexuales:" for="agoNumParejasSexuales" />
+								</p:column>
+								<p:column styleClass="inputDerS1" style="width: 10%;">
+									<p:inputText id="agoNumParejasSexuales" value="#{antecedentesGOMB.histGinecologica.parejasSexuales}"
+									 	 		 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+									<p:watermark value="0" for="agoNumParejasSexuales"/>
+								</p:column>
+								<p:column styleClass="labelDer" style="width: 10%;">
+									<p:outputLabel value="Parejas sexuales:" />
+								</p:column>
+								<p:column style="width: 47.5%;">
+									<p:selectOneRadio id="agoParejasSexuales" value="#{antecedentesGOMB.histGinecologica.tipoParejas}">
+										<f:selectItem itemLabel="Hombres" itemValue="1" />
+										<f:selectItem itemLabel="Mujeres" itemValue="2" />
+										<f:selectItem itemLabel="Ambos" itemValue="3" />
+									</p:selectOneRadio>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel></p:column></p:row>
+
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 33%;">
+							<p:outputLabel value="Observaciones:" for="agoObservaciones" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:inputTextarea id="agoObservaciones" value="#{antecedentesGOMB.histGinecologica.observaciones}" autoResize="false" 
+								 	 	 	 rows="3" style="width: 90%;" maxlength="500" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column colspan="4">
+				<p:spacer height="14px" />
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSubSeccion">
+				<p:outputLabel value="Historia obstétrica" />
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="# de embarazos:" for="agoNumEbarazos" />
+						</p:column>
+						<p:column styleClass="inputDerS1" style="width: 10%;">
+							<p:inputText id="agoNumEbarazos" value="#{antecedentesGOMB.histObstetrica.embarazos}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoNumEbarazos"/>
+						</p:column>
+						<p:column styleClass="labelDer" style="width: 20%;">
+							<p:outputLabel value="# de abortos:" for="agoNumAbortos" />
+						</p:column>
+						<p:column styleClass="inputDerS1" style="width: 47%;">
+							<p:inputText id="agoNumAbortos" value="#{antecedentesGOMB.histObstetrica.abortos}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoNumAbortos"/>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="# de óbitos:" for="agoNumObitos" />
+						</p:column>
+						<p:column styleClass="inputDerS1" style="width: 10%;">
+							<p:inputText id="agoNumObitos" value="#{antecedentesGOMB.histObstetrica.obitos}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoNumObitos"/>
+						</p:column>
+						<p:column styleClass="labelDer" style="width: 20%;">
+							<p:outputLabel value="# de prematuros:" for="agoNumPrematuros" />
+						</p:column>
+						<p:column styleClass="inputDerS1" style="width: 47%;">
+							<p:inputText id="agoNumPrematuros" value="#{antecedentesGOMB.histObstetrica.prematuros}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoNumPrematuros"/>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="# de nacidos vivos:" for="agoNumVivos" />
+						</p:column>
+						<p:column styleClass="inputDerS1" style="width: 10%;">
+							<p:inputText id="agoNumVivos" value="#{antecedentesGOMB.histObstetrica.nacidosVivos}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoNumVivos"/>
+						</p:column>
+						<p:column styleClass="labelDer" style="width: 20%;">
+							<p:outputLabel value="# de vivos actuales:" for="agoVivosActuales" />
+						</p:column>
+						<p:column styleClass="inputDerS1" style="width: 47%;">
+							<p:inputText id="agoVivosActuales" value="#{antecedentesGOMB.histObstetrica.vivosActuales}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoVivosActuales"/>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid id="agoPgNacimientos" style="width: 100%;">
+					<p:row>
+						<p:column colspan="6" styleClass="labelIzqBold">
+							<p:outputLabel value="Información de nacimientos" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="6" styleClass="labelIzqMiddle">
+							<p:outputLabel value="En esta sección puede registrar información de nacimientos o partos en una tabla; para
+												  agregar información a la tabla, primero llene los campos y después dé clic en el botón 
+												  'Agregar' que se encuentra al final de esta sección." />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="Fecha de nacimiento:" for="agoFechaNacimiento" />
+						</p:column>
+						<p:column colspan="6" styleClass="inputDerM1" style="width: 77%;">
+							<p:inputMask id="agoFechaNacimiento" value="#{antecedentesGOMB.parto.fechaNacimiento}" mask="99/aaa/9999"
+										 onkeydown='return revisarBase(event)' >
+								<f:convertDateTime pattern="dd/MMM/yyyy" />
+								<p:ajax event="blur" listener="#{antecedentesGOMB.validarFecha(antecedentesGOMB.parto.fechaNacimiento)}"
+										update="msgFechaNacimiento" process="@this" />
+							</p:inputMask>
+							<p:commandButton id="agoAyudaFechaNacimiento" icon="ui-icon-help" type="button" />
+							<p:tooltip styleClass="tipoFuente" for="agoAyudaFechaNacimiento"
+									   value="La fecha de nacimiento no debe ser mayor a la del día de hoy, ej. 01/ene/1985" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column />
+						<p:column colspan="5">
+							<p:message for="agoFechaNacimiento" id="msgFechaNacimiento" display="text" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="Nombre:" for="agoNombreNacimiento" />
+						</p:column>
+						<p:column colspan="5" style="width: 77%;">
+							<p:inputText styleClass="inputIzqXL2" style="width: 90%;" id="agoNombreNacimiento" value="#{antecedentesGOMB.parto.nombre}"
+										 onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="Semanas de embarazo:" for="agoSemanasEmbarazo" />
+						</p:column>
+						<p:column styleClass="inputDerS2" style="width: 13%;">
+							<p:inputText id="agoSemanasEmbarazo" value="#{antecedentesGOMB.parto.semanasEmbarazo}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoSemanasEmbarazo"/>
+						</p:column>
+						<p:column styleClass="labelDer" style="width: 10%;">
+							<p:outputLabel value="Kg:" for="agoKgNacimiento" />
+						</p:column>
+						<p:column styleClass="inputDerS2" style="width: 10%;">
+							<p:inputText id="agoKgNacimiento" value="#{antecedentesGOMB.parto.pesoKg}"
+									 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoKgNacimiento"/>
+						</p:column>
+						<p:column style="width: 11%;" />
+						<p:column style="width: 33%;" />
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="Tipo de nacimiento:" />
+						</p:column>
+						<p:column colspan="3" style="width: 33%;">
+							<p:selectOneRadio id="agoTipoNacimiento" value="#{antecedentesGOMB.parto.tipoNacimiento}">
+								<f:selectItem itemLabel="Parto" itemValue="Parto" />
+								<f:selectItem itemLabel="Cesárea" itemValue="Cesárea" />
+
+								<p:ajax event="change" update="agoCesarea" />
+							</p:selectOneRadio>
+						</p:column>
+						<p:column styleClass="labelDer" style="width: 11%;">
+							<p:outputLabel value="Sexo:" />
+						</p:column>
+						<p:column style="width: 33%;">
+							<p:selectOneRadio id="agoSexoNacimiento" value="#{antecedentesGOMB.parto.sexo}">
+								<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+								<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 23%;">
+							<p:outputLabel value="Indicación de cesárea:" for="agoCesarea" />
+						</p:column>
+						<p:column colspan="5" style="width: 77%;">
+							<p:inputTextarea id="agoCesarea" value="#{antecedentesGOMB.parto.indicacionCesarea}" autoResize="false" 
+								 		  	 rows="3" style="width: 90%;" maxlength="500"
+								 		  	 disabled="#{!antecedentesGOMB.parto.tipoNacimiento.equals('Cesárea')}" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 23%;">
+							<p:outputLabel value="Complicaciones:" />
+						</p:column>
+						<p:column colspan="5" style="width: 77%;">
+							<p:selectBooleanCheckbox id="sbcDiabetes" itemLabel="Diabetes" itemValue="Diabetes" 
+													 value="#{antecedentesGOMB.parto.diabetes}" style="padding-left: 12px !important;" />
+							<p:selectBooleanCheckbox id="sbcHipertension" itemLabel="Hipertensión" itemValue="Hipertensión" 
+													 value="#{antecedentesGOMB.parto.hipertension}" style="padding-left: 12px !important;" />
+							<p:selectBooleanCheckbox id="sbcPreclamsia" itemLabel="Preclampsia" itemValue="Preclampsia" 
+													 value="#{antecedentesGOMB.parto.preclamsia}" style="padding-left: 12px !important;" />
+							<p:selectBooleanCheckbox id="sbcDepresion" itemLabel="Depresion" itemValue="Depresión" 
+													 value="#{antecedentesGOMB.parto.depresion}" style="padding-left: 12px !important;" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 23%;">
+							<p:outputLabel value="Otras complicaciones:" />
+						</p:column>
+						<p:column colspan="5" style="width: 77%;">
+							<p:inputTextarea id="agoOtrasComplicaciones" value="#{antecedentesGOMB.parto.otra}" autoResize="false" 
+								 		 	 rows="3" style="width: 90%;" maxlength="500" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="6" styleClass="labelDerMiddle">
+							<p:commandButton value="Limpiar formulario" icon="ui-icon-arrowreturnthick-1-w" action="#{antecedentesGOMB.reinitParto()}"
+											 update="agoPgNacimientos" process="@this agoFechaNacimiento agoNombreNacimiento agoSemanasEmbarazo
+											 									agoKgNacimiento agoTipoNacimiento agoSexoNacimiento agoCesarea
+									 											sbcDiabetes sbcHipertension sbcPreclamsia sbcDepresion agoOtrasComplicaciones" />
+							<p:commandButton id="agoPartoAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesGOMB.reinitParto()}"
+											 update="agoPgNacimientos nacimientos" process="@this agoFechaNacimiento agoNombreNacimiento agoSemanasEmbarazo
+											 												agoKgNacimiento agoTipoNacimiento agoSexoNacimiento agoCesarea
+									 														sbcDiabetes sbcHipertension sbcPreclamsia sbcDepresion agoOtrasComplicaciones">
+								<p:collector value="#{antecedentesGOMB.parto}" addTo="#{antecedentesGOMB.partos}" />
+							</p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:outputPanel id="nacimientos" style="width: 100%; padding-right: 25px;">
+					<p:dataTable styleClass="panelGrid-Tabla" id="agoTblPartos" value="#{antecedentesGOMB.partos}" var="parto" editable="true"
+								 widgetVar="tblPartos" emptyMessage="No se tienen registrados nacimientos.">
+
+						<p:column headerText="Fecha de&lt;br/&gt;nacimiento" styleClass="labelDerMiddle" style="width: 8%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText styleClass="labelDer" value="#{parto.fechaNacimiento}">
+										<f:convertDateTime pattern="dd/MMM/yyyy" />
+									</h:outputText>
+								</f:facet>
+								<f:facet name="input">
+									<p:inputMask id="agoFechaNacimientoModel" value="#{parto.fechaNacimiento}" mask="99/aaa/9999" 
+												 validatorMessage="La fecha necesita ser anterior al día de hoy" style="width: 90%;"
+												 onkeydown='return revisarBase(event)' >
+										<f:convertDateTime pattern="dd/MMM/yyyy" />
+										<p:ajax event="blur" update="msgFechaNacimientoModel" process="@this" />
+									</p:inputMask>
+									<p:message for="agoFechaNacimientoModel" id="msgFechaNacimientoModel" display="text" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Nombre" style="width: 14%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText styleClass="inputIzqXL2" id="agoNombreNacimientoModel" value="#{parto.nombre}" style="width: 90%;"
+												 onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Semanas de&lt;br/&gt;embarazo" style="width: 8%;" styleClass="labelDerMiddle">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.semanasEmbarazo}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="agoSemanasEmbarazoModel" value="#{parto.semanasEmbarazo}" styleClass="inputDerS1"
+												 style="width: 90%;" maxlength="3" onkeypress='return capturarNumero(event)'
+												 onkeydown='return revisarBase(event)' />
+									<p:watermark value="0" for="agoSemanasEmbarazoModel"/>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Kg" style="width: 8%;" styleClass="labelDerMiddle">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.pesoKg}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="agoKgNacimientoModel" value="#{parto.pesoKg}" styleClass="inputDerS1"
+												 style="width: 90%;" maxlength="3" onkeypress='return capturarNumero(event)'
+												 onkeydown='return revisarBase(event)' />
+									<p:watermark value="0" for="agoKgNacimientoModel"/>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Tipo de&lt;br/&gt;nacimiento" style="width: 8%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.tipoNacimiento}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneRadio id="agoTipoNacimientoModel" value="#{parto.tipoNacimiento}" layout="grid" columns="1">
+										<f:selectItem itemLabel="Parto" itemValue="Parto" />
+										<f:selectItem itemLabel="Cesárea" itemValue="Cesárea" />
+									</p:selectOneRadio>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Sexo" style="width: 8%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.sexo}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneRadio id="agoSexoNacimientoModel" value="#{parto.sexo}" layout="grid" columns="1">
+										<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+										<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+									</p:selectOneRadio>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Indicaciones&lt;br/&gt;de cesárea" style="width: 14%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.indicacionCesarea}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputTextarea id="agoCesareaModel" value="#{parto.indicacionCesarea}" autoResize="false" 
+								 		 			 rows="9" style="width: 90%;" maxlength="500" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Complicaciones" style="width: 8%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="Diabetes" rendered="#{parto.diabetes}" />
+									<p:outputLabel value="Hipertensión" rendered="#{parto.hipertension}" />
+									<p:outputLabel value="Preclamsia" rendered="#{parto.preclamsia}" />
+									<p:outputLabel value="Depresión" rendered="#{parto.depresion}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectBooleanCheckbox id="sbcDiabetes" itemLabel="Diabetes" itemValue="Diabetes" 
+															 value="#{parto.diabetes}" style="padding-bottom: 9px !important;" />
+									<p:selectBooleanCheckbox id="sbcHipertension" itemLabel="Hipertensión" itemValue="Hipertensión" 
+															 value="#{parto.hipertension}" style="padding-bottom: 9px !important;" />
+									<p:selectBooleanCheckbox id="sbcPreclamsia" itemLabel="Preclampsia" itemValue="Preclampsia" 
+															 value="#{parto.preclamsia}" style="padding-bottom: 9px !important;" />
+									<p:selectBooleanCheckbox id="sbcDepresion" itemLabel="Depresion" itemValue="Depresión" 
+															 value="#{parto.depresion}" style="padding-bottom: 9px !important;" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Otras&lt;br/&gt;complicaciones" style="width: 14%;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:outputLabel value="#{parto.otra}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputTextarea id="agoOtrasComplicacionesModel" value="#{parto.otra}" autoResize="false" 
+								 		 			 rows="9" style="width: 90%;" maxlength="500" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="" style="width: 5%;">
+							<p:rowEditor id="agoReParto" />
+						</p:column>
+						<p:column headerText="" style="width: 5%;">
+							<p:commandLink id="appEliminarParto" styleClass="ui-icon ui-icon-trash" update=":formAntecedentes:agoFrmMain:nacimientos"
+										   process="@this :formAntecedentes:agoFrmMain:nacimientos">
+								<p:collector value="#{parto}" removeFrom="#{antecedentesGOMB.partos}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 23%;">
+							<p:outputLabel value="Observaciones:" for="agoObservacionesNacimientos" />
+						</p:column>
+						<p:column style="width: 77%;">
+							<p:inputTextarea id="agoObservacionesNacimientos" value="#{antecedentesGOMB.histObstetrica.observaciones}" 
+											 autoResize="false" rows="9" style="width: 90%;" maxlength="500" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column colspan="4">
+				<p:spacer height="14px" />
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelIzqBold" colspan="4" style="width: 100%;">
+							<p:outputLabel value="Información de anticonceptivos" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 30%;">
+							<p:outputLabel value="Métodos anticonceptivos:" />
+						</p:column>
+						<p:column colspan="3" style="width: 70%;">
+							<p:selectBooleanCheckbox id="agoAntiHormonal" itemLabel="Hormonal" itemValue="Hormonal" 
+													 style="padding-left: 12px !important;" />
+							<p:selectBooleanCheckbox id="agoAntiNoHormonal" itemLabel="No hormonal" itemValue="No hormonal" 
+													 style="padding-left: 12px !important;" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid id="agoPgAnticonceptivos" styleClass="panelGrid-Tabla" style="width: 100%;">
+					<f:facet name="header">
+						<p:row>
+							<p:column style="width: 15%;">
+								<p:outputLabel value="Tipo" />
+							</p:column>
+							<p:column colspan="2" style="width: 20%;">
+								<p:outputLabel value="Actual/Previa" />
+							</p:column>
+							<p:column colspan="2" style="width: 25%;">
+								<p:outputLabel value="Tiempo de uso" />
+							</p:column>
+							<p:column style="width: 40%;">
+								<p:outputLabel value="Observaciones" />
+							</p:column>
+						</p:row>
+					</f:facet>
+					<p:row>
+						<p:column styleClass="tipoFuente" style="padding: 0 !important;" colspan="6">
+							<p:dataGrid var="anticonceptivo" value="#{antecedentesGOMB.anticonceptivosActuales}" 
+										rows="#{antecedentesGOMB.anticonceptivosActuales.size()}" columns="1" style="width: 100% !important;" >
+								<p:panelGrid id="agoPgDGAntiActual" styleClass="panelGrid-Tabla" style="width: 100% !important; padding: 0 !important;">
+									<p:row>
+										<p:column style="width: 14.8%;" styleClass="labelIzq">
+											<p:outputLabel value="#{anticonceptivo.idCatAnticonceptivos.descripcion}" style="width: 95% !important;" />
+										</p:column>
+										<p:column style="width: 20%;">
+											<p:selectBooleanCheckbox id="agoAntiPrevio" itemLabel="Previo" style="padding-right: 15px !important;" />
+											<p:selectBooleanCheckbox id="agoAntiActual" itemLabel="Actual" />
+										</p:column>
+										<p:column style="width: 12%;" styleClass="inputDerM1">
+											<p:inputText id="agoAntiAniosActual" value="#{anticonceptivo.anosUso}"
+														 styleClass="inputDerS1" style="width: 30%;"
+												 		 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+											<p:watermark value="0" for="agoAntiAniosActual"/>
+											<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+										</p:column>
+										<p:column style="width: 13%;" styleClass="inputDerM1">
+											<p:inputText id="agoAntiMesesActual" value="#{anticonceptivo.mesesUso}"
+														 styleClass="inputDerS1" style="width: 30%;"
+												 		 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+											<p:watermark value="0" for="agoAntiMesesActual"/>
+											<p:outputLabel styleClass="labelIzqMiddle" value="meses" />
+										</p:column>
+										<p:column style="width: 39.1%;">
+											<p:inputTextarea id="agoAntiObservacionesActual" value="#{anticonceptivo.observaciones}" autoResize="false" 
+								 		 					 rows="2" style="width: 95%;" maxlength="200" />
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+							</p:dataGrid>
+							<p:panelGrid id="agoPgOtrosActual" styleClass="panelGrid-Tabla" style="width: 100%;">
+								<p:row>
+									<p:column colspan="6" styleClass="labelIzqMiddle">
+										<p:outputLabel value="En caso de que desee agregar información de otro anticonceptivo, introduzca esa información en los 
+														  	  campos que se presentan a continuación y de clic en el botón 'Agregar', para que queden registrados 
+														  	  en una tabla." />
+									</p:column>
+								</p:row>
+								<p:row>
+									<p:column style="width: 15%;">
+										<p:outputLabel value="Otro anticonceptivo" />
+									</p:column>
+									<p:column style="width: 20%;">
+										<p:selectBooleanCheckbox id="agoAntiPrevio" itemLabel="Previo" style="padding-right: 15px !important;" />
+										<p:selectBooleanCheckbox id="agoAntiActual" itemLabel="Actual" />
+									</p:column>
+									<p:column style="width: 12%;" styleClass="inputDerM1">
+										<p:inputText id="agoAniosOtro" value="#{antecedentesGOMB.otroAnticonceptivoActual.anosUso}"
+													 styleClass="inputDerS1" style="width: 30%;"
+												 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+										<p:watermark value="0" for="agoAniosOtro"/>
+										<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+									</p:column>
+									<p:column style="width: 13%;" styleClass="inputDerM1">
+										<p:inputText id="agoMesesOtro" value="#{antecedentesGOMB.otroAnticonceptivoActual.mesesUso}"
+													 styleClass="inputDerS1" style="width: 30%;"
+												 	 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+										<p:watermark value="0" for="agoMesesOtro"/>
+										<p:outputLabel styleClass="labelIzqMiddle" value="meses" />
+									</p:column>
+									<p:column style="width: 25%;">
+										<p:inputTextarea id="agoObservacionesOtro" value="#{antecedentesGOMB.otroAnticonceptivoActual.observaciones}" 
+														 autoResize="false" rows="2" style="width: 95%;" maxlength="200" />
+									</p:column>
+									<p:column style="width: 15%;">
+										<p:commandButton id="agoAntActualAgregar" value="Agregar" icon="ui-icon-plusthick" 
+														 action="#{antecedentesGOMB.reinitAnticonceptivoActual()}"
+														 update="agoPgOtrosActual otrosAntiActuales" 
+														 process="@this agoAniosOtro agoMesesOtro agoObservacionesOtro">
+											<p:collector value="#{antecedentesGOMB.otroAnticonceptivoActual}" 
+														 addTo="#{antecedentesGOMB.otrosAnticonceptivosActuales}" />
+										</p:commandButton>
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+							<p:row>
+								<p:column colspan="6">
+									<p:outputPanel id="otrosAntiActuales" style="width: 100%;">
+										<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.9%;" id="agoTblAntiActuales"
+													 value="#{antecedentesGOMB.otrosAnticonceptivosActuales}" var="otroAntiActual" editable="true" 
+													 widgetVar="tblAntiActuales" emptyMessage="No se tienen registrados otros anticonceptivos.">
+											<p:column style="width: 14.9%;">
+												<p:outputLabel value="Otra anticonceptivo" />
+											</p:column>
+											<p:column style="width: 20.1%;">
+												<p:cellEditor>
+													<f:facet name="output">
+														Previo/Actual
+													</f:facet>
+													<f:facet name="input">
+														<p:selectBooleanCheckbox id="agoAntiPrevioModel" itemLabel="Previo" 
+																				 style="padding-right: 15px !important;" />
+														<p:selectBooleanCheckbox id="agoAntiActualModel" itemLabel="Actual" />
+													</f:facet>
+												</p:cellEditor>
+											</p:column>
+											<p:column style="width: 12%;" styleClass="inputDerM1">
+												<p:cellEditor>
+													<f:facet name="output">
+														<p:outputLabel value="#{otroAntiActual.anosUso} años" />
+													</f:facet>
+													<f:facet name="input">
+														<p:inputText id="agoAniosOtroModel" value="#{otroAntiActual.anosUso}"
+													 				 styleClass="inputDerS1" style="width: 30%;"
+												 	 				 maxlength="3" onkeypress='return capturarNumero(event)'
+												 	 				 onkeydown='return revisarBase(event)' />
+														<p:watermark value="0" for="agoAniosOtroModel"/>
+													</f:facet>
+												</p:cellEditor>
+											</p:column>
+											<p:column style="width: 12.9%;" styleClass="inputDerM1">
+												<p:cellEditor>
+													<f:facet name="output">
+														<p:outputLabel value="#{otroAntiActual.mesesUso} meses" />
+													</f:facet>
+													<f:facet name="input">
+														<p:inputText id="agoMesesOtroModel" value="#{otroAntiActual.mesesUso}"
+													 				 styleClass="inputDerS1" style="width: 30%;"
+												 	 				 maxlength="3" onkeypress='return capturarNumero(event)'
+												 	 				 onkeydown='return revisarBase(event)' />
+														<p:watermark value="0" for="agoMesesOtroModel"/>
+													</f:facet>
+												</p:cellEditor>
+											</p:column>
+											<p:column style="width: 25%;">
+												<p:cellEditor>
+													<f:facet name="output">
+														<p:outputLabel value="#{otroAntiActual.observaciones}" />
+													</f:facet>
+													<f:facet name="input">
+														<p:inputTextarea id="agoObservacionesOtroModel" value="#{otroAntiActual.observaciones}" 
+														 				 autoResize="false" rows="2" style="width: 95%;" maxlength="200" />
+													</f:facet>
+												</p:cellEditor>
+											</p:column>
+											<p:column style="width: 10.1%;">
+												<p:rowEditor id="agoReOtroAntAct" />
+											</p:column>
+											<p:column style="width: 5%;">
+												<p:commandLink id="ahfEliminarOtroAntAct" styleClass="ui-icon ui-icon-trash" 
+															   update=":formAntecedentes:agoFrmMain:otrosAntiActuales" 
+															   process="@this :formAntecedentes:agoFrmMain:otrosAntiActuales">
+													<p:collector value="#{otroAntiActual}" removeFrom="#{antecedentesGOMB.otrosAnticonceptivosActuales}" />
+												</p:commandLink>
+											</p:column>
+										</p:dataTable>
+									</p:outputPanel>
+								</p:column>
+							</p:row>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column colspan="4">
+				<p:spacer height="7px" />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 30%;">
+							<p:outputLabel value="Método anticonceptivo previo:" />
+						</p:column>
+						<p:column colspan="3" style="width: 70%;">
+							<p:selectBooleanCheckbox id="agoAntiPrevioHormonal" itemLabel="Hormonal" itemValue="Hormonal" 
+													 style="padding-left: 12px !important;" />
+							<p:selectBooleanCheckbox id="agoAntiPrevioNoHormonal" itemLabel="No hormonal" itemValue="No hormonal" 
+													 style="padding-left: 12px !important;" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid id="agoPgPildoraPrevio" styleClass="panelGrid-Tabla" style="width: 100%;">
+					<f:facet name="header">
+						<p:row>
+							<p:column style="width: 15%;">
+								<p:outputLabel value="Tipo" />
+							</p:column>
+							<p:column colspan="2" style="width: 25%;">
+								<p:outputLabel value="Tiempo de uso" escape="true" />
+							</p:column>
+							<p:column style="width: 60%;">
+								<p:outputLabel value="Observaciones" escape="true" />
+							</p:column>
+						</p:row>
+					</f:facet>
+					<p:row>
+						<p:column styleClass="tipoFuente" colspan="4" style="padding: 0 !important;">
+							<p:dataGrid var="anticonceptivo" value="#{antecedentesGOMB.anticonceptivosPrevios}" 
+										rows="#{antecedentesGOMB.anticonceptivosPrevios.size()}" 
+										columns="1" style="width: 100% !important;" >
+								<p:panelGrid id="agoPgDGAntiPrevio" styleClass="panelGrid-Tabla" style="width: 100% !important; padding: 0 !important;">
+									<p:row>
+										<p:column styleClass="labelIzq" style="width: 14.7%;">
+											<p:outputLabel value="#{anticonceptivo.idCatAnticonceptivos.descripcion}" style="width: 95% !important;" />
+										</p:column>
+										<p:column style="width: 12%;" styleClass="inputDerM1">
+											<p:inputText id="agoAntiAniosPrevio" value="#{anticonceptivo.anosUso}"
+														 styleClass="inputDerS1" style="width: 30%;"
+														 maxlength="3" onkeypress='return capturarNumero(event)'
+														 onkeydown='return revisarBase(event)' />
+											<p:watermark value="0" for="agoAntiAniosPrevio"/>
+											<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+										</p:column>
+										<p:column style="width: 13.2%;" styleClass="inputDerM1">
+											<p:inputText id="agoAntiMesesPrevio" value="#{anticonceptivo.mesesUso}"
+														 styleClass="inputDerS1" style="width: 30%;"
+														 maxlength="3" onkeypress='return capturarNumero(event)'
+														 onkeydown='return revisarBase(event)' />
+											<p:watermark value="0" for="agoAntiMesesPrevio"/>
+											<p:outputLabel styleClass="labelIzqMiddle" value="meses" />
+										</p:column>
+										<p:column style="width: 60.1%;">
+											<p:inputTextarea id="agoAntiObservacionesPrevio" value="#{anticonceptivo.observaciones}" autoResize="false" 
+								 		 					 rows="2" style="width: 95%;" maxlength="200" />
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+							</p:dataGrid>
+						</p:column>						
+					</p:row>
+				</p:panelGrid>
+				<p:panelGrid id="agoPgOtrosPrevio" styleClass="panelGrid-Tabla" style="width: 100%;">
+					<p:row>
+						<p:column colspan="6" styleClass="labelIzqMiddle">
+							<p:outputLabel value="En caso de que desee agregar información de otro anticonceptivo, introduzca esa información en los 
+											  	  campos que se presentan a continuación y de clic en el botón 'Agregar', para que queden registrados 
+											  	  en una tabla." />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column style="width: 15%;">
+							<p:outputLabel value="Otro anticonceptivo" />
+						</p:column>
+						<p:column style="width: 11.9%;" styleClass="inputDerM1">
+							<p:inputText id="agoAniosOtroPrevio" value="#{antecedentesGOMB.otroAnticonceptivoPrevio.anosUso}"
+										 styleClass="inputDerS1" style="width: 30%;"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoAniosOtroPrevio"/>
+							<p:outputLabel styleClass="labelIzqMiddle" value="años" />
+						</p:column>
+						<p:column style="width: 13.1%;" styleClass="inputDerM1">
+							<p:inputText id="agoMesesOtroPrevio" value="#{antecedentesGOMB.otroAnticonceptivoPrevio.mesesUso}"
+										 styleClass="inputDerS1" style="width: 30%;"
+										 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0" for="agoMesesOtroPrevio"/>
+							<p:outputLabel styleClass="labelIzqMiddle" value="meses" />
+						</p:column>
+						<p:column style="width: 45.5%;">
+							<p:inputTextarea id="agoObservacionesOtroPrevio" value="#{antecedentesGOMB.otroAnticonceptivoPrevio.observaciones}"  
+								 		 	 autoResize="false" rows="2" style="width: 95%;" maxlength="200" />
+						</p:column>
+						<p:column style="width: 14.5%;">
+							<p:commandButton id="agoAntPrevioAgregar" value="Agregar" icon="ui-icon-plusthick" 
+											 action="#{antecedentesGOMB.reinitAnticonceptivoPrevio()}"
+											 update="agoPgOtrosPrevio antiPrevios" 
+											 process="@this agoAniosOtroPrevio agoMesesOtroPrevio agoObservacionesOtroPrevio">
+								<p:collector value="#{antecedentesGOMB.otroAnticonceptivoPrevio}" addTo="#{antecedentesGOMB.otrosAnticonceptivosPrevios}" />
+							</p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<p:row>
+					<p:column colspan="6">
+						<p:outputPanel id="antiPrevios" style="width: 100%;">
+							<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.9%;" id="agoTblAntiPrevios"
+										 value="#{antecedentesGOMB.otrosAnticonceptivosPrevios}" var="antiPrevio" editable="true" 
+										 widgetVar="tblAntiPrevios" emptyMessage="No se tienen registrados otros anticonceptivos previos.">
+								<p:column style="width: 15%;">
+									<p:outputLabel value="Otro anticonceptivo" />
+								</p:column>
+								<p:column style="width: 12%;" styleClass="inputDerM1">
+									<p:cellEditor>
+										<f:facet name="output">
+											<p:outputLabel value="#{antiPrevio.anosUso} años" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText id="agoAniosOtroPrevioModel" value="#{antiPrevio.anosUso}"
+										 				 styleClass="inputDerS1" style="width: 30%;"
+										 				 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+										 	<p:watermark value="0" for="agoMesesOtroPrevio"/>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column style="width: 13%;" styleClass="inputDerM1">
+									<p:cellEditor>
+										<f:facet name="output">
+											<p:outputLabel value="#{antiPrevio.mesesUso} meses" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText id="agoMesesOtroPrevioModel" value="#{antiPrevio.mesesUso}"
+										 				 styleClass="inputDerS1" style="width: 30%;"
+										 				 maxlength="3" onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' />
+										 	<p:watermark value="0" for="agoMesesOtroPrevioModel"/>
+										 </f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column style="width: 45%;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<p:outputLabel value="#{antiPrevio.observaciones}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputTextarea id="agoObservacionesOtroPrevioModel" value="#{antiPrevio.observaciones}"  
+								 		 	 				 autoResize="false" rows="2" style="width: 95%;" maxlength="200" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column style="width: 10%;">
+									<p:rowEditor id="agoReOtroAntPrev" />
+								</p:column>
+								<p:column style="width: 5%;">
+									<p:commandLink id="ahfEliminarOtroAntPrev" styleClass="ui-icon ui-icon-trash"
+												   update=":formAntecedentes:agoFrmMain:antiPrevios" 
+												   process="@this :formAntecedentes:agoFrmMain:antiPrevios">
+										<p:collector value="#{antiPrevio}" removeFrom="#{antecedentesGOMB.otrosAnticonceptivosPrevios}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+					</p:column>
+				</p:row>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column colspan="4">
+				<p:spacer height="7px" />
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column styleClass="tipoFuente" colspan="4">
+				<p:panelGrid style="width: 100%;">
+					<p:row>
+						<p:column colspan="4" styleClass="labelIzqBold">
+							<p:outputLabel value="Otra información" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Fecha de última citología cervical:" for="agoFechaCitologia" />
+						</p:column>
+						<p:column style="width: 19%;">
+							<p:calendar id="agoFechaCitologia" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy" pages="3"
+										maxdate="#{antecedentesGOMB.fechaHoy}" showButtonPanel="true" navigator="true" effect="slideDown"
+										value="#{antecedentesGOMB.ultimosEstudios.fechaUltimaCitologia}" />
+						</p:column>
+						<p:column styleClass="labelDer" style="width: 13%;">
+							<p:outputLabel value="Resultados:" />
+						</p:column>
+						<p:column style="width: 35%;">
+							<p:selectOneRadio id="agoResultadosCitologia" value="#{antecedentesGOMB.ultimosEstudios.resultadoUltimaCC}">
+								<f:selectItem itemLabel="Normal" itemValue="Normal" />
+								<f:selectItem itemLabel="Anormal" itemValue="Anormal" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 33%;">
+							<p:outputLabel value="Observaciones para citología cervical:" for="agoObservacionesCitologia" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:inputTextarea id="agoObservacionesCitologia" value="#{antecedentesGOMB.ultimosEstudios.observacionesUltimaCC}"
+											 autoResize="false" rows="2" style="width: 95%;" maxlength="500" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="4">
+							<p:spacer height="3px" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="¿Efectúa autoexploración mamaria?" for="agoAutoExploracion" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:selectBooleanCheckbox id="agoAutoExploracion" itemValue="true" 
+													 value="#{antecedentesGOMB.ultimosEstudios.autoexploracionMamaria}" 
+													 style="padding-left: 12px !important;">
+								<p:ajax update="agoOpAutoExploracion" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+					</p:row>
+					<p:row><p:column colspan="4" style="width: 33%;"><p:outputPanel id="agoOpAutoExploracion" style="width: 100%;">
+						<p:panelGrid style="width: 100%;" rendered="#{antecedentesGOMB.ultimosEstudios.autoexploracionMamaria}">
+							<p:row>
+								<p:column style="width: 32.5%;" styleClass="labelDerTop1" >
+									<p:outputLabel value="Observaciones para autoexploración mamaria:" for="agoObservacionesAutoExploracion" />
+								</p:column>
+								<p:column colspan="3" style="width: 67.5%;" >
+									<p:inputTextarea id="agoObservacionesAutoExploracion" value="#{antecedentesGOMB.ultimosEstudios.observacionesAutoMamaria}"
+											 		 autoResize="false" rows="2" style="width: 97%;" maxlength="200" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:outputPanel></p:column></p:row>
+
+					<p:row>
+						<p:column colspan="4">
+							<p:spacer height="3px" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Fecha de última mamografía:" for="agoFechaMamografia" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:calendar id="agoFechaMamografia" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy" pages="3" 
+										maxdate="#{antecedentesGOMB.fechaHoy}" showButtonPanel="true" navigator="true" effect="slideDown" 
+										value="#{antecedentesGOMB.ultimosEstudios.fechaUltimaMamografia}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 33%;">
+							<p:outputLabel value="Observaciones para mamografía:" for="agoObservacionesMamografia" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:inputTextarea id="agoObservacionesMamografia" value="#{antecedentesGOMB.ultimosEstudios.observacionesMamografia}"
+											 autoResize="false" rows="2" style="width: 95%;" maxlength="200" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="4">
+							<p:spacer height="3px" />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column styleClass="labelDer" style="width: 33%;">
+							<p:outputLabel value="Fecha de última densitometría:" for="agoFechaDensitometria" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:calendar id="agoFechaDensitometria" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy" pages="3" 
+										maxdate="#{antecedentesGOMB.fechaHoy}" showButtonPanel="true" navigator="true" effect="slideDown" 
+										value="#{antecedentesGOMB.ultimosEstudios.fechaUltimaDensitometria}"
+										onkeydown='return revisarBase(event)' />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="labelDerTop1" style="width: 33%;">
+							<p:outputLabel value="Observaciones para densitometría:" for="agoObservacionesDensitometria" />
+						</p:column>
+						<p:column colspan="3" style="width: 67%;">
+							<p:inputTextarea id="agoObservacionesDensitometria" value="#{antecedentesGOMB.ultimosEstudios.observacionesUltimaDensitometria}" 
+											 maxlength="200" rows="2" autoResize="false" style="width: 95%;" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+</ui:composition>

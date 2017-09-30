@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+   				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	<f:metadata>
+        <f:viewParam name="msg" value="#{loginMB.msg}" />
+        <f:event type="preRenderView" listener="#{loginMB.revisarSesion}" />
+    </f:metadata>
+	<h:head />
+	
+	<h:body>
+		<ui:composition template="/WEB-INF/templates/templateLogin.xhtml">
+			<ui:define name="title">
+				Baalam :: Login
+			</ui:define>
+			
+			<ui:define name="forma">
+				<ui:include src="#{rutas.loginForm}" />  
+		   	</ui:define>
+		   	
+		   	<ui:define name="contenido">
+		   		<ui:include src="#{rutas.loginAds}" />
+		   	</ui:define>
+	   	</ui:composition>
+   	</h:body>
+   	
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple">
+		<p:row>
+			<p:column style="width:40px;"><h:graphicImage value="/resources/gfx/nurse.png" width="40" height="40" /></p:column> 
+			<p:column style="height:30px;" styleClass="tituloSeccionAzul"><h:outputText value="Médicos asociados" /></p:column>  
+	    </p:row>
+		
+		<p:row><p:column colspan="4" styleClass="tipoFuente"><p:panelGrid>
+			<p:row>
+        		<p:column colspan="2">
+        			<p:dataTable id="dtMedicosAsoc" styleClass="tipoFuenteTabla"  var="doctor" value="#{datosUsuarioMB.doctores}"
+        							emptyMessage="No se encuentra asociada a algún médico" >  
+				        <p:column headerText="Nombre">  
+				            <h:outputText value="#{doctor.doctor.nombre}" />  
+				        </p:column>  
+				  
+				        <p:column headerText="Apellido Paterno">  
+				            <h:outputText value="#{doctor.doctor.aPaterno}" />  
+				        </p:column>  
+				  
+				        <p:column headerText="Apellido Materno">  
+				            <h:outputText value="#{doctor.doctor.aMaterno}" />  
+				        </p:column>  
+				  
+				        <p:column headerText="Teléfono móvil">  
+				            <h:outputText value="#{doctor.doctor.celular}" />  
+				        </p:column> 
+				        
+				        <p:column headerText="Teléfono móvil 2">  
+				            <h:outputText value="#{doctor.doctor.celular2}" />  
+				        </p:column>  
+				        
+				        <p:column headerText="Correo eletrónico">  
+				            <h:outputText value="#{doctor.doctor.correo1}" />  
+				        </p:column> 
+				    </p:dataTable>  
+        		</p:column>
+        	</p:row>
+		</p:panelGrid></p:column></p:row>
+	
+	</p:panelGrid>	
+	
+</ui:composition>

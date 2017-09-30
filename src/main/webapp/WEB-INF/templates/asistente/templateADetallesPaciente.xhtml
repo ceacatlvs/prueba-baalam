@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:pe="http://primefaces.org/ui/extensions"
+		xmlns:f="http://java.sun.com/jsf/core">
+		
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		
+		<title>
+			<ui:insert name="title" />
+		</title>
+	</h:head>
+    
+    <h:body>
+    	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+    	<h:outputScript library="js" name="scrolling.js" />
+    	<h:outputStylesheet name="css/consulta.css" />
+    	
+    	<p:layout fullPage="true" resizeTitle="resize" >
+
+			<p:layoutUnit position="north" id="top" size="18%" resizable="false" styleClass="ui-top" >
+				<p:layout>
+					<p:layoutUnit position="west" id="topLeft" size="85%" resizable="false" styleClass="ui-topLeft">
+						<p:panelGrid styleClass="panelGrid-Medico">
+        					<p:row>
+        						<p:column rowspan="2">
+        							<h:graphicImage value="/resources/gfx/DoctorFemale.png" alt="Asistente" width="32px" height="32px" />
+        						</p:column>
+        						<p:column styleClass="nombreMedico">
+        							<h:outputText value="#{loginMB.secretaria.nombre}" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column styleClass="especialidad">
+        							<h:outputText value="#{loginMB.doctor.nombre}" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" styleClass="primerConsulta">
+        							<h:outputText value="Detalles de paciente: #{fichaIdentificacionMB.paciente.nombrePaciente}" />
+        						</p:column>
+        					</p:row>
+        				</p:panelGrid>	
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="center" id="topCenter" size="15%" resizable="false" styleClass="ui-topCenter">
+						<h:form id="menuMainForm" prependId="false">
+	        				<p:panelGrid styleClass="panelGrid-MenuGeneral">
+	        					<p:row>  
+	        						<p:column style="width:50px;"><h:outputLink value="../inicio/inicioA.jsf"><h:graphicImage value="/resources/gfx/home.png" alt="Home" width="40" height="40" /></h:outputLink></p:column>
+	        						<p:column style="width:50px;"><h:commandLink action="#{loginMB.logOut()}"><h:graphicImage value="/resources/gfx/exit.png" alt="Exit" width="40" height="40" /></h:commandLink></p:column>
+	    						</p:row>
+	    						<p:row>
+	    							<p:column style="width:50px;"><h:outputLink value="../inicio/inicioA.jsf" style="text-decoration: none;"><h:outputText styleClass="menuGeneral" value="Inicio" /></h:outputLink></p:column>
+	    							<p:column style="width:50px;"><h:commandLink value="Salir" action="#{loginMB.logOut()}" styleClass="menuGeneral" style="text-decoration:none; color:#003399;"/></p:column>
+	    						</p:row>
+	        				</p:panelGrid>
+        				</h:form>
+        			</p:layoutUnit>
+				</p:layout>
+           	</p:layoutUnit>
+           	
+           	<p:layoutUnit position="center" id="center" size="82%" resizable="false" styleClass="ui-center">
+           		<p:layout>
+           			<p:layoutUnit position="north" id="ctrTop" size="12%" resizable="false" styleClass="ui-ctrTop" >
+           				<h:form id="formMenu">
+            				<p:tabMenu id="menuConsulta" activeIndex="#{activeIndex}" styleClass="ui-menuMain" >
+				           		<p:menuitem value="Ficha de identificación" url="../detallesPaciente/detalleAPaciente_FID.xhtml?faces-redirect=true" />				        		
+				        		<p:menuitem value="Historial de consultas" url="../detallesHistorialConsulta/historialConsultasA.xhtml?faces-redirect=true" />
+				        		<p:menuitem value="Pagos" url="../controlPagos/controlPagosA.jsf?faces-redirect=true" />
+				        	</p:tabMenu>
+			        	</h:form>
+           			</p:layoutUnit>
+	           		
+	           		<p:layoutUnit position="center" id="ctrCenter" resizable="false" styleClass="ui-ctrCenter" >
+		           		<p:growl id="growlDetalle" autoUpdate="true" showDetail="true" showSummary="true" sticky="false" life="3000" />
+		           		
+		           		<p:layout>	
+					   		<p:layoutUnit position="west" id="ctrWest" size="17%" resizable="false" styleClass="ui-ctrWest" rendered="#{subMenu}" >
+					   			<ui:insert name="menuSub" />
+					 		</p:layoutUnit>
+					 		
+					 		<p:layoutUnit position="center" id="ctrCenterII" resizable="false" styleClass="ui-ctrCenterII" >
+					   			<ui:insert name="content" />
+					 		</p:layoutUnit>
+					 	</p:layout>
+	         		</p:layoutUnit>
+         		</p:layout>
+           	</p:layoutUnit>
+    		
+    	</p:layout>
+    	
+    </h:body>
+    
+</html>

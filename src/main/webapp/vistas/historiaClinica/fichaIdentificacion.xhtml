@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+	
+	<p:panelGrid id="pgFID" style="width: 85% !important;" >
+		<p:row>
+			<p:column style="width: 25%;" />
+			<p:column style="width: 25%;" />
+			<p:column style="width: 10%;" />
+			<p:column style="width: 10%;" />
+			<p:column style="width: 30%;" />
+		</p:row>
+		
+		<p:row>
+			<p:column colspan="4" styleClass="labelDer" >
+				<p:outputLabel for="fechaFID" value="Fecha:" />
+			</p:column>
+			<p:column>
+				<p:calendar id="fechaFID" showOn="both" locale="es" pattern="dd/MMM/yyyy" styleClass="inputDerM1"  
+							showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c+1" 
+							value="#{fichaIdentificacionMB.paciente.fechaCreacion}" maxdate="#{fichaIdentificacionMB.fechaHoy}"
+							onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidRecomendo" value="Recomendó:" />
+			</p:column>
+			<p:column colspan="4" >
+				<p:inputText id="fidRecomendo" value="#{fichaIdentificacionMB.paciente.recomendo}" maxlength="250" style="width: 85%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="txtFechaNacimiento" value="Fecha de nacimiento:" />
+			</p:column>
+			<p:column styleClass="inputDerM1" >
+				<p:inputMask id="txtFechaNacimiento" value="#{fichaIdentificacionMB.paciente.fechaNacimiento}" mask="99/99/9999" style="width: 70%;"
+							 validatorMessage="La fecha necesita ser anterior al día de hoy" onkeydown='return revisarBase(event)' >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Mexico/General" locale="es" />
+					<p:ajax event="blur" listener="#{fichaIdentificacionMB.actualizarEdad}" update="edadOL msgFechaNacimiento" process="@this" />
+				</p:inputMask>
+				<p:watermark value="dd/mm/aaaa" for="txtFechaNacimiento"/>
+			</p:column>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel value="Edad:" />
+			</p:column>
+			<p:column colspan="2">
+				<p:outputLabel styleClass="labelIzq" id="edadOL" value="#{fichaIdentificacionMB.paciente.edad}" />
+				<p:outputLabel styleClass="labelIzq" value=" años" />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column />
+			<p:column colspan="4" >
+				<p:message for="txtFechaNacimiento" id="msgFechaNacimiento" showSummary="true" showDetail="false" display="text" />
+			</p:column>			
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidNombrePaciente" value="Nombre de la paciente: " />
+				<p:outputLabel for="fidNombrePaciente" value="*" styleClass="labelRoja" />
+			</p:column>
+			<p:column colspan="4" >
+				<p:inputText id="fidNombrePaciente" value="#{fichaIdentificacionMB.paciente.nombrePaciente}" maxlength="250" 
+							 style="width: 85%;" validatorMessage="El nombre de la paciente es necesario, favor de llenarlo"
+							 onkeydown='return revisarBase(event)' >
+					<p:ajax event="blur" update="msgNombrePaciente" process="@this"/>
+				</p:inputText>				
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column />
+			<p:column colspan="4" >
+				<p:message for="fidNombrePaciente" id="msgNombrePaciente" showSummary="true" showDetail="false" display="text" />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidOcupacion" value="Ocupación de la paciente:" />
+			</p:column>
+			<p:column colspan="4" >
+				<p:inputText id="fidOcupacion" value="#{fichaIdentificacionMB.paciente.ocupacionPaciente}" maxlength="250" style="width: 85%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidTelMovil" value="Teléfono móvil: " />
+				<p:outputLabel for="fidTelMovil" value="*" styleClass="labelRoja" />
+			</p:column>
+			<p:column styleClass="inputDerM1">
+				<p:inputMask id="fidTelMovil" mask="99-9999-9999" style="width: 60%;"
+							 value="#{fichaIdentificacionMB.paciente.telefonoMovil}" onkeydown='return revisarBase(event)'>
+					<p:ajax event="blur" update="contactoPaciente" />
+				</p:inputMask>
+				<p:watermark value="55-5555-5555" for="fidTelMovil"/>
+			</p:column>
+			<p:column colspan="2" styleClass="labelDer" >
+				<p:outputLabel for="fidEmail" value="Correo electrónico: " />
+				<p:outputLabel for="fidEmail" value="*" styleClass="labelRoja" />
+			</p:column>
+			<p:column>
+				<p:inputText id="fidEmail" value="#{fichaIdentificacionMB.paciente.correo}" maxlength="250" 
+							 style="width: 60%;" validatorMessage="La cuenta de correo es inválida." onkeydown='return revisarBase(event)' >
+					<f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />  
+                	<p:ajax event="blur" update="contactoPaciente msgEmail1" />
+            	</p:inputText>
+            	<p:watermark value="correo@dominio.com" for="fidEmail"/>
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column />
+			<p:column colspan="4" >
+				<p:message for="fidEmail" id="msgEmail1" showSummary="true" showDetail="false" display="text" />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column />
+			<p:column colspan="4" >
+				<p:outputPanel id="contactoPaciente" >
+					<p:outputPanel rendered="#{!(fichaIdentificacionMB.paciente.telefonoMovil.length() > 0) 
+											 and !(fichaIdentificacionMB.paciente.correo.length() > 0)}" >
+						<div class="ui-message ui-message-error ui-message-error-summary ui-widget ui-corner-all" style="margin-left: 5px !important;" >
+							<p:outputLabel value="Es necesario el teléfono móvil o correo electrónico de la paciente" style="margin-left: 10px !important;" />
+						</div>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="fidNombrePreferido" value="¿Cómo le gusta que le llamen?:" />
+			</p:column>
+			<p:column colspan="4">
+				<p:inputText id="fidNombrePreferido" value="#{fichaIdentificacionMB.paciente.nombreFavorito}" maxlength="250" style="width: 85%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="fidNombreEsposo" value="Nombre del esposo:" />
+			</p:column>
+			<p:column colspan="4">
+				<p:inputText id="fidNombreEsposo" value="#{fichaIdentificacionMB.paciente.nombreEsposo}" style="width: 85%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="fidOcupacionEsposo" value="Ocupación del esposo:" />
+			</p:column>
+			<p:column colspan="4">
+				<p:inputText id="fidOcupacionEsposo" value="#{fichaIdentificacionMB.paciente.ocupacionEsposo}" style="width: 85%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="fidCalle" value="Domicilio (calle y nro.):" />
+			</p:column>
+			<p:column colspan="4">
+				<p:inputText id="fidCalle" value="#{fichaIdentificacionMB.paciente.domicilio}" style="width: 85%;" 
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer">
+				<p:outputLabel for="fidColonia" value="Colonia:" />
+			</p:column>
+			<p:column>
+				<p:inputText id="fidColonia" value="#{fichaIdentificacionMB.paciente.colonia}" style="width: 70%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+			<p:column colspan="2" styleClass="labelDer">
+				<p:outputLabel for="fidDelMun" value="Delegación o municipio:" />
+			</p:column>
+			<p:column>
+				<p:inputText id="fidDelMun" value="#{fichaIdentificacionMB.paciente.delegacion}" style="width: 60%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidEstado" value="Estado:" />
+			</p:column>
+			<p:column>
+				<p:selectOneMenu id="fidEstado" value="#{fichaIdentificacionMB.paciente.entidadFedereativa.idEntidadFedereativa}" effect="fade" >           			 							 
+           			<f:selectItems value="#{fichaIdentificacionMB.entidades}" var="entidad" itemLabel="#{entidad.descripcion}" 
+           						   itemValue="#{entidad.idEntidadFedereativa}" />  
+       			</p:selectOneMenu>
+      		</p:column>
+			<p:column colspan="2" styleClass="labelDer" >
+				<p:outputLabel for="fidCP" value="Código postal:" />
+			</p:column>
+			<p:column >
+				<p:inputMask id="fidCP" mask="99999" value="#{fichaIdentificacionMB.paciente.cp}" style="width: 60%;"
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidTelCasa" value="Teléfono de casa:" />
+			</p:column>
+			<p:column styleClass="inputDerM1">
+				<p:inputMask id="fidTelCasa" mask="(99)9999-9999" style="width: 60%;" value="#{fichaIdentificacionMB.paciente.telCasa}"
+							 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+				<p:watermark value="(55)5555-5555" for="fidTelCasa"/>
+				<p:tooltip id="ttTelCasa" for="fidTelCasa" showEvent="focus" hideEvent="blur" styleClass="tipoFuente" />
+			</p:column>
+			
+			<p:column colspan="2" styleClass="labelDer" > 
+				<p:outputLabel for="fidTelOficina" value="Teléfono de oficina:" />
+			</p:column>
+			<p:column styleClass="inputDerM1">
+				<p:inputMask id="fidTelOficina" mask="(99)9999-9999" style="width: 60%;" value="#{fichaIdentificacionMB.paciente.telOficina}"
+							 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+				<p:watermark value="(55)5555-5555" for="fidTelOficina"/>
+				<p:tooltip id="ttTelOficina" for="fidTelOficina" showEvent="focus" hideEvent="blur" styleClass="tipoFuente" />
+			</p:column>				
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidGpoSanguineo" value="Grupo sanguíneo:" />
+			</p:column>
+			<p:column colspan="4" >
+				<p:selectOneMenu id="fidGpoSanguineo" value="#{fichaIdentificacionMB.paciente.idGrupoSanguineo.idGrupoSanguineo}" effect="fade" >            										 							
+           			<f:selectItems value="#{fichaIdentificacionMB.gruposSanguineos}" var="grupoSanguineo" itemLabel="#{grupoSanguineo.descripcion}" 
+           						   itemValue="#{grupoSanguineo.idGrupoSanguineo}" />  
+      			</p:selectOneMenu>
+      		</p:column>
+      	</p:row>
+      	
+      	<p:row>  
+      		<p:column colspan="5" >
+      			<p:spacer height="3px;" />
+      		</p:column>  
+	    </p:row> 
+      	
+      	<p:row>  
+      		<p:column colspan="5" styleClass="tituloSubSeccion" >
+      			<h:outputText value="Datos de contacto de emergencia" />
+      		</p:column>  
+	    </p:row> 
+	    
+	    <p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidContacto" value="Nombre:" />
+			</p:column>
+			<p:column colspan="4" >
+				<p:inputText id="fidContacto" value="#{fichaIdentificacionMB.paciente.contactoEmergencia}" style="width: 85%;" 
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidParentesco" value="Parentesco:" />
+			</p:column>
+			<p:column>
+				<p:inputText id="fidParentesco" value="#{fichaIdentificacionMB.paciente.parentescoContacto}" style="width: 70%;" 
+							 onkeydown='return revisarBase(event)' />
+			</p:column>
+			<p:column colspan="2" styleClass="labelDer" >
+				<p:outputLabel for="fidTelContacto" value="Teléfono móvil:" />
+			</p:column>
+			<p:column styleClass="inputDerM1">
+				<p:inputMask id="fidTelContacto" mask="99-9999-9999" style="width: 60%;"
+							 value="#{fichaIdentificacionMB.paciente.telContactoMovil}" onkeydown='return revisarBase(event)' />
+				<p:watermark value="55-5555-5555" for="fidTelContacto"/>
+			</p:column>				
+		</p:row>
+		
+		<p:row>
+			<p:column styleClass="labelDer" >
+				<p:outputLabel for="fidTelCasaContacto" value="Teléfono de casa:" />
+			</p:column>
+			<p:column styleClass="inputDerM1">
+				<p:inputMask id="fidTelCasaContacto" mask="(99)9999-9999" style="width: 60%;" value="#{fichaIdentificacionMB.paciente.telContactoCasa}"
+							 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+				<p:watermark value="(55)5555-5555" for="fidTelCasaContacto"/>
+				<p:tooltip id="ttTelCasaContacto" for="fidTelCasaContacto" showEvent="focus" hideEvent="blur" styleClass="tipoFuente" />
+			</p:column>
+			
+			<p:column colspan="2" styleClass="labelDer" >
+				<p:outputLabel for="fidTelOficinaContacto" value="Teléfono de oficina:" />
+			</p:column>
+			<p:column styleClass="inputDerM1">
+				<p:inputMask id="fidTelOficinaContacto" mask="(99)9999-9999" style="width: 60%;" value="#{fichaIdentificacionMB.paciente.telContactoOficina}"
+							 title="Favor de incluir la clave LADA." onkeydown='return revisarBase(event)' />
+				<p:watermark value="(55)5555-5555" for="fidTelOficinaContacto"/>
+				<p:tooltip id="ttTelOficinaContacto" for="fidTelOficinaContacto" showEvent="focus" hideEvent="blur" styleClass="tipoFuente" />
+			</p:column>					
+		</p:row>
+		
+	</p:panelGrid>			
+
+</ui:composition>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:pe="http://primefaces.org/ui/extensions"
+		xmlns:f="http://java.sun.com/jsf/core">
+		
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		
+		<title>
+			<ui:insert name="title" />
+		</title>
+	</h:head>
+    
+    <h:body>
+    	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+    	<h:outputStylesheet name="css/consulta.css" />
+    	
+    	<p:layout fullPage="true" >
+
+			<p:layoutUnit position="north" id="top" size="18%" resizable="false" styleClass="ui-top" collapsible="true" gutter="0" >
+				<p:layout>
+					<p:layoutUnit position="west" id="topLeft" size="45%" resizable="false" styleClass="ui-topLeft" collapsible="true" gutter="0" >
+						<p:panelGrid styleClass="panelGrid-Medico" style="width: 100%;" >
+        					<p:row>
+        						<p:column rowspan="2" style="width: 10%;" >
+        							<h:graphicImage value="/resources/gfx/DoctorMale.png" alt="Medico" width="32px" height="32px" />
+        						</p:column>
+        						<p:column styleClass="nombreSeccion" style="width: 90%;" >
+        							<h:outputText value="Detalle de control de embarazo" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column styleClass="paciente" style="width: 100%;" >
+        							<h:outputText value="Paciente: #{fichaIdentificacionMB.paciente.nombrePaciente}" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" styleClass="nombreMedico" style="width: 90%;" >
+        							<h:outputText value="#{fichaIdentificacionMB.login.doctor.nombre} #{fichaIdentificacionMB.login.doctor.aPaterno} #{fichaIdentificacionMB.login.doctor.aMaterno}" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" styleClass="fecha" style="width: 100%;" >
+        							<h:outputText value="#{fichaIdentificacionMB.fechaHoy}" >
+        								<f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" timeZone="Mexico/General" />
+        							</h:outputText>
+        						</p:column>
+        					</p:row>
+        				</p:panelGrid>	
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="center" id="topCenter" size="30%" resizable="false" styleClass="ui-topCenter" collapsible="true" gutter="0" />
+					
+					<p:layoutUnit position="east" id="topEast" size="25%" resizable="false" styleClass="ui-topCenter" collapsible="true" gutter="0" >
+        				<p:panelGrid styleClass="panelGrid-MenuGeneral">
+        					<p:row>
+	        						<p:column style="width:45%;" />
+	        						<p:column style="width:25%;"><h:outputLink value="javascript:void(0)" onclick="PF('dlgAgendaWV').show()"><h:graphicImage value="/resources/gfx/calendar.png" alt="Agenda" width="32" height="32" /></h:outputLink></p:column>
+	        						<p:column style="width:30%;"><h:outputLink value="../detallesHistorialConsulta/historialConsultas.jsf"><h:graphicImage value="/resources/gfx/PatientFile.png" alt="Historia" width="40" height="40" /></h:outputLink></p:column>
+	    						</p:row>
+	    						<p:row>
+	    							<p:column style="width:45%;" />
+	    							<p:column style="width:25%;"><h:outputLink value="javascript:void(0)" onclick="PF('dlgAgendaWV').show()" style="text-decoration: none;"><h:outputText styleClass="menuAdmon" value="Ver agenda" escape="false" /></h:outputLink></p:column>
+	    							<p:column style="width:30%;"><h:outputLink value="../detallesHistorialConsulta/historialConsultas.jsf" style="text-decoration: none;"><h:outputText styleClass="menuAdmon" value="Volver a historial" /></h:outputLink></p:column>
+	    						</p:row>
+        				</p:panelGrid>
+        			</p:layoutUnit>
+				</p:layout>
+           	</p:layoutUnit>
+           	
+           	<p:layoutUnit position="center" id="center" size="85%" resizable="false" styleClass="ui-center" collapsible="true" gutter="0" >
+           		<p:layout>
+           			<p:layoutUnit position="north" id="ctrTop" resizable="false" styleClass="ui-ctrTop" collapsible="true" gutter="0" >
+	           			<div id="content" style="overflow: hidden;">	
+	           				<h:form id="formMenu">
+	            				<p:tabMenu id="menuConsulta" activeIndex="#{activeIndex}" styleClass="ui-menuConsulta" >
+					           		<p:menuitem value="Control de embarazo" url="../detallesHistorialConsulta/hcSub_PA.xhtml" />
+					        	</p:tabMenu>
+				        	</h:form>
+		        		</div>
+           			</p:layoutUnit>
+	           		
+	           		<p:layoutUnit position="center" id="ctrCenter" resizable="false" styleClass="ui-ctrCenter" collapsible="true" gutter="0" >
+		           		<p:growl id="growlDetalle" autoUpdate="true" showDetail="true" showSummary="true" sticky="false" life="3000" />
+		           		
+		           		<p:layout>	
+					   		<p:layoutUnit position="center" id="ctrCenterII" resizable="false" styleClass="ui-ctrCenterII" collapsible="true" gutter="0" >
+					   			<ui:insert name="content" />
+					 		</p:layoutUnit>
+					   		
+					   		<p:layoutUnit position="east" id="ctrWest" size="8%" resizable="false" styleClass="ui-ctrWest" rendered="#{subMenu}" collapsible="true" gutter="0" >
+					   			<ui:insert name="menuSub" />
+					 		</p:layoutUnit>
+					 	</p:layout>
+	         		</p:layoutUnit>
+         		</p:layout>
+           	</p:layoutUnit>
+    		
+    	</p:layout>
+    	
+    	<ui:insert name="pantallaModal" />
+    	
+    	<ui:include style="align-text:center; align:center;" src="/vistas/agenda/datosVerAgenda.xhtml" />
+    	
+    </h:body>
+    
+</html>

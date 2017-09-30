@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 20% !important;" >
+						<p:outputLabel value="Ruidos cardiacos: " />
+					</p:column>
+					<p:column style="width: 80% !important;" >
+						<p:selectOneRadio id="efcardioRuidoCardiaco" value="#{efCardioMB.efCardio.ruidosCardiacos}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Ruidos agregados: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efcardioRuidoAgregado" value="#{efCardioMB.efCardio.ruidosAgregados}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel value="Vascular periférico: " />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="efcardioVascular" value="#{efCardioMB.efCardio.vascularPerif}">
+							<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+							<f:selectItem itemLabel="Anormal" itemValue="Anormal"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 10% !important;" >
+						<p:outputLabel value="Observaciones: " />
+					</p:column>
+					<p:column style="width: 75% !important;" >
+						<p:inputTextarea id="efcardioObservaciones" value="#{efCardioMB.efCardio.observaciones}" autoResize="false" 
+								 		 rows="7" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

@@ -1,0 +1,731 @@
+h1 {
+	font-size: 16px;
+	color: #FF0000;
+	padding-top: 9px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 32px;
+}
+
+h2 {
+	font-size: 14px;
+	color: #2E6E9E;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 14px;
+}
+
+h3 {
+	font-size: 14px;
+	color: #2E6E9E;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 14px;
+}
+
+h4 {
+	font-size: 28px;
+	color: #2E6E9E;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 14px;
+}
+
+.ui-datatable td {
+	white-space: normal !important;
+	vertical-align: top !important;
+}
+
+.ui-datatable, .ui-datatable-odd {
+	background: #EBEBEB;
+}
+
+.fila-1raVez {
+     background: #E0F0FF !important;
+}
+                
+.fila-sub {
+    background: #E0FFE0 !important;
+}
+
+.ui-carousel {
+	background: #FFFFFF !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.carouselContenido {
+	width: 575px;
+	background: #FFFFFF !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.panelGrid-PacienteFecha {
+	text-align: right;
+	padding-top: 0 !important;
+	padding-right: 9 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.panelGrid-FormularioInput {
+	margin-top: 0px;
+	margin-left: 0px;
+}
+
+.panelGrid-FormularioInput tr, .panelGrid-FormularioInput td {
+    border: none !important;
+}
+
+.panelGrid-FormularioSimpleTop {
+	margin-top: 0px;
+	margin-left: 24px;
+	margin-bottom: 4px;
+}
+
+.panelGrid-FormularioSimpleTop tr, .panelGrid-FormularioSimpleTop td {
+    border: none !important;
+}
+
+.panelGrid-FormularioSimpleInicio {
+	margin-top: 0px;
+	margin-left: 0px;
+}
+
+.panelGrid-FormularioSimpleInicio tr, .panelGrid-FormularioSimpleInicio td {
+    border: none !important;
+}
+
+.panelGrid-FormularioAgenda {
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.panelGrid-FormularioAgenda .ui-layout-unit-content {
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	
+	background: #FFFFFF !important;
+}
+
+.panelGrid-FormularioAgenda tr, .panelGrid-FormularioAgenda td {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	border: none !important;
+ 	border-style: hidden !important;
+}
+
+.panelGrid-FormularioSimple {
+	margin-top: 0 !important;
+	margin-left: 12px;
+}
+
+.panelGrid-FormularioSimple .ui-layout-unit-content {
+	background: #FFFFFF !important;
+}
+
+.panelGrid-FormularioSimple tr, .panelGrid-FormularioSimple td {
+    border: none !important;
+}
+
+.panelGrid-FormularioMenu {
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+}
+
+.panelGrid-FormularioMenu tr, .panelGrid-FormularioMenu td {
+    border: none !important;
+}
+
+.panelGrid-Tabla, .panelGrid-Tabla tr, .panelGrid-Tabla td {
+	font-size: 12px !important;
+	border: 1px solid #a6c9e2 !important;
+	white-space: normal !important;
+}
+
+.panelGrid-APNP {
+	float: left !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 35% !important;
+}
+
+.hide-column-names table thead tr {
+    display: none;
+}
+
+/*.ui-selectonemenu label.ui-selectonemenu-label {
+	padding-right: 28px;
+	text-align: left;
+}*/
+
+.ui-datagrid-content {
+	width: 750px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-datagrid-column {
+	width: 750px !important;
+	
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-datepicker .ui-datepicker-title, .ui-datepicker .ui-datepicker-title select { 
+	font-size: 14px !important;
+}
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { 
+	width: 21px !important; 
+	height: 21px !important;
+}
+
+.ui-datepicker-month, .ui-datepicker-year {
+	font-size: 14px !important;
+}
+
+.ui-datepicker-group-middle .ui-datepicker-header {
+	font-size: 12px !important;
+	height: 22px !important;
+}
+
+.ui-datepicker-group-last .ui-datepicker-header {
+	font-size: 12px !important;
+	height: 22px !important;
+}
+
+.ui-datepicker table {
+	font-size: 12px !important;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane {
+	font-size: 12px !important;
+}
+
+.ui_tpicker_time, .ui_tpicker_time_label, .ui_tpicker_hour_label, .ui_tpicker_minute_label {
+	font-size: 12px !important;
+}
+
+.ui-timepicker .ui-timepicker-title, .ui-timepicker .ui-timepicker-title select { 
+	font-size: 14px !important;
+}
+
+.ui-timepicker table {
+	font-size: 12px !important;
+}
+
+.ui-autocomplete-input {
+    width: 95% !important;
+}
+
+.ui-datagrid-data, .ui-datagrid-content {
+	width: 100% !important;
+}
+
+.ui-datagrid-row, .ui-datagrid-column {
+	width: 100% !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	text-align: right !important;
+}
+
+.ui-password-panel {
+	width: 86% !important;
+}
+
+.ui-password-meter {
+	width: 86% !important;
+}
+
+.mensaje {
+	color: #3A87AD;
+	background-color: #D9EDF7;
+	
+	border-top-left-radius: 9px !important;
+	border-top-right-radius: 9px !important;
+	border-bottom-left-radius: 9px !important;
+	border-bottom-right-radius: 9px !important;
+}
+
+.nombrePaciente {
+	width: 200px;
+	color: #0066FF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: right;
+}
+
+.fechaConsulta {
+	width: 200px;
+	color: #303030;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: right;
+}
+
+.fechaID {
+	color: #303030;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: right;
+}
+
+.tituloSeccionAzul {
+	width: 450px;
+	color: #0066FF;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: left;
+	
+	padding-top: 9px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+.tituloSeccionTab {
+	width: 450px;
+	color: #FF0000;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: left;
+	
+	padding-top: 9px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+.tituloSubSeccion {
+	color: #0066FF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.tipoFuente {
+	color: #303030 !important;
+	font-size: 12px !important;
+	font-family:Arial,Helvetica,sans-serif !important;
+}
+
+.tipoFuenteAzul {
+	color: #466883!important;
+	font-size: 12px !important;
+	font-family:Arial,Helvetica,sans-serif !important;
+}
+
+.tipoFuenteTabla {
+	color: #303030;
+	font-size: 12px;
+	white-space:pre !important;
+	font-family:Arial,Helvetica,sans-serif;
+}
+
+.tipoFuenteTablaCenter {
+	color: #303030;
+	font-size: 12px;
+	white-space:pre !important;
+	font-family:Arial,Helvetica,sans-serif;
+	text-align: center !important;
+}	
+
+
+.tipoFuenteLogin {
+	color: #2E6E9E;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: none;
+	text-align: left;
+}
+
+.tipoFuenteLogin .ui-outputlabel-rfi {
+	display: none;
+}
+
+.tipoFuenteLinks {
+	color: #2E6E9E !important;
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-size: 12px !important;
+	font-weight: normal !important;
+	text-align: center !important; 
+	text-decoration: underline; 
+}
+
+.tipoToolTip {
+	color: #303030;
+	font-size: 11px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+
+.labelChkBox .ui-chkbox, .labelChkBox .ui-chkbox-label {
+	float: right !important;
+}
+
+.labelRoja {
+	color: red;
+}
+
+.labelCtr {
+	text-align: center;
+	white-space: normal;
+}
+
+.labelDer {
+	text-align: right;
+	white-space: normal;
+}
+
+.labelIzq {
+	text-align: left;
+	white-space: normal;
+}
+
+.labelIzqLogin {
+	text-align: left;
+	font-size: 16px;
+	white-space: normal;
+}
+
+.labelDerBold {
+	font-weight: bold;
+	text-align: right;
+	white-space: normal;
+}
+
+.labelIzqBold {
+	font-weight: bold;
+	text-align: left;
+	white-space: normal;
+}
+
+.labelDerTop0 {
+	text-align: left;
+	white-space: normal;
+	padding-top: 0px;
+	vertical-align: top;
+}
+
+.labelDerTop1 {
+	text-align: right;
+	white-space: normal;
+	padding-top: 5px;
+	vertical-align: top;
+}
+
+.labelDerTop2 {
+	text-align: right;
+	white-space: normal;
+	padding-top: 15px;
+	vertical-align: top;
+}
+
+.labelDerTopBold {
+	font-weight: bold;
+	text-align: right;
+	white-space: normal;
+	padding-top: 15px;
+	vertical-align: top;
+}
+
+.labelIzqTopBold {
+	font-weight: bold;
+	text-align: left;
+	white-space: normal;
+	padding-top: 15px;
+	vertical-align: top;
+}
+
+.labelDerMiddle {
+	text-align: right;
+	white-space: normal;
+	padding-top: 5px;
+	padding-left: 5px;
+	vertical-align: middle;
+}
+
+.labelIzqMiddle {
+	text-align: left;
+	white-space: normal;
+	padding-top: 5px;
+	padding-left: 5px;
+	vertical-align: middle;
+}
+
+.labelCtrMiddle {
+	text-align: center;
+	white-space: normal;
+	padding-top: 5px;
+	padding-left: 5px;
+	vertical-align: middle;
+}
+
+.inputTop {
+	padding-top: 5px;
+	vertical-align: top;
+}
+
+.inputIzqXL2, .inputIzqXL2 input {
+	width: 525px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqXL1, .inputIzqXL1 input {
+	width: 475px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqL2, .inputIzqL2 input {
+	width: 325px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqL1, .inputIzqL1 input {
+	width: 250px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqL1, .inputIzqL1 .ui-inputfield {
+	width: 250px;
+}
+
+.inputIzqM1, .inputIzqM1 input {
+	width: 150px !important;
+	font-size: 12px !important;
+	text-align: left !important;
+}
+
+.inputIzqM2, .inputIzqM2 input {
+	width: 170px !important;
+	font-size: 12px !important;
+	text-align: left !important;
+}
+
+.inputIzqM3, .inputIzqM3 input {
+	width: 300px !important;
+	font-size: 16px !important;
+	text-align: left !important;
+}
+
+.inputIzqM4, .inputIzqM2 input {
+	width: 100px !important;
+	font-size: 12px !important;
+	text-align: left !important;
+}
+
+.inputIzqS2 {
+	width: 45px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqS2 input {
+	width: 45px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqS1 {
+	width: 35px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputIzqS1 input {
+	width: 35px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputDerM1 {
+	width: 90px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputDerM1 input {
+	width: 90px;
+	font-size: 12px;
+	text-align: right;
+}
+
+.inputDerM2 {
+	width: 90% !important;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputDerM2 input {
+	width: 50% !important;
+	font-size: 12px;
+	text-align: right;
+}
+
+.inputDerS2 {
+	width: 45px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputDerS2 input {
+	width: 45px;
+	font-size: 12px;
+	text-align: right;
+}
+
+.inputDerS1 {
+	width: 35px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputDerS1 input {
+	width: 35px;
+	font-size: 12px;
+	text-align: right;
+}
+
+.inputDer input {
+	font-size: 12px;
+	text-align: right;
+}
+
+.ui-blockui {
+	z-index: 5000 !important;
+}
+
+.ui-blockui-content {
+	z-index: 5000 !important;
+}
+
+/** Agenda **/
+.fc .fc-header tr, .fc .fc-header td {
+	border: none !important;
+}
+
+.fc table {
+	border-collapse: collapse !important;
+	border-spacing: 0 !important;
+}
+
+.fc td, .fc th {
+	padding: 0 !important;
+	vertical-align: top !important;
+	border: 1px solid #a6c9e2 !important;
+}
+
+.fechaPasada {
+    background: #cccccc !important;
+}
+/** Agenda **/

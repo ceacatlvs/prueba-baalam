@@ -1,0 +1,151 @@
+.ui-top {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-bottom {
+	background: #2E6E9E !important;
+	
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-btmLeft, .ui-btmLeft .ui-layout-unit-content {
+	background: #2E6E9E !important;
+	color: white !important;
+	font-size: 13px !important;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	
+	padding-top: 7px !important;
+	padding-right: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 5px !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-btmCenter, .ui-btmCenter .ui-layout-unit-content {
+	background: #2E6E9E !important;
+	color: white !important;
+	text-align: right !important;
+	font-size: 13px !important;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	
+	padding-top: 7px !important;
+	padding-right: 5px !important;
+	padding-bottom: 0px !important;
+	padding-left: 0px !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-left {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+} 
+
+.ui-right {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+} 
+  	
+.ui-center {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-ctrLeft {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.ui-ctrCenter {
+	padding-top: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	
+	border: none !important;
+ 	border-style: hidden !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.panelFormulario, .panelFormulario .ui-layout-unit-content {
+	background: #FFFFFF !important;
+}
+
+.links {
+	color: #FFFFFF !important;
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-size: 13px !important;
+	font-weight: normal !important;
+}

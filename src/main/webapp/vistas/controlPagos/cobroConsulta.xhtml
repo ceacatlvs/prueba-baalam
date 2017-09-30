@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	<h:outputScript library="js" name="locales.js" />
+	
+	<p:panelGrid styleClass="panelGrid-FormularioSimple">
+		<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid>
+			<p:row><p:column styleClass="tipoFuente" colspan="4"><p:panelGrid>
+				<p:row>
+					<p:column style="width:100px;" styleClass="labelDer">
+						<p:outputLabel value="Fecha: " />
+					</p:column>
+					<p:column colspan="3">
+						<h:outputText value="#{padecimientoActualMB.padecimientoActual.fechaConsulta}" >
+							<f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" timeZone="Mexico/General" />
+						</h:outputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:selectBooleanCheckbox id="conCortesia" itemLabel="Cortesía: " value="#{cpCobroConsultaMB.cobroConsulta.cortesia}"/>
+					</p:column>
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="conMonto" value="Monto: " />
+					</p:column>
+					<p:column styleClass="inputDerM1">
+						<pe:inputNumber id="conMonto" minValue="0"  symbol="$" symbolPosition="p"  
+										decimalSeparator="." decimalPlaces="2" thousandSeparator="," value="#{cpCobroConsultaMB.cobroConsulta.monto}"/>
+					</p:column>
+					<p:column styleClass="labelDer">
+						<p:selectBooleanCheckbox id="conRecibo" itemLabel="Recibo: " value="#{cpCobroConsultaMB.cobroConsulta.recibo}"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="labelDerTop1">
+						<p:outputLabel value="Descripción: " for="conDescripcion" />
+					</p:column>
+					<p:column colspan="3">
+						<p:inputTextarea id="conDescripcion" maxlength="300" rows="4" cols="45" value="#{cpCobroConsultaMB.cobroConsulta.notas}"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid></p:column></p:row>
+		</p:panelGrid></p:column></p:row>
+	
+	</p:panelGrid>	
+	
+</ui:composition>

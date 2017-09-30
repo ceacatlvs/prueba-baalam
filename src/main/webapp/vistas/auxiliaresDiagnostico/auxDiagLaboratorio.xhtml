@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100%;"><p:panelGrid style="width: 100%;">
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adBioHema" value="Biometría hemática: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adBioHema" value="#{adsLaboratorioMB.adsLab.biometriaHematica}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adQuimSan" value="Química sanguínea: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adQuimSan" value="#{adsLaboratorioMB.adsLab.quimicaSanguinea}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel styleClass="labelIzqMiddle" for="adQuimSanElem"  value="de: " />
+					<p:inputText styleClass="inputDerS1" id="adQuimSanElem" value="#{adsLaboratorioMB.adsLab.elementosQS}" maxlength="3"
+								 onkeypress='return capturarNumero(event)' onkeydown='return revisarBase(event)' style="text-align: right;" />
+					<p:outputLabel styleClass="labelIzqMiddle" for="adQuimSanElem" value="elementos" />
+					<p:watermark value="0" for="adQuimSanElem"/>
+				</p:column>
+				<p:column/>
+				<p:column/>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adGpoRhSan" value="Grupo y RH sanguíneo: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adGpoRhSan" value="#{adsLaboratorioMB.adsLab.gpoRhSanguineo}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adVdrl" value="VDRL: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adVdrl" value="#{adsLaboratorioMB.adsLab.vdrl}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adTProtom" value="Tiempo de protrombina: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adTProtom" value="#{adsLaboratorioMB.adsLab.tiempoProtrombina}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adTProtomParc" value="Tiempo de protrombina parcial: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adTProtomParc" value="#{adsLaboratorioMB.adsLab.tiempoTromboplastinaParcial}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adEgo" value="Examen general de orina: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adEgo" value="#{adsLaboratorioMB.adsLab.ego}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adUrocult" value="Urocultivo: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adUrocult" value="#{adsLaboratorioMB.adsLab.urocultivo}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adGlucPosCarg" value="Glucosa postcarga 50 g: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adGlucPosCarg" value="#{adsLaboratorioMB.adsLab.glucosaPoscarga50}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adCurvTolGluc" value="Curva tolerancia a la glucosa oral: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adCurvTolGluc" value="#{adsLaboratorioMB.adsLab.curvaToleranciaGlucosaOral}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adCitoCerv" value="Citología cervical: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adCitoCerv" value="#{adsLaboratorioMB.adsLab.citologiaCervical}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDer">
+					<p:outputLabel for="adCultSecrVag" value="Cultivo secreciones vaginales: " />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="adCultSecrVag" value="#{adsLaboratorioMB.adsLab.cultivoSecrecionesVaginales}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="labelDerTop1" style="width: 25%;" >
+					<p:outputLabel for="adOtros" value="Otros: " />
+				</p:column>
+				<p:column colspan="4" style="width: 75%;" >
+					<p:inputTextarea id="adOtros" value="#{adsLaboratorioMB.adsLab.otrosDescripcion}" autoResize="false" 
+								 	 rows="3" style="width: 75%;" maxlength="300" />
+				</p:column>
+			</p:row>
+
+		</p:panelGrid></p:column></p:row>
+		
+	</p:panelGrid>
+
+</ui:composition>

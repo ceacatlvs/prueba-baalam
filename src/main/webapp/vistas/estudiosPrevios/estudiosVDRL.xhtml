@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;">
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaVDRLEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaVDRLEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+									maxdate="#{epVdrlVIHMB.fechaHoy}" value="#{epVdrlVIHMB.epVH.fechaVdrl}" pages="3"
+									onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="options" value="#{epVdrlVIHMB.epVH.resultadoVdrl}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>										
+			</p:panelGrid>
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSeccionTab"><h:outputText value="HIV"></h:outputText></p:column>
+		</p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;">
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaHIVEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaHIVEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+									maxdate="#{epVdrlVIHMB.fechaHoy}" value="#{epVdrlVIHMB.epVH.fechaHIV}"
+									onkeydown='return revisarBase(event)' />								
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="optionsHIV" value="#{epVdrlVIHMB.epVH.resultadoHIV}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>										
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

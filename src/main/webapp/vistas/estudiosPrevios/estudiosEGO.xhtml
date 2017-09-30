@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+			
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaEgoEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaEgoEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+							  		showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+							  		maxdate="#{epEgoMB.fechaHoy}" value="#{epEgoMB.epEGO.fechaEgo}" onkeypress='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="options" value="#{epEgoMB.epEGO.resultadoEgo}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosEgoPH" value="pH:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosEgoPH" value="#{epEgoMB.epEGO.ph}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoPH"/>
+						<p:outputLabel styleClass="labelDerMiddle" for="estudiosEgoPH" value="g" />
+					</p:column>
+					
+					<p:column style="width: 5% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosEgoAsp" value="Aspecto:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosEgoAsp" value="#{epEgoMB.epEGO.aspecto}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoAsp"/>
+					</p:column>
+					
+					<p:column style="width: 5% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosEgoHemo" value="Hemoglobina:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 25% !important;" >
+						<p:inputText id="estudiosEgoHemo" value="#{epEgoMB.epEGO.hemoglobina}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoHemo"/>
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosEgoProt" value="Proteínas:" />
+					</p:column>
+					<p:column styleClass="inputDerS1">
+						<p:inputText id="estudiosEgoProt" value="#{epEgoMB.epEGO.proteinas}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoProt"/>
+					</p:column>
+					
+					<p:column />
+					
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosEgoNitr" value="Nitritos:" />
+					</p:column>
+					<p:column styleClass="inputDerS1">
+						<p:inputText id="estudiosEgoNitr" value="#{epEgoMB.epEGO.nitritos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoNitr"/>
+					</p:column>
+					
+					<p:column />
+					
+					<p:column styleClass="labelDer">
+						<p:outputLabel for="estudiosEgoCC" value="Cuerpos cetónicos:" />
+					</p:column>
+					<p:column styleClass="inputDerS1">
+						<p:inputText id="estudiosEgoCC" value="#{epEgoMB.epEGO.cuerposCetonicos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoCC"/>
+					</p:column>
+				</p:row>						
+			</p:panelGrid>
+			
+			<p:spacer height="15" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="tituloSubSeccion">
+						<p:outputLabel value="Sedimento" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 13% !important;" >
+						<p:outputLabel for="estudiosEgoBact" value="Bacterias:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 12% !important;" >
+						<p:inputText id="estudiosEgoBact" value="#{epEgoMB.epEGO.sedimentoBacterias}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoBact"/>
+						<p:outputLabel styleClass="labelDerMiddle" for="estudiosEgoBact" value="g" />
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 13% !important;" >
+						<p:outputLabel for="estudiosEgoLeuco" value="Leucocitos:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosEgoLeuco" value="#{epEgoMB.epEGO.sedimentoLeucocitos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoLeuco"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 13% !important;" >
+						<p:outputLabel for="estudiosEgoEri" value="Eritrocitos:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosEgoEri" value="#{epEgoMB.epEGO.sedimentoEritrocitos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoEri"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 13% !important;">
+						<p:outputLabel for="estudiosEgoPio" value="Piocitos:" />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosEgoPio" value="#{epEgoMB.epEGO.sedimentoPiocitos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosEgoPio"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

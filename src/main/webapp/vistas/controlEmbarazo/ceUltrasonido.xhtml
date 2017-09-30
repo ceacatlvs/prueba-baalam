@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 60%;">
+		
+		<p:row><p:column styleClass="tipoFuente" colspan="4" style="width: 100%;"><p:panelGrid style="width: 100%;">
+		
+			<p:row><p:column colspan="8" style="width: 100%;"><p:outputPanel id="ceOpUltrasonido" style="width: 100%;">
+				<p:panelGrid id="cePgUltrasonido" style="width: 100%;">
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel for="ultFecha" value="Fecha: " />
+						</p:column>
+						<p:column colspan="10">
+							<p:calendar styleClass="inputDerM1" id="ultFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+										value="#{ceUltrasonidoMB.ultrasonido.fechaUltrasonido}" showButtonPanel="true" navigator="true" effect="slideDown" 
+										readonlyInput="true" maxdate="#{ceUltrasonidoMB.fechaHoy}" yearRange="c-100:c" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="CRL: " for="ultCRL" />
+						</p:column>
+						<p:column style="width: 20%;" styleClass="inputDerS1">
+							<p:inputText id="ultCRL" value="#{ceUltrasonidoMB.ultrasonido.crl}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultCRL" />
+							<p:outputLabel value=" mm" for="ultCRL" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="TN: " for="ultTN" />
+						</p:column>
+						<p:column style="width: 20%;" styleClass="inputDerS1">
+							<p:inputText id="ultTN" value="#{ceUltrasonidoMB.ultrasonido.tn}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultTN" />
+							<p:outputLabel value=" mm" for="ultTN" />
+						</p:column>
+						<p:column style="width: 5%;" />
+						<p:column style="width: 10%;" styleClass="labelDer">
+							<p:outputLabel value="DBP: " for="ultDBP" />
+						</p:column>
+						<p:column style="width: 20%;" styleClass="inputDerS1">
+							<p:inputText id="ultDBP" value="#{ceUltrasonidoMB.ultrasonido.dbp}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultDBP" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="CA: " for="ultCA" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultCA" value="#{ceUltrasonidoMB.ultrasonido.ca}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultCA" />
+							<p:outputLabel value=" mm" for="ultCA" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="LF: " for="ultLF" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultLF" value="#{ceUltrasonidoMB.ultrasonido.lf}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultLF" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="HUM: " for="ultHUM" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultHUM" value="#{ceUltrasonidoMB.ultrasonido.hum}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultHUM" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="EG: " for="ultEG" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:spinner id="ultEG" min="0" size="1" value="#{ceUltrasonidoMB.ultrasonido.eg}" />
+							<p:watermark value="0" for="ultEG" />
+							<p:outputLabel value=" semanas" for="ultEG" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Peso: " for="ultPeso" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultPeso" value="#{ceUltrasonidoMB.ultrasonido.peso}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultPeso" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Placenta: " for="ultPlacenta" />
+						</p:column>
+						<p:column>
+							<p:selectOneRadio id="ultPlacenta" value="#{ceUltrasonidoMB.ultrasonido.idPlacenta.idPlacenta}" >
+								<p:ajax event="change" listener="#{ceUltrasonidoMB.setDescripcionPlacenta()}" />  
+								<f:selectItems value="#{ceUltrasonidoMB.tipoPlacenta}" var="tipoPlacenta" itemLabel="#{tipoPlacenta.descripcion}" 
+											   itemValue="#{tipoPlacenta.idPlacenta}" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="LA: " for="ultLA" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu id="ultLA" value="#{ceUltrasonidoMB.ultrasonido.idLA.idLA}" >
+								<p:ajax event="change" listener="#{ceUltrasonidoMB.setDescripcionLA()}" />
+								<f:selectItem itemLabel="Elija..." itemValue="" />
+								<f:selectItems value="#{ceUltrasonidoMB.tipoLA}" var="tipoLA" itemLabel="#{tipoLA.descripcion}" itemValue="#{tipoLA.idLA}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="IRUmb: " for="ultIRUmb" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultIRUmb" value="#{ceUltrasonidoMB.ultrasonido.irumb}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultIRUmb" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="IRUt: " for="ultIRUt" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultIRUt" value="#{ceUltrasonidoMB.ultrasonido.irut}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultIRUt" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="IRACM: " for="ultIRACM" />
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:inputText id="ultIRACM" value="#{ceUltrasonidoMB.ultrasonido.iracm}" maxlength="5"  
+							 	 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+							<p:watermark value="0.0" for="ultIRACM" />
+						</p:column>
+						<p:column />
+						<p:column styleClass="labelDer">
+							<p:outputLabel value="Sexo: " for="ultSexo" />
+						</p:column>
+						<p:column colspan="4">
+							<p:selectOneRadio id="ultSexo" value="#{ceUltrasonidoMB.ultrasonido.idSexo.idSexo}" >  
+								<p:ajax event="change" listener="#{ceUltrasonidoMB.setDescripcionSexo()}" />  
+								<f:selectItems value="#{ceUltrasonidoMB.tipoSexo}" var="tipoSexo" itemLabel="#{tipoSexo.descripcion}"
+											   itemValue="#{tipoSexo.idSexo}" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDerTop1">
+							<p:outputLabel for="ultOtros" value="Otros:" />
+						</p:column>
+						<p:column styleClass="labelIzq" colspan="7">
+							<p:inputTextarea id="ultOtros" value="#{ceUltrasonidoMB.ultrasonido.otros}" autoResize="false" 
+								     		 rows="5" style="width: 75%;" maxlength="500" />
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column styleClass="labelDer" colspan="11">
+							<p:commandButton id="ceUltLimpiar" value="Limpiar" icon="ui-icon-clipboard" update="cePgUltrasonido" process="@this" >
+								<p:resetInput target="cePgUltrasonido" />
+							</p:commandButton>
+							<p:commandButton id="ceUltAgregar" value="Registrar" icon="ui-icon-plusthick" action="#{ceUltrasonidoMB.reinit()}" 
+											 update="cePgUltrasonido ultrasonido" process="@this ultFecha ultCRL ultTN ultDBP ultCA ultLF ultHUM ultEG ultPeso 
+											 													   ultPlacenta ultLA ultIRUmb ultIRUt ultIRACM ultSexo ultOtros" >
+								<p:collector value="#{ceUltrasonidoMB.ultrasonido}" addTo="#{ceUltrasonidoMB.ultrasonidos}" />
+			                </p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:outputPanel></p:column></p:row>
+		
+		</p:panelGrid></p:column></p:row>
+
+	</p:panelGrid>
+				
+	<br />
+					
+	<p:panelGrid>
+		<p:row>
+			<p:column>
+				<p:outputPanel id="ultrasonido" style="width: 1500px;" >
+					<p:dataTable styleClass="panelGrid-Tabla" id="ceTblUltrasonido" editable="true" widgetVar="tblUltrasonido"
+								 emptyMessage="No se tienen registrados ultrasonidos." value="#{ceUltrasonidoMB.ultrasonidos}" var="ultrasonido" >
+						<p:columnGroup type="header">
+							<p:row>
+								<p:column headerText="Fecha" style="width: 10%;" />
+								<p:column headerText="CRL"	 style="width: 3%;" />
+								<p:column headerText="TN"	 style="width: 3%;" />
+								<p:column headerText="DBP"	 style="width: 3%;" />
+								<p:column headerText="CA"	 style="width: 3%;" />
+								<p:column headerText="LF"	 style="width: 3%;" />
+								<p:column headerText="HUM"	 style="width: 3%;" />
+								<p:column headerText="EG"	 style="width: 3%;" />
+								<p:column headerText="Peso"	 style="width: 3%;" />
+								<p:column headerText="Placenta"	style="width: 14%;" />
+								<p:column headerText="LA"	 style="width: 10%;" />
+								<p:column headerText="IRUmb" style="width: 5%;" />
+								<p:column headerText="IRUt"	 style="width: 3%;" />
+								<p:column headerText="IRACM" style="width: 5%;" />
+								<p:column headerText="Sexo"	 style="width: 10%;" />
+								<p:column headerText="Otros" style="width: 14%;" />
+								<p:column colspan="2" headerText="Editar" style="width: 5%;" />
+							</p:row>
+						</p:columnGroup>
+						
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.fechaUltrasonido}"><f:convertDateTime pattern="dd/MMM/yyyy" /></h:outputText>
+								</f:facet>
+								<f:facet name="input" >
+									<p:calendar styleClass="inputDerM1" id="ceUltModelFecha" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+												value="#{ultrasonido.fechaUltrasonido}" showButtonPanel="true" navigator="true" effect="slideDown" 
+												readonlyInput="true" maxdate="#{ceUltrasonidoMB.fechaHoy}" yearRange="c-100:c" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.crl}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelCRL" value="#{ultrasonido.crl}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.tn}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelTN" value="#{ultrasonido.tn}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.dbp}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelDBP" value="#{ultrasonido.dbp}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.ca}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelCA" value="#{ultrasonido.ca}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.lf}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelLF" value="#{ultrasonido.lf}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.hum}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelHUM" value="#{ultrasonido.hum}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.eg}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:spinner id="ceUltModelEG" min="0" size="1" value="#{ultrasonido.eg}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.peso}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelPeso" value="#{ultrasonido.peso}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.idPlacenta.descripcion}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:selectOneRadio id="ceUltModelPlacenta" value="#{ultrasonido.idPlacenta.idPlacenta}" >
+										<p:ajax event="change" listener="#{ceUltrasonidoMB.cambiarDescripcionPlacenta(ultrasonido)}" />  
+										<f:selectItems value="#{ceUltrasonidoMB.tipoPlacenta}" var="tipoPlacenta" 
+													   itemLabel="#{tipoPlacenta.descripcion}" itemValue="#{tipoPlacenta.idPlacenta}" />
+									</p:selectOneRadio>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.idLA.descripcion}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:selectOneMenu id="ceUltModelLA" value="#{ultrasonido.idLA.idLA}" style="width: 95%;" >
+										<p:ajax event="change" listener="#{ceUltrasonidoMB.cambiarDescripcionLA(ultrasonido)}" />
+										<f:selectItem itemLabel="Elija una opción" itemValue="" />
+										<f:selectItems value="#{ceUltrasonidoMB.tipoLA}" var="tipoLA" 
+													   itemLabel="#{tipoLA.descripcion}" itemValue="#{tipoLA.idLA}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.irumb}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelIRUmb" value="#{ultrasonido.irumb}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.irut}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelIRUt" value="#{ultrasonido.irut}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column styleClass="inputDerS1">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.iracm}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputText id="ceUltModelIRACM" value="#{ultrasonido.iracm}" maxlength="5"  
+							 	 		 		 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.idSexo.descripcion}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:selectOneRadio id="ceUltModelSexo" value="#{ultrasonido.idSexo.idSexo}" >  
+										<p:ajax event="change" listener="#{ceUltrasonidoMB.cambiarDescripcionSexo(ultrasonido)}" />  
+										<f:selectItems value="#{ceUltrasonidoMB.tipoSexo}" var="tipoSexo" 
+													   itemLabel="#{tipoSexo.descripcion}" itemValue="#{tipoSexo.idSexo}" />
+									</p:selectOneRadio>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{ultrasonido.otros}" />
+								</f:facet>
+								<f:facet name="input" >
+									<p:inputTextarea id="ceUltModelOtros" value="#{ultrasonido.otros}" autoResize="false" 
+								     		 		 rows="3" style="width: 95%;" maxlength="500" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+						<p:column>
+							<p:rowEditor id="ceReUltrasonido" />
+						</p:column>
+						<p:column>
+							<p:commandLink id="ceEliminarUltrasonido" styleClass="ui-icon ui-icon-trash" update=":formCE:ultrasonido" process=":formCE:ultrasonido" >
+                            	<p:collector value="#{ultrasonido}" removeFrom="#{ceUltrasonidoMB.ultrasonidos}" ></p:collector>
+                            </p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+
+</ui:composition>

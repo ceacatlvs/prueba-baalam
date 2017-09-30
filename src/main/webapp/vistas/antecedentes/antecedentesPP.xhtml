@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100%;">
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSubSeccion"><p:outputLabel value="Enfermedades" /></p:column>
+		</p:row>
+		<p:row><p:column colspan="6" styleClass="labelIzqMiddle">
+			<p:outputLabel value="Para agregar una enfermedad a la tabla primero llene los campos 
+							   	  y después dé clic en el botón 'Agregar'." />
+		</p:column></p:row>
+		<p:row><p:column styleClass="tipoFuente">
+			<p:panelGrid id="appPgEnfermedades" styleClass="panelGrid-Tabla" style="width: 100%;">
+				<f:facet name="header"><p:row>
+					<p:column style="width: 23%;"><p:outputLabel value="Enfermedad" /></p:column>
+					<p:column style="width: 15%;"><p:outputLabel value="Fecha de diagnóstico" /></p:column>
+					<p:column style="width: 23%;"><p:outputLabel value="Estado actual" /></p:column>
+					<p:column style="width: 26%;"><p:outputLabel value="Tratamiento" /></p:column>
+					<p:column style="width: 13%;"><p:outputLabel value=" " /></p:column>
+				</p:row></f:facet>
+				<p:row>
+					<p:column style="width: 23%;">
+						<p:autoComplete id="appEnfermedadNombre" value="#{antecedentesPPMB.enfermedad.nombreEnfermedad}" 
+										completeMethod="#{antecedentesPPMB.buscarEnfermedades}" onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 15%;" styleClass="inputDerM1">
+						<p:inputMask id="appEnfermedadFecha" style="width: 90% !important;" value="#{antecedentesPPMB.enfermedad.fechaDiagnostico}"
+									 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 onkeydown='return revisarBase(event)' >
+							<f:convertDateTime pattern="dd/MMM/yyyy" />
+						</p:inputMask>
+					</p:column>
+					<p:column style="width: 23%;">
+						<p:selectOneMenu id="appEnfermedadEdoActual" value="#{antecedentesPPMB.enfermedad.idCatEnfEdoActual.idCatEnfEdoActual}" 
+										 effect="fade" editable="false">
+							<p:ajax event="change" listener="#{antecedentesPPMB.setDescripcionEdoActualEnfermedad()}" />							           											
+							<f:selectItems value="#{antecedentesPPMB.edoActual}" var="edoActual" itemLabel="#{edoActual.descripcion}" 
+										   itemValue="#{edoActual.idCatEnfEdoActual}"/>
+						</p:selectOneMenu>
+					</p:column>
+					<p:column style="width: 26%;">
+						<p:inputTextarea id="appEnfermedadTratamiento" value="#{antecedentesPPMB.enfermedad.tratamiento}" autoResize="false" 
+								 		 rows="2" style="width: 95%;" maxlength="500" />
+					</p:column>
+					<p:column style="width: 13% !important;">
+						<p:commandButton id="appEnfermedadAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesPPMB.reinitEnfermedad()}" 
+										 update="appPgEnfermedades appOpEnfermedades" 
+										 process="@this appEnfermedadNombre appEnfermedadFecha appEnfermedadEdoActual appEnfermedadTratamiento" >
+							<p:collector value="#{antecedentesPPMB.enfermedad}" addTo="#{antecedentesPPMB.enfermedades}" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:outputPanel id="appOpEnfermedades" style="width: 100%;">
+				<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.8%;" id="appTblEnfermedades" 
+							 value="#{antecedentesPPMB.enfermedades}" var="appEnfermedad" editable="true" widgetVar="appTblEnfermedades" 
+							 emptyMessage="No se tienen registradas enfermedades.">
+					<p:column style="width: 23.4%;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{appEnfermedad.nombreEnfermedad}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:autoComplete id="appEnfermedadNombreModel" value="#{appEnfermedad.nombreEnfermedad}" 
+												completeMethod="#{antecedentesPPMB.buscarEnfermedades}" onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 15.2%;" styleClass="inputDerM1">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel styleClass="labelDer" value="#{appEnfermedad.fechaDiagnostico}">
+									<f:convertDateTime pattern="dd/MMM/yyyy" />
+								</p:outputLabel>
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputMask id="appEnfermedadFechaModel" style="width: 90% !important;" value="#{appEnfermedad.fechaDiagnostico}"
+									 		 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 		 onkeydown='return revisarBase(event)' >
+									<f:convertDateTime pattern="dd/MMM/yyyy" />
+								</p:inputMask>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 23.4%;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{appEnfermedad.idCatEnfEdoActual.descripcion}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:selectOneMenu id="appEnfermedadEdoActualModel" value="#{appEnfermedad.idCatEnfEdoActual.idCatEnfEdoActual}"
+												 effect="fade" editable="false" style="width: 75%;" >				 
+									<f:selectItems value="#{antecedentesPPMB.edoActual}" var="edoActual" itemLabel="#{edoActual.descripcion}" 
+												   itemValue="#{edoActual.idCatEnfEdoActual}"/>
+								</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 26.2%;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{appEnfermedad.tratamiento}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputTextarea id="appEnfermedadTratamientoModel" value="#{appEnfermedad.tratamiento}" autoResize="false" 
+								 		 		 rows="2" style="width: 95%;" maxlength="500" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 8.7%">
+						<p:rowEditor id="appReEnfermedad" />
+					</p:column>
+					<p:column style="width: 1.8%">
+						<p:commandLink id="appEliminarEnfermedad" styleClass="ui-icon ui-icon-trash" 
+									   update="@this :formAntecedentes:appFrmMain:appTblEnfermedades"
+									   process="@this :formAntecedentes:appFrmMain:appTblEnfermedades" >
+							<p:collector value="#{appEnfermedad}" removeFrom="#{antecedentesPPMB.enfermedades}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row><p:column colspan="4" /></p:row>
+		
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSubSeccion"><p:outputLabel value="Hospitalizaciones y cirugías" /></p:column>
+		</p:row>
+		<p:row><p:column colspan="6" styleClass="labelIzqMiddle">
+			<p:outputLabel value="Para agregar una hospitalización o cirugía a la tabla primero llene los campos 
+							   	  y después dé clic en el botón 'Agregar'." />
+		</p:column></p:row>
+		<p:row><p:column styleClass="tipoFuente" colspan="4">
+			<p:panelGrid id="appPgHyC" styleClass="panelGrid-Tabla" style="width: 100% !important;">
+				<f:facet name="header">
+					<p:row>
+						<p:column style="width: 26% !important;">
+							<p:outputLabel value="Causa" />
+						</p:column>
+						<p:column style="width: 17% !important;">
+							<p:outputLabel value="Fecha" />
+						</p:column>
+						<p:column style="width: 25% !important;">
+							<p:outputLabel value="Hospital" />
+						</p:column>
+						<p:column style="width: 18% !important;">
+							<p:outputLabel value="Estado actual" />
+						</p:column>
+						<p:column style="width: 14% !important;">
+							<p:outputLabel value=" " />
+						</p:column>
+					</p:row>
+				</f:facet>
+				<p:row>
+					<p:column style="width: 26% !important;">
+						<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appHyCCausa" value="#{antecedentesPPMB.hospCir.causa}"
+							 		 onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 17% !important;" styleClass="inputDerM1">
+						<p:inputMask id="appHyCFecha" value="#{antecedentesPPMB.hospCir.fecha}" style="width: 90% !important;"
+									 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 onkeydown='return revisarBase(event)' >
+							<f:convertDateTime pattern="dd/MMM/yyyy" />
+						</p:inputMask>
+					</p:column>
+					<p:column style="width: 25% !important;">
+						<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appHyCHospital" value="#{antecedentesPPMB.hospCir.hospital}"
+							 		 onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 18% !important;">
+						<p:inputText styleClass="inputIzqM4" style="width: 90% !important;" id="appHyCEdoActual" value="#{antecedentesPPMB.hospCir.edoActual}"
+							 		 onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 14% !important;" styleClass="labelIzq">
+						<p:commandButton id="appHyCAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesPPMB.reinitHospyCir()}"
+										 update="appPgHyC hyc" process="@this appHyCCausa appHyCFecha appHyCHospital appHyCEdoActual" >
+							<p:collector value="#{antecedentesPPMB.hospCir}" addTo="#{antecedentesPPMB.listaHospCir}" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:outputPanel id="hyc" style="width: 100%;">
+				<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.8% !important;" id="appTblHyC"
+							 value="#{antecedentesPPMB.listaHospCir}" var="hospCir" editable="true" widgetVar="tblHyC" 
+							 emptyMessage="No se tienen registrados hospitales y cirugías." >
+					<p:column style="width: 25.9% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{hospCir.causa}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appCausaModelHyC" value="#{hospCir.causa}"
+							 		 		 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 17% !important;" styleClass="inputDerM1">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{hospCir.fecha}"><f:convertDateTime pattern="dd/MMM/yyyy" /></h:outputText>
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputMask id="appFechaModelHyC" value="#{hospCir.fecha}" style="width: 90% !important;"
+									 		 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 		 onkeydown='return revisarBase(event)' >
+									<f:convertDateTime pattern="dd/MMM/yyyy" />
+								</p:inputMask>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 25.2% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{hospCir.hospital}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appHospitalModelHyC" value="#{hospCir.hospital}"
+							 		 		 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 18% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{hospCir.edoActual}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqM4" style="width: 90% !important;" id="appEdoActualModelHyC" value="#{hospCir.edoActual}"
+							 		 		 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column style="width: 8.9% !important;">
+						<p:rowEditor id="appReHyC" />
+					</p:column>
+					<p:column style="width: 5% !important;">
+						<p:commandLink id="appEliminarHyC" styleClass="ui-icon ui-icon-trash"
+									   update=":formAntecedentes:appFrmMain:hyc" process="@this :formAntecedentes:appFrmMain:hyc" >
+							<p:collector value="#{hospCir}" removeFrom="#{antecedentesPPMB.listaHospCir}" ></p:collector>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row><p:column colspan="4"></p:column></p:row>
+		
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSubSeccion"><p:outputLabel value="Enfermedades o accidentes" /></p:column>
+		</p:row>
+		<p:row><p:column colspan="6" styleClass="labelIzqMiddle">
+			<p:outputLabel value="Para agregar una enfermedad o un accidente a la tabla primero llene los campos 
+							   	  y después dé clic en el botón 'Agregar'." />
+		</p:column></p:row>
+		<p:row><p:column styleClass="tipoFuente" colspan="4">
+			<p:panelGrid id="appPgEoA" styleClass="panelGrid-Tabla" style="width: 100% !important;">
+				<f:facet name="header">
+					<p:row>
+						<p:column style="width: 65% !important;">
+							<p:outputLabel value="Tipo de enfermedad o accidente" />
+						</p:column>
+						<p:column style="width: 20% !important;">
+							<p:outputLabel value="Fecha" />
+						</p:column>
+						<p:column style="width: 15% !important;">
+							<p:outputLabel value=" " />
+						</p:column>
+					</p:row>
+				</f:facet>
+				<p:row>
+					<p:column style="width: 65% !important;">
+						<p:inputText styleClass="inputIzqL2" style="width: 95% !important;" id="appEoATipo" value="#{antecedentesPPMB.enfAcc.tipo}"
+							 		 onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 20% !important;" styleClass="inputDerM1">
+						<p:inputMask id="appEoAFecha" value="#{antecedentesPPMB.enfAcc.fecha}" style="width: 95% !important;"
+									 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 onkeydown='return revisarBase(event)' >
+							<f:convertDateTime pattern="dd/MMM/yyyy" />
+						</p:inputMask>
+					</p:column>
+					<p:column style="width: 15% !important;">
+						<p:commandButton id="appEoAAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesPPMB.reinitEnfAcc()}"
+										 update="appPgEoA eoa" process="@this appEoATipo appEoAFecha" >
+							<p:collector value="#{antecedentesPPMB.enfAcc}" addTo="#{antecedentesPPMB.listaEnfAcc}" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:outputPanel id="eoa" style="width: 100% !important;">
+				<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.8% !important;" id="appTblEoA" 
+							 value="#{antecedentesPPMB.listaEnfAcc}" var="enfAcc" editable="true" widgetVar="tblEoA" 
+							 emptyMessage="No se tienen registradas enfermedades o accidentes." >
+					<p:column style="width: 65% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{enfAcc.tipo}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appTipoModelEoA" value="#{enfAcc.tipo}"
+							 		 		 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 20.1% !important;" styleClass="inputDerM1">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{enfAcc.fecha}">
+									<f:convertDateTime pattern="dd/MMM/yyyy" onkeydown='return revisarBase(event)' />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputMask id="appFechaModelEoA" value="#{enfAcc.fecha}" style="width: 95% !important;"
+									 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 onkeypress='return revisarBase(event)' >
+									<f:convertDateTime pattern="dd/MMM/yyyy" />
+								</p:inputMask>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 9.9% !important;">
+						<p:rowEditor id="appReAyE" />
+					</p:column>
+					<p:column style="width: 5% !important;">
+						<p:commandLink id="appEliminarEoA" styleClass="ui-icon ui-icon-trash" 
+									   update=":formAntecedentes:appFrmMain:eoa" process="@this :formAntecedentes:appFrmMain:eoa" >
+							<p:collector value="#{enfAcc}" removeFrom="#{antecedentesPPMB.listaEnfAcc}" ></p:collector>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row><p:column colspan="4"></p:column></p:row>
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSubSeccion"><p:outputLabel value="Vacunas" /></p:column>
+		</p:row>
+		<p:row><p:column colspan="6" styleClass="labelIzqMiddle">
+			<p:outputLabel value="Para agregar otras vacunas a la tabla primero llene los campos en 'Otras vacunas'  
+							   	  y después dé clic en el botón 'Agregar'." />
+		</p:column></p:row>
+		<p:row><p:column styleClass="tipoFuente" colspan="4">
+			<p:panelGrid styleClass="panelGrid-Tabla" id="appPgVacunas" style="width: 100% !important;">
+				<f:facet name="header">
+					<p:row>
+						<p:column style="width: 20% !important;">
+							<p:outputLabel value="Vacuna" />
+						</p:column>
+						<p:column style="width: 15% !important;">
+							<p:outputLabel value="Fecha" />
+						</p:column>
+						<p:column style="width: 65% !important;" colspan="2">
+							<p:outputLabel value="Observaciones" />
+						</p:column>
+					</p:row>
+				</f:facet>					
+				<p:row>
+					<p:column colspan="3" style="padding: 0 !important;">
+						<p:dataGrid var="vacuna" value="#{antecedentesPPMB.vacunas}" rows="#{antecedentesPPMB.vacunas.size()}" columns="1" 
+									style="width: 100% !important;" >
+							<p:panelGrid styleClass="panelGrid-Tabla" id="appPDGVacunas" style="width: 100% !important;">													
+								<p:row>
+									<p:column style="width: 20%;" styleClass="labelIzq">
+										<p:outputLabel value="#{vacuna.idCatAntVacunas.descripcion}" style="width: 95% !important;" />
+									</p:column>
+									<p:column style="width: 15%" styleClass="inputDerM1">
+										<p:inputMask id="appDifteriaFecha" value="#{vacuna.fecha}" style="width: 95% !important;"
+													 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+													 onkeypress='return revisarBase(event)' >
+											<f:convertDateTime pattern="dd/MMM/yyyy" />
+										</p:inputMask>
+									</p:column>
+									<p:column style="width: 65%;" colspan="2">
+										<p:inputText styleClass="inputIzqL2" style="width: 95% !important;" id="appDifteriaObservaciones" 
+													 value="#{vacuna.observaciones}" onkeypress='return revisarBase(event)' />
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+						</p:dataGrid>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panelGrid styleClass="panelGrid-Tabla" id="appPgOtrasVacunas" style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelIzq" style="width: 20.2%;">
+						<p:outputLabel value="Otras vacunas" />
+					</p:column>
+					<p:column style="width: 15%;">
+						<p:inputMask id="appOtrasFecha" value="#{antecedentesPPMB.otraVacuna.fecha}" style="width: 95% !important;"
+									 mask="99/aaa/9999" validatorMessage="La fecha necesita ser anterior al día de hoy"
+									 onkeypress='return revisarBase(event)' >
+							<f:convertDateTime pattern="dd/MMM/yyyy" />
+						</p:inputMask>
+					</p:column>												  
+					<p:column style="width: 50%;">
+						<p:inputText styleClass="inputIzqL2" style="width: 95% !important;" id="appOtrasObservaciones" 
+									 value="#{antecedentesPPMB.otraVacuna.observaciones}" onkeypress='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 14.8% !important;" styleClass="labelIzq">
+						<p:commandButton id="appOtraVacunaAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesPPMB.reinitVacuna()}"
+										 update="appPgOtrasVacunas @parent otrasVacunas" process="@this appOtrasFecha appOtrasObservaciones" >
+							<p:collector value="#{antecedentesPPMB.otraVacuna}" addTo="#{antecedentesPPMB.listaVacunas}" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>				
+			<p:outputPanel id="otrasVacunas" style="width: 100% !important;">
+				<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.8% !important;" id="appTblOtrasVacunas"
+							 value="#{antecedentesPPMB.listaVacunas}" var="otraVacuna" editable="true" widgetVar="tblOtrasVacunas"
+							 emptyMessage="No se tienen registradas otras vacunas." >
+					<p:column style="width: 20.2%;">
+						<p:outputLabel value="Otra vacuna" />
+					</p:column>
+					<p:column style="width: 14.9%;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText styleClass="labelDer" value="#{otraVacuna.fecha}">
+									<f:convertDateTime pattern="dd/MMM/yyyy" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input" >
+								<p:calendar id="appFechaModelOtraVacuna" value="#{otraVacuna.fecha}" styleClass="inputDerM1" showOn="both" 
+											yearRange="c-100:c+1" locale="es" pattern="dd/MMM/yyyy" showButtonPanel="true" navigator="true" 
+											effect="slideDown" readonlyInput="true" maxdate="#{antecedentesPPMB.fechaHoy}"
+											onkeypress='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 50.1% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{otraVacuna.observaciones}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqL2" id="appObservacionesModelOtraVacuna" value="#{otraVacuna.observaciones}"  
+									 		 onkeypress='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column style="width: 9.8% !important;">
+						<p:rowEditor id="appReOtraVacuna" />
+					</p:column>
+					<p:column style="width: 5% !important;">
+						<p:commandLink id="appEliminarOtraVacuna" styleClass="ui-icon ui-icon-trash" update=":formAntecedentes:appFrmMain:otrasVacunas"
+									   process="@this :formAntecedentes:appFrmMain:otrasVacunas" >
+							<p:collector value="#{otraVacuna}" removeFrom="#{antecedentesPPMB.listaVacunas}" ></p:collector>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+		<p:row><p:column colspan="4"></p:column></p:row>
+		<p:row>
+			<p:column colspan="4" styleClass="tituloSubSeccion"><p:outputLabel value="Medicación actual" /></p:column>
+		</p:row>
+		<p:row><p:column colspan="6" styleClass="labelIzqMiddle">
+			<p:outputLabel value="Para agregar un medicamento a la tabla primero llene los campos 
+							   	  y después dé clic en el botón 'Agregar'." />
+		</p:column></p:row>
+		<p:row><p:column styleClass="tipoFuente" colspan="4">
+			<p:panelGrid id="appPgMed" styleClass="panelGrid-Tabla" style="width: 100% !important;">
+				<f:facet name="header">
+					<p:row>
+						<p:column style="width: 35% !important;">
+							<p:outputLabel value="Medicamento" />
+						</p:column>
+						<p:column style="width: 25% !important;">
+							<p:outputLabel value="Dosis" />
+						</p:column>
+						<p:column style="width: 25% !important;">
+							<p:outputLabel value="¿Quién prescribió?" />
+						</p:column>
+						<p:column style="width: 15% !important;">
+							<p:outputLabel value=" " />
+						</p:column>
+					</p:row>
+				</f:facet>
+				<p:row>
+					<p:column style="width: 35% !important;">
+						<p:inputText styleClass="inputIzqL2" style="width: 95% !important;" id="appMedicamento" 
+									 value="#{antecedentesPPMB.medAct.medicamento}" onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 25% !important;">
+						<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appMedicamentoDosis" 
+									 value="#{antecedentesPPMB.medAct.dosis}" onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 25% !important;">
+						<p:inputText styleClass="inputIzqM2" style="width: 95% !important;" id="appMedicamentoPrescribio" 
+									 value="#{antecedentesPPMB.medAct.preescribio}" onkeydown='return revisarBase(event)' />
+					</p:column>
+					<p:column style="width: 15% !important;" styleClass="labelIzq">
+						<p:commandButton id="appMedAgregar" value="Agregar" icon="ui-icon-plusthick" action="#{antecedentesPPMB.reinitiMedAct()}"
+										 update="appPgMed med" process="@this appMedicamento appMedicamentoDosis appMedicamentoPrescribio" >
+							<p:collector value="#{antecedentesPPMB.medAct}" addTo="#{antecedentesPPMB.listMedAct}" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:outputPanel id="med" style="width: 100% !important;" >
+				<p:dataTable styleClass="panelGrid-Tabla hide-column-names" style="width: 99.8% !important;" id="appTblMed" 
+							 value="#{antecedentesPPMB.listMedAct}" var="medAct" editable="true" widgetVar="tblMed" 
+							 emptyMessage="No se tienen registrados medicamentos actuales." >
+					<p:column style="width: 35% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{medAct.medicamento}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqL2" style="width: 95% !important;" id="appMedicamentoModelMed" 
+											 value="#{medAct.medicamento}"  onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 25% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{medAct.dosis}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqM2" id="appDosisModelMed" value="#{medAct.dosis}"  
+									 		 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 25.1% !important;">
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{medAct.preescribio}" />
+							</f:facet>
+							<f:facet name="input" >
+								<p:inputText styleClass="inputIzqM2" id="appPreescribioModelMed" value="#{medAct.preescribio}"  
+									 		 onkeydown='return revisarBase(event)' />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column style="width: 9.9% !important;">
+						<p:rowEditor id="appReMed" />
+					</p:column>
+					<p:column style="width: 5% !important;">
+						<p:commandLink id="appEliminarMed" styleClass="ui-icon ui-icon-trash" update=":formAntecedentes:appFrmMain:med" 
+									   process="@this :formAntecedentes:appFrmMain:med" >
+							<p:collector value="#{medAct}" removeFrom="#{antecedentesPPMB.listMedAct}" ></p:collector>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>

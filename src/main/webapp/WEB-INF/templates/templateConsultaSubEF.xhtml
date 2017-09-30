@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition	xmlns="http://www.w3.org/1999/xhtml"
+       			xmlns:ui="http://java.sun.com/jsf/facelets"
+       			xmlns:h="http://java.sun.com/jsf/html"
+       			xmlns:p="http://primefaces.org/ui"
+       			xmlns:pe="http://primefaces.org/ui/extensions"
+       			xmlns:f="http://java.sun.com/jsf/core"
+       			template="/WEB-INF/templates/templateConsultaSub.xhtml">
+    
+    <ui:param name="subMenu" value="true" />
+    
+	<ui:define name="menuSub">
+		<h:form id="menuEF">
+			<p:tabMenu id="tabEF" styleClass="ui-menuSubSeccion" style="top: -52px !important;" activeIndex="#{activeIndexSM}" >
+				<p:menuitem value="Cuello" url="consultaSub_EF_Cuello.xhtml" />
+				<p:menuitem value="Respiratorio" url="consultaSub_EF_Resp.xhtml" />
+				<p:menuitem value="Cardiovascular" url="consultaSub_EF_CV.xhtml" />
+				<p:menuitem value="Abdomen" url="consultaSub_EF_Abd.xhtml" />
+				<p:menuitem value="Linfático" url="consultaSub_EF_Lin.xhtml" />
+				<p:menuitem value="Piel" url="consultaSub_EF_Piel.xhtml" />
+				<p:menuitem value="Neurológico/Esfera mental" url="consultaSub_EF_NEM.xhtml" />
+				<p:menuitem value="Ginecológico" url="consultaSub_EF_Gine.xhtml" />
+			</p:tabMenu>
+		</h:form>
+	</ui:define>
+	 		
+	<ui:define name="content">
+	 	<p:panelGrid styleClass="panelGrid-FormularioMenu">
+        	<p:row>  
+		    	<p:column rowspan="2" colspan="4" styleClass="tituloSeccionTab">
+		    		<ui:insert name="seccion" />
+		    	</p:column>
+		    	
+		    	<p:column styleClass="nombrePaciente"><h:outputText value="#{fichaIdentificacionMB.paciente.nombrePaciente}" /></p:column>  
+	    	</p:row>
+	    	
+			<p:row>
+				<p:column styleClass="fechaConsulta"><h:outputText rendered="#{activeIndex>1}" value="#{padecimientoActualMB.padecimientoActual.fechaConsulta}"><f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" locale="es" /></h:outputText></p:column>
+			</p:row>
+    	
+   			<p:row><p:column colspan="5" style="width: 75% !important;" styleClass="tipoFuente">
+				<h:form id="formEF">
+					<ui:insert name="contentEF" />
+				</h:form>
+			</p:column></p:row>
+		</p:panelGrid>
+	</ui:define>
+    
+</ui:composition>

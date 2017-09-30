@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaBhEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaBhEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+									maxdate="#{epBHMB.fechaHoy}" value="#{epBHMB.epBH.fechaBH}" onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column style="width: 100% !important;" >
+						<p:selectOneRadio id="options" value="#{epBHMB.epBH.biometriaH}">  
+	           				<f:selectItem itemLabel="Normal" itemValue="Normal" />  
+	           				<f:selectItem itemLabel="Anormal" itemValue="Anormal" />    
+	       				</p:selectOneRadio>
+	       			</p:column>
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosBhHemo" value="Hemoglobina: " />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosBhHemo" value="#{epBHMB.epBH.hemoglobina}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:outputLabel styleClass="labelIzqMiddle" for="estudiosBhHemo" value="g" />
+						<p:watermark value="0.0" for="estudiosBhHemo"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosBhHema" value="Hematocrito: " />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 10% !important;" >
+						<p:inputText id="estudiosBhHema" value="#{epBHMB.epBH.hematocrito}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosBhHema"/>
+					</p:column>
+					
+					<p:column style="width: 2% !important;" />
+					
+					<p:column styleClass="labelDer" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosBhLeuco" value="Leucocitos: " />
+					</p:column>
+					<p:column styleClass="inputDerS1" style="width: 31% !important;" >
+						<p:inputText id="estudiosBhLeuco" value="#{epBHMB.epBH.leucocitos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosBhLeuco"/>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column styleClass="labelDer" >
+						<p:outputLabel for="estudiosBhPlaque" value="Plaquetas: " />
+					</p:column>
+					<p:column styleClass="inputDerS1" >
+						<p:inputText id="estudiosBhPlaque" value="#{epBHMB.epBH.plaquetas}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosBhPlaque"/>
+					</p:column>
+					
+					<p:column/>
+					
+					<p:column styleClass="labelDer" >
+						<p:outputLabel for="estudiosBhLinfo" value="Linfocitos: " />
+					</p:column>
+					<p:column styleClass="inputDerS1" colspan="4" >
+						<p:inputText id="estudiosBhLinfo" value="#{epBHMB.epBH.linfocitos}" maxlength="5"
+									 onkeypress='return capturarNumeroDecimal(event)' onkeydown='return revisarBase(event)' />
+						
+						<p:watermark value="0.0" for="estudiosBhLinfo"/>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column styleClass="labelDerTop1" >
+						<p:outputLabel for="estudiosBhOtro" value="Otro: " />
+					</p:column>
+					<p:column colspan="7" >
+						<p:inputTextarea id="estudiosBhOtro" value="#{epBHMB.epBH.otro}" autoResize="false" 
+								 		 rows="3" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>			
+		
+	</p:panelGrid>
+	
+</ui:composition>

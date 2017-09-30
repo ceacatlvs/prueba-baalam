@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		
+		<title>
+			<ui:insert name="title" />
+		</title>
+	</h:head>
+    
+    <h:body>
+    	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+    	<h:outputStylesheet name="css/consulta.css" />
+    	
+    	<p:layout fullPage="true" >
+    	
+    		<p:layoutUnit position="north" id="top" size="15%" resizable="false" styleClass="ui-top" collapsible="true" gutter="0" >
+    			<p:layout>
+    				<p:layoutUnit position="west" id="topLeft" size="45%" resizable="false" styleClass="ui-topLeft" collapsible="true" gutter="0" >
+    					<p:panelGrid styleClass="panelGrid-Medico" style="width: 100%;" collapsible="true" gutter="0" >
+    						<p:row>
+        						<p:column rowspan="2" style="width: 10%;" >
+        							<h:graphicImage value="/resources/gfx/DoctorMale.png" alt="Medico" width="32px" height="32px" />
+        						</p:column>
+        						<p:column styleClass="nombreSeccion" style="width: 90%;" >
+        							<h:outputText value="Agenda" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" styleClass="nombreMedico" style="width: 90%;" >
+        							<h:outputText value="#{loginMB.doctor.nombre} #{loginMB.doctor.aPaterno} #{loginMB.doctor.aMaterno}" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" >
+        							<p:spacer height="3" />
+        						</p:column>
+        					</p:row>
+        					<p:row>
+        						<p:column colspan="2" styleClass="fecha" >
+        							<h:outputText value="#{inicioMB.fecha}" >
+        								<f:convertDateTime pattern="EEEEEEEE dd 'de' MMMMMMMM, yyyy" timeZone="Mexico/General" />
+        							</h:outputText>
+        						</p:column>
+        					</p:row>
+    					</p:panelGrid>
+    				</p:layoutUnit>
+    				
+    				<p:layoutUnit position="center" id="topCenter" size="25%" resizable="false" styleClass="ui-topCenter" collapsible="true" gutter="0" />
+    				
+    				<p:layoutUnit position="east" id="topEast" size="30%" resizable="false" styleClass="ui-topRight" collapsible="true" gutter="0" >
+    					<h:form id="menuMainForm" prependId="false" style="float: right;" >
+	        				<p:panelGrid styleClass="panelGrid-MenuGeneral" style="width: 100%;" collapsible="true" gutter="0" >
+	        					<p:row>
+	        						<p:column style="width:25%;"><h:outputLink value="../consulta1raVez/consulta1ra_FID.xhtml"><h:graphicImage value="/resources/gfx/addFemaleUser.png" alt="Paciente" width="32" height="32" /></h:outputLink></p:column>
+	        						<p:column style="width:25%;"><h:graphicImage value="/resources/gfx/calendar.png" alt="Agenda" width="32" height="32" /></p:column>	        					
+	        						<p:column style="width:25%;"><h:outputLink value="../admonUsuarios/usrMedico.xhtml"><h:graphicImage value="/resources/gfx/userSetup.png" alt="Usuarios" width="32" height="32" /></h:outputLink></p:column>
+	        						
+	        						<p:column style="width:5%;" />
+	        						
+	        						<p:column style="width:20%;"><h:outputLink value="../inicio/inicioM.jsf"><h:graphicImage value="/resources/gfx/home.png" alt="Home" width="40" height="40" /></h:outputLink></p:column>
+	    						</p:row>
+	    						<p:row>
+	    							<p:column style="width:25%;"><h:outputLink value="../consulta1raVez/consulta1ra_FID.xhtml" style="text-decoration: none;"><h:outputText styleClass="menuAdmon" value="Agregar paciente" escape="false" /></h:outputLink></p:column>
+	    							<p:column style="width:25%;"><h:outputText styleClass="menuAdmon" style="font-weight: bold;" value="Agenda" escape="false" /></p:column>	        				
+	        						<p:column style="width:25%;"><h:outputLink value="../admonUsuarios/usrMedico.xhtml" style="text-decoration: none;"><h:outputText styleClass="menuAdmon" value="Mi cuenta de usuario" escape="false" /></h:outputLink></p:column>
+	        						
+	        						<p:column style="width:5%;" />
+	        						
+	        						<p:column style="width:20%;"><h:outputLink value="../inicio/inicioM.jsf" style="text-decoration: none;"><h:outputText styleClass="menuGeneral" value="Inicio" /></h:outputLink></p:column>
+	    						</p:row>
+	        				</p:panelGrid>
+                        </h:form>
+    				</p:layoutUnit>
+    			</p:layout>
+    		</p:layoutUnit>
+    		
+    		<p:layoutUnit position="center" id="center" size="85%" resizable="false" styleClass="ui-center" collapsible="true" gutter="0" >
+           		<p:layout>
+           			<p:layoutUnit position="north" id="ctrTop" resizable="false" styleClass="ui-ctrTop" collapsible="true" gutter="0" >
+           				<div id="content" style="overflow: hidden;">
+	           				<h:form id="formMenu" style="margin: 0 !important; border: none !important; padding: 0 !important;" >
+	            				<p:tabMenu id="menuConsulta" activeIndex="#{activeIndex}" styleClass="ui-menuConsultaSimple" style="width: 100% !important;" >
+					           		<p:menuitem value="Agenda" url="../agenda/agenda.xhtml" />
+					        		<p:menuitem value="Citas canceladas" url="../agenda/citasCanceladas.xhtml" />
+					           		<p:menuitem value="Agenda 2" />
+					        	</p:tabMenu>
+				        	</h:form>
+			        	</div>
+           			</p:layoutUnit>
+	           		
+	           		<p:layoutUnit position="center" id="ctrCenter" resizable="false" styleClass="ui-ctrCenter" collapsible="true" gutter="0" >
+		           		<p:layout>
+					   		<p:layoutUnit position="center" id="ctrCenterII" resizable="false" styleClass="ui-ctrCenterIV" collapsible="true" gutter="0" >
+         						<ui:insert name="agenda" />
+         					</p:layoutUnit>
+         				</p:layout>
+	         		</p:layoutUnit>
+         		</p:layout>
+           	</p:layoutUnit>
+           	
+    	</p:layout>
+    	
+    </h:body>
+    
+</html>

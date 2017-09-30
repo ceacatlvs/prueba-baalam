@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+		
+	<p:carousel id="tabsCarousel" styleClass="carouselLogin" itemStyleClass="carouselContenido" pageLinks="4" 
+				autoPlayInterval="4000" numVisible="1" effect="fade" circular="true"  >
+  		<p:tab title="Aviso 1">  
+	        <h:panelGrid columns="2" cellpadding="10">  
+	            <p:graphicImage value="/resources/gfx/Stethoscope.png" />  
+	            <h:outputText styleClass="labelIzqLogin" value="Baalam le ayuda a registrar de manera ordenada los datos de una consulta
+	                				y almacenar esa información en un expediente electrónico en línea de la
+	             					paciente." />  
+	        </h:panelGrid>  
+	    </p:tab>
+	    
+	    <p:tab title="Aviso 2">  
+	        <h:panelGrid columns="2" cellpadding="10">  
+	            <p:graphicImage value="/resources/gfx/CashRegister.png" />  
+	            <h:outputText styleClass="labelIzqLogin" value="Baalam le ayuda a llevar el control de los pagos por consultas." />  
+	        </h:panelGrid>  
+	    </p:tab>
+	    
+	    <p:tab title="Aviso 3">  
+	        <h:panelGrid columns="2" cellpadding="10">  
+	            <p:graphicImage value="/resources/gfx/pregnant.png" />  
+	            <h:outputText styleClass="labelIzqLogin" value="Lleve el control de embarazos de sus pacientes." />  
+	        </h:panelGrid>  
+	    </p:tab>
+	    
+	    <p:tab title="Aviso 4">  
+	        <h:panelGrid columns="2" cellpadding="10">  
+	            <p:graphicImage value="/resources/gfx/userSetup.png" />  
+	            <h:outputText styleClass="labelIzqLogin" value="Baalam protege su información y la de sus pacientes." />  
+	        </h:panelGrid>  
+	    </p:tab>
+  	</p:carousel>
+   			
+</ui:composition>
+
+		

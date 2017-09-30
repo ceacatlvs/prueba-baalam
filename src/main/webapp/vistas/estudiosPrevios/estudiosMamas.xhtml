@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   				xmlns:ui="http://java.sun.com/jsf/facelets"
+   				xmlns:f="http://java.sun.com/jsf/core"
+   				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<h:outputStylesheet name="css/formularios.css" />
+	
+	<h:outputScript library="js" name="locales.js" />
+	<h:outputScript library="js" name="configurador.js" />
+		
+	<p:panelGrid styleClass="panelGrid-FormularioMenu" style="width: 100% !important;" >
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaMamografiaEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaMamografiaEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy"
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c" 
+									maxdate="#{epMamografiaMB.fechaHoy}" value="#{epMamografiaMB.epMamas.fechaMamografia}"
+									onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="estudiosBiradsMamo" value="BIRADS:" />
+					</p:column>
+					<p:column styleClass="labels1" style="width: 90% !important;" >
+						<p:selectOneRadio id="estudiosBiradsMamo" value="#{epMamografiaMB.epMamas.mamoBirads}" >  
+	           				<f:selectItem itemLabel="0" itemValue="0" />  
+	           				<f:selectItem itemLabel="I" itemValue="1" />    
+	           				<f:selectItem itemLabel="II" itemValue="2" />  
+	           				<f:selectItem itemLabel="III" itemValue="3" />  
+	           				<f:selectItem itemLabel="IV" itemValue="4" />  
+	           				<f:selectItem itemLabel="V" itemValue="5" />  
+	           				<f:selectItem itemLabel="VI" itemValue="6" />              				
+	       				</p:selectOneRadio>
+	       			</p:column>        			
+				</p:row>										
+			</p:panelGrid>
+		</p:column></p:row>
+		
+		<p:row><p:column>
+			<p:spacer height="10" />
+		</p:column></p:row>
+		
+		<p:row>
+			<p:column style="width: 100% !important;" styleClass="tituloSeccionTab">
+				<h:outputText value="USG mama" />
+			</p:column>
+		</p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="fechaUSGmamaEstudios" value="Fecha: " />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:calendar id="fechaUSGmamaEstudios" styleClass="inputDerM1" showOn="both" locale="es" pattern="dd/MMM/yyyy" 
+									showButtonPanel="true" navigator="true" effect="slideDown" readonlyInput="true" yearRange="c-100:c"
+									maxdate="#{epMamografiaMB.fechaHoy}" value="#{epMamografiaMB.epMamas.fechaUsgMama}"
+									onkeydown='return revisarBase(event)' />
+					</p:column>					
+				</p:row>
+			</p:panelGrid>
+			
+			<p:spacer height="5" />
+			
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDer" style="width: 10% !important;" >
+						<p:outputLabel for="estudiosBiradsUsg" value="BIRADS:" />
+					</p:column>
+					<p:column style="width: 90% !important;" >
+						<p:selectOneRadio id="estudiosBiradsUsg" value="#{epMamografiaMB.epMamas.usgMamasBirads}">  
+	           				<f:selectItem itemLabel="0" itemValue="0" />  
+	           				<f:selectItem itemLabel="I" itemValue="1" />    
+	           				<f:selectItem itemLabel="II" itemValue="2" />  
+	           				<f:selectItem itemLabel="III" itemValue="3" />  
+	           				<f:selectItem itemLabel="IV" itemValue="4" />  
+	           				<f:selectItem itemLabel="V" itemValue="5" />  
+	           				<f:selectItem itemLabel="VI" itemValue="6" />              				
+	       				</p:selectOneRadio>
+	       			</p:column>        			
+				</p:row>
+			</p:panelGrid>
+		</p:column></p:row>
+		
+		<p:row><p:column>
+			<p:spacer height="10" />
+		</p:column></p:row>
+		
+		<p:row><p:column styleClass="tipoFuente" style="width: 100% !important;" >
+			<p:panelGrid style="width: 100% !important;" >
+				<p:row>
+					<p:column styleClass="labelDerTop1" style="width: 15% !important;" >
+						<p:outputLabel for="estudiosMamaObserv" value="Observaciones:" />
+					</p:column>
+					<p:column style="width: 85% !important;" >
+						<p:inputTextarea id="estudiosMamaObserv" value="#{epMamografiaMB.epMamas.observaciones}" autoResize="false" 
+								 		 rows="5" style="width: 75%;" maxlength="300" />
+					</p:column>
+				</p:row>									
+			</p:panelGrid>
+		</p:column></p:row>
+		
+	</p:panelGrid>
+	
+</ui:composition>
